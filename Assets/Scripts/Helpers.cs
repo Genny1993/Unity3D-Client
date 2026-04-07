@@ -20,6 +20,7 @@ public static class Settings
     public static string CurretChat;
     public static string LastMessageId;
     public static string QuotedId = "";
+    public static int lastCaretPosition = 0;
 }
 
 public static class MessageBox

@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+
+public class SendMessage : MonoBehaviour, IEventSystemHandler
+{
+    [SerializeField] private TMP_InputField inputField;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (inputField == null)
+            inputField = GetComponent<TMP_InputField>();
+
+        // Перехватываем ввод символов
+        inputField.onValidateInput += ValidateInput;
+        // Дополнительно подписываемся на onSubmit, чтобы обработать вызов
+        inputField.onSubmit.AddListener(OnSubmitCallback);
+    }
+
+    private char ValidateInput(string text, int charIndex, char addedChar)
+    {
+        // Если нажат Enter (символ '\n') и не зажат Shift
+        if (addedChar == '\n')
+        {
+            inputField.onSubmit.Invoke(inputField.text);
+            return '\0'; // отменяем вставку
+        }
+        return addedChar;
+    }
+
+    private async void OnSubmitCallback(string text)
+    {
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "message"),
+            new KeyValuePair<string, string>("pack[method]", "post"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][chat_id]", Settings.CurretChat),
+            new KeyValuePair<string, string>("pack[info][message]", inputField.text.Trim()),
+            new KeyValuePair<string, string>("pack[info][quoted_id]", ""),
+            new KeyValuePair<string, string>("pack[info][file][name]", ""),
+            new KeyValuePair<string, string>("pack[info][file][size]", ""),
+            new KeyValuePair<string, string>("pack[info][file][type]", ""),
+            new KeyValuePair<string, string>("pack[info][file][content]", ""),
+        };
+
+        try
+        {
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            Settings.QuotedId = "";
+            
+        }
+        catch (Exception)
+        {
+        }
+        finally
+        {
+            inputField.interactable = true;
+            inputField.ActivateInputField();
+            inputField.text = "";
+        }
+    }
+}

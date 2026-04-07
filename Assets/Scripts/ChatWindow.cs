@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
@@ -10,9 +11,14 @@ public class ChatWindow : MonoBehaviour
 {
     [Header("Ссылки на UI")]
     [SerializeField] private ScrollRect chatsList;
+    [SerializeField] private ScrollRect messagesList;
+    [SerializeField] private TMP_InputField messageInput;
 
     [Header("Настройки префаба")]
     [SerializeField] private string prefabPath = "Prefabs/ChatPrefab";
+
+    [Header("Таймеры")]
+    [SerializeField] public UpdateMessageTimer timer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,13 +59,11 @@ public class ChatWindow : MonoBehaviour
                     return;
                 }
 
-                // 2. Очищаем старые элементы (чтобы не дублировать при повторном вызове)
                 foreach (Transform child in contentTransform)
                 {
                     Destroy(child.gameObject);
                 }
 
-                // 3. Загружаем префаб из Resources
                 GameObject chatPrefab = Resources.Load<GameObject>(prefabPath);
                 if (chatPrefab == null)
                 {
@@ -76,17 +80,24 @@ public class ChatWindow : MonoBehaviour
 
                         ChatPrefab chat = newChatItem.GetComponent<ChatPrefab>();
                         chat.Initializate(
-                            item["id"]?.ToString() ?? "", 
-                            item["name"]?.ToString() ?? ""
+                            item["id"]?.ToString() ?? "",
+                            item["name"]?.ToString() ?? "",
+                            messagesList,
+                            messageInput,
+                            this.timer
                         );
                     }
                 }
-
             }
 
         }
         catch (Exception)
         {
+        } finally
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
         }
     }
 }

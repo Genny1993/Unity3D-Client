@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7280251600078512384}
   - component: {fileID: 3540073102212037328}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2026-04-06 19:53:00
+  m_text: 0000-00-00 00:0:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282795590
-  m_fontColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
+    rgba: 4280821800
+  m_fontColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 5872307950576627431}
   - component: {fileID: 4166009799123799818}
   - component: {fileID: 6179599142984421136}
+  - component: {fileID: 7660970980878866711}
   m_Layer: 5
   m_Name: MessageBubble
   m_TagString: Untagged
@@ -352,6 +353,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &7660970980878866711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256899420653569391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a925d8765474b8247ae0880278a140be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessageBubble
+  id: 
+  username: {fileID: 7371918410654066251}
+  message: {fileID: 6974052120116774783}
+  time: {fileID: 3540073102212037328}
+  panel: {fileID: 5267773487746119377}
+  targetCanvas: {fileID: 0}
+  starParticlePrefab: {fileID: 5703808981801442127, guid: 70b20d6b1d7aa3c42a45df61b03d59ca, type: 3}
+  starCount: 20
+  destroyAfter: 3
 --- !u!1 &5267773487746119377
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 391.5, y: -140.21}
+  m_AnchoredPosition: {x: 391.5, y: -75.815}
   m_SizeDelta: {x: 763, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3185493760373232943
@@ -416,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7529412, b: 0.79607844, a: 0.50980395}
+  m_Color: {r: 1, g: 0.7529412, b: 0.79607844, a: 0.7058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -621,19 +643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430
-    \u041E\u0447\u0435\u043D\u044C \u043C\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430 "
+  m_text: "\u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -642,8 +652,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282795590
-  m_fontColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
+    rgba: 4280821800
+  m_fontColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

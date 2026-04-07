@@ -51,11 +51,15 @@
     <Compile Include="Assets\Scripts\Helpers.cs" />
     <Compile Include="Assets\Scripts\FileManager.cs" />
     <Compile Include="Assets\Scripts\MessageBoxWindow.cs" />
+    <Compile Include="Assets\Scripts\UpdateMessageTimer.cs" />
+    <Compile Include="Assets\Scripts\SaveCaretPosition.cs" />
     <Compile Include="Assets\Scripts\QuitGameButton.cs" />
+    <Compile Include="Assets\Scripts\MessageBubble.cs" />
     <Compile Include="Assets\Scripts\ChatPrefab.cs" />
     <Compile Include="Assets\Scripts\RegisterWindow.cs" />
     <Compile Include="Assets\Scripts\StartMessengerInitializer.cs" />
     <Compile Include="Assets\Scripts\ChatWindow.cs" />
+    <Compile Include="Assets\Scripts\SendMessage.cs" />
     <Compile Include="Assets\Scripts\LoginWindow.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\viono\\Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\chatwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chatwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\loginwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\loginwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\updatemessagetimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\updatemessagetimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\chatprefab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chatprefab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\messagebubble.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\messagebubble.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\chatwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chatwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\loginwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\loginwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\startmessengerinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\messageboxwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\messageboxwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\viono\\client\\assets\\scripts\\quitgamebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,86 +54,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ChatWindow.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatWindow.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ChatWindow.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatWindow.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ChatWindow.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAmwEQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-06T15:07:15.616Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginWindow.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\LoginWindow.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\LoginWindow.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\LoginWindow.cs",
-              "RelativeToolTip": "Assets\\Scripts\\LoginWindow.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBcAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T11:51:07.033Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ChatPrefab.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatPrefab.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ChatPrefab.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatPrefab.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ChatPrefab.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-06T13:57:18.139Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "QuitGameButton.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\QuitGameButton.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\QuitGameButton.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\QuitGameButton.cs",
-              "RelativeToolTip": "Assets\\Scripts\\QuitGameButton.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAkAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-06T13:36:54.133Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RegisterWindow.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\RegisterWindow.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\RegisterWindow.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\RegisterWindow.cs",
-              "RelativeToolTip": "Assets\\Scripts\\RegisterWindow.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-06T09:58:44.148Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MessageBoxWindow.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\MessageBoxWindow.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\MessageBoxWindow.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\MessageBoxWindow.cs",
-              "RelativeToolTip": "Assets\\Scripts\\MessageBoxWindow.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T10:40:12.718Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -140,7 +70,98 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UpdateMessageTimer.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\UpdateMessageTimer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UpdateMessageTimer.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\UpdateMessageTimer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UpdateMessageTimer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T16:17:06.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MessageBubble.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\MessageBubble.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MessageBubble.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\MessageBubble.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MessageBubble.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAIwA4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:20:59.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "ChatWindow.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatWindow.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ChatWindow.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatWindow.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ChatWindow.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowFUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T15:07:15.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LoginWindow.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\LoginWindow.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\LoginWindow.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\LoginWindow.cs",
+              "RelativeToolTip": "Assets\\Scripts\\LoginWindow.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwCIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T11:51:07.033Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatPrefab.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatPrefab.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ChatPrefab.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\ChatPrefab.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ChatPrefab.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAcwHMAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T13:57:18.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegisterWindow.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\RegisterWindow.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\RegisterWindow.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\RegisterWindow.cs",
+              "RelativeToolTip": "Assets\\Scripts\\RegisterWindow.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAowG4AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T09:58:44.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Helpers.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\Helpers.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Helpers.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\Helpers.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Helpers.cs",
+              "ViewState": "AgIAABEBAAAAAAAAAAAwwCcBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T18:19:08.364Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "StartMessengerInitializer.cs",
               "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\StartMessengerInitializer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\StartMessengerInitializer.cs",
@@ -154,6 +175,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "MessageBoxWindow.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\MessageBoxWindow.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MessageBoxWindow.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\MessageBoxWindow.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MessageBoxWindow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T10:40:12.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "QuitGameButton.cs",
+              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\QuitGameButton.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\QuitGameButton.cs",
+              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\QuitGameButton.cs",
+              "RelativeToolTip": "Assets\\Scripts\\QuitGameButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T13:36:54.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "FileManager.cs",
               "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\FileManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\FileManager.cs",
@@ -161,21 +208,7 @@
               "RelativeToolTip": "Assets\\Scripts\\FileManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T12:50:28.043Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Helpers.cs",
-              "DocumentMoniker": "C:\\Users\\viono\\Client\\Assets\\Scripts\\Helpers.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Helpers.cs",
-              "ToolTip": "C:\\Users\\viono\\Client\\Assets\\Scripts\\Helpers.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Helpers.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAAwFsBAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-04T18:19:08.364Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T12:50:28.043Z"
             }
           ]
         }
