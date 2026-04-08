@@ -99,7 +99,9 @@ public class UpdateMessageTimer : MonoBehaviour
                                 item["name"]?.ToString() ?? "",
                                 item["message"]?.ToString() ?? "",
                                 item["date"]?.ToString() ?? "",
-                                (item["is_my"]?.ToString() ?? "") == "1" ? true : false
+                                (item["is_my"]?.ToString() ?? "") == "1" ? true : false,
+                                messagesList,
+                                messageInput
                             );
                             Settings.LastMessageId = item["id"]?.ToString() ?? "";
                             StartCoroutine(message.IgniteWithDelay());

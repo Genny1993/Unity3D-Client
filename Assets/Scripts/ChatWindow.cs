@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,10 +10,13 @@ using UnityEngine.UIElements;
 
 public class ChatWindow : MonoBehaviour
 {
+    bool emojis;
     [Header("Ссылки на UI")]
     [SerializeField] private ScrollRect chatsList;
     [SerializeField] private ScrollRect messagesList;
     [SerializeField] private TMP_InputField messageInput;
+    [SerializeField] private UnityEngine.UI.Button emojiButton;
+    [SerializeField] private GameObject emojiPanel;
 
     [Header("Настройки префаба")]
     [SerializeField] private string prefabPath = "Prefabs/ChatPrefab";
@@ -23,6 +27,14 @@ public class ChatWindow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        emojis = false;
+        if (emojiButton != null)
+            emojiButton.onClick.AddListener(OnEmojiButtonClick);
+        RectTransform rect = messagesList.GetComponent<RectTransform>();
+        Vector2 size = rect.sizeDelta;
+        size.y = 970;
+        rect.sizeDelta = size;
+        emojiPanel.SetActive(false);
         GetChats();
     }
 
@@ -99,5 +111,37 @@ public class ChatWindow : MonoBehaviour
             messageInput.caretPosition = Settings.lastCaretPosition;
             messageInput.selectionFocusPosition = messageInput.caretPosition;
         }
+    }
+
+    void OnEmojiButtonClick()
+    {
+        if(emojis)
+        {
+            emojis = false;
+            emojiPanel.SetActive(false);
+            RectTransform rect = messagesList.GetComponent<RectTransform>();
+            Vector2 size = rect.sizeDelta;
+            size.y = 970;
+            rect.sizeDelta = size;
+        } else
+        {
+            emojis = true;
+            emojiPanel.SetActive(true);
+            RectTransform rect = messagesList.GetComponent<RectTransform>();
+            Vector2 size = rect.sizeDelta;
+            size.y = 740;
+            rect.sizeDelta = size;
+            StartCoroutine(ScrollToBottomNextFrame());
+        }
+
+        messageInput.ActivateInputField();
+        messageInput.caretPosition = Settings.lastCaretPosition;
+        messageInput.selectionFocusPosition = messageInput.caretPosition;
+    }
+
+    IEnumerator ScrollToBottomNextFrame()
+    {
+        yield return new WaitForSeconds(0.1f);
+        messagesList.verticalNormalizedPosition = 0f;
     }
 }

@@ -48,6 +48,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.1f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\EmojiController.cs" />
     <Compile Include="Assets\Scripts\Helpers.cs" />
     <Compile Include="Assets\Scripts\FileManager.cs" />
     <Compile Include="Assets\Scripts\MessageBoxWindow.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Assets\Scripts\MessageBubble.cs" />
     <Compile Include="Assets\Scripts\ChatPrefab.cs" />
     <Compile Include="Assets\Scripts\RegisterWindow.cs" />
+    <Compile Include="Assets\Scripts\EditMessage.cs" />
     <Compile Include="Assets\Scripts\StartMessengerInitializer.cs" />
     <Compile Include="Assets\Scripts\ChatWindow.cs" />
     <Compile Include="Assets\Scripts\SendMessage.cs" />
