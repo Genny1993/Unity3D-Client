@@ -727,6 +727,9 @@ MonoBehaviour:
   historyButton: {fileID: 1597929022647582035}
   chatButton: {fileID: 8267649063851038238}
   prefabPath: Prefabs/MessageBubble
+  timer: {fileID: 0}
+  buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
+  clickVolume: 0.7
 --- !u!1 &4702624730892835332
 GameObject:
   m_ObjectHideFlags: 0

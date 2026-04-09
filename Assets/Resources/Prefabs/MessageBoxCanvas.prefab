@@ -569,7 +569,6 @@ MonoBehaviour:
   messageText: {fileID: 114781594822740991}
   okButton: {fileID: 3617990358963018519}
   closeButton: {fileID: 1909368021111162170}
-  backgroundPanel: {fileID: 7432236200446236732}
   panelToAnimate: {fileID: 7432236200446236732}
   throwForce: 1000
   upForce: 1000

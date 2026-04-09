@@ -967,7 +967,7 @@ MonoBehaviour:
   panelToAnimate: {fileID: 5462090078058538164}
   throwForce: 1000
   upForce: 1000
-  randomTorque: 5
+  randomTorque: 50000
   gravityScale: 1000
   mass: 1
   fadeDelay: 0
