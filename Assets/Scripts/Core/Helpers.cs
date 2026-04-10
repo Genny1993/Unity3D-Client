@@ -27,6 +27,8 @@ public static class Settings
     public static int currentMessagesListHeight = 960;
     public static bool fileBar = false;
     public static bool quoteBar = false;
+    public static int CountMessages = 0;
+    public static int Page = 0;
 }
 
 public static class MessageBox
@@ -432,6 +434,48 @@ public static class MessageShowerWindow
         if (window == null)
         {
             Debug.LogError("MessageShower component not found on prefab!");
+            UnityEngine.Object.Destroy(windowObject);
+            return;
+        }
+
+        // Инициализируем окно
+        window.Initialize(id, messageList, i_f, status_bar, quote_bar, quoteLabel);
+    }
+}
+
+public static class HistoryWindowStart
+{
+    private static GameObject messageShowerPrefab;
+
+    // Загрузка префаба (вызовите один раз при старте игры)
+    public static void Initialize()
+    {
+        if (messageShowerPrefab == null)
+        {
+            messageShowerPrefab = Resources.Load<GameObject>("Prefabs/HistoryWindow");
+            if (messageShowerPrefab == null)
+                Debug.LogError("MessageShower prefab not found in Resources/Prefabs/");
+        }
+    }
+
+    // Показать окно сообщения
+    public static void Show(string id, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel)
+    {
+        if (messageShowerPrefab == null)
+        {
+            Debug.LogError("HistoryWindow not initialized! Call HistoryWindow.Initialize() first.");
+            return;
+        }
+
+        // Создаем экземпляр окна
+        GameObject windowObject = UnityEngine.Object.Instantiate(messageShowerPrefab);
+
+        // Находим компонент HistoryWindow
+        HistoryWindow window = windowObject.GetComponent<HistoryWindow>();
+
+        if (window == null)
+        {
+            Debug.LogError("HistoryWindow component not found on prefab!");
             UnityEngine.Object.Destroy(windowObject);
             return;
         }

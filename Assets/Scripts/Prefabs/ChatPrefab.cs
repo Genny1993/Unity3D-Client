@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,9 +66,8 @@ public class ChatPrefab : MonoBehaviour
     void OnHistoryButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
-        chatButton.interactable = false;
-        MessageBox.Show("Информация", "Нажата кнопка истории");
-        chatButton.interactable = true;
+
+        HistoryWindowStart.Show(chatId, messagesList, messageInput, statusBar, quoteBar, quoteLabel);
     }
 
     async void OnChatButtonClick()

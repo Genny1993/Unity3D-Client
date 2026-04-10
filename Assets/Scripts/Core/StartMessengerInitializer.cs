@@ -9,6 +9,7 @@ public class StartMessengerInitializer : MonoBehaviour
         AudioManager.Initialize(); //Инициализируем проигрывание звуков
         MessageBox.Initialize(); //Инициализируем MessageBox
         MessageShowerWindow.Initialize();
+        HistoryWindowStart.Initialize();
 
         //Загружаем файловый менеджер
         GameObject go = new GameObject("FileManagerInit");
