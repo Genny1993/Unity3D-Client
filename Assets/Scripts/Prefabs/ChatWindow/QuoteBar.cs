@@ -29,18 +29,25 @@ public class QuotePanel : MonoBehaviour
 
     void OnDeleteQuoteButtonClick()
     {
+
         AudioManager.PlayOneShot(buttonClick, clickVolume);
 
         Settings.QuotedId = "";
         quoteLabel.text = "";
         quoteBar.SetActive(false);
-        statusBar.SetActive(false);
 
-        RectTransform rect = messagesList.GetComponent<RectTransform>();
-        Vector2 size = rect.sizeDelta;
-        size.y = Settings.currentMessagesListHeight + 40;
-        Settings.currentMessagesListHeight = (int)size.y;
-        rect.sizeDelta = size;
+        Settings.quoteBar = false;
+
+        if(Settings.quoteBar == false && Settings.fileBar == false)
+        {
+            statusBar.SetActive(false);
+
+            RectTransform rect = messagesList.GetComponent<RectTransform>();
+            Vector2 size = rect.sizeDelta;
+            size.y = Settings.currentMessagesListHeight + 40;
+            Settings.currentMessagesListHeight = (int)size.y;
+            rect.sizeDelta = size;
+        }
 
         messageInput.ActivateInputField();
         messageInput.caretPosition = Settings.lastCaretPosition;

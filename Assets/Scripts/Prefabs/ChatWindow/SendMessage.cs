@@ -12,6 +12,7 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
     [SerializeField] private TMP_InputField inputField;
 
     [SerializeField] private GameObject quoteBar;
+    [SerializeField] private GameObject fileBar;
     [SerializeField] private GameObject statusBar;
     [SerializeField] private ScrollRect messagesList;
     [SerializeField] private TMP_Text quoteLabel;
@@ -49,19 +50,22 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
             new KeyValuePair<string, string>("pack[info][chat_id]", Settings.CurretChat),
             new KeyValuePair<string, string>("pack[info][message]", inputField.text.Trim()),
             new KeyValuePair<string, string>("pack[info][quoted_id]", Settings.QuotedId.Trim()),
-            new KeyValuePair<string, string>("pack[info][file][name]", ""),
-            new KeyValuePair<string, string>("pack[info][file][size]", ""),
-            new KeyValuePair<string, string>("pack[info][file][type]", ""),
-            new KeyValuePair<string, string>("pack[info][file][content]", ""),
+            new KeyValuePair<string, string>("pack[info][file][name]", FileInfo.FileName.Trim()),
+            new KeyValuePair<string, string>("pack[info][file][size]", FileInfo.FileSize.ToString()),
+            new KeyValuePair<string, string>("pack[info][file][type]", FileInfo.FileType.Trim()),
+            new KeyValuePair<string, string>("pack[info][file][content]", FileInfo.FileContentBase64.Trim()),
         };
 
         try
         {
             Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
             Settings.QuotedId = "";
+            FileInfo.Clear();
             quoteLabel.text = "";
             quoteBar.SetActive(false);
+            fileBar.SetActive(false);
             statusBar.SetActive(false);
+
 
             RectTransform rect = messagesList.GetComponent<RectTransform>();
             Vector2 size = rect.sizeDelta;

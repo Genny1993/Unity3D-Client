@@ -1,12 +1,19 @@
+using SFB;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Net.Http;
+using System.Text;
+using System.Windows.Forms;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using SFB;
+using System.IO;
 
 public class MessageBubble : MonoBehaviour
 {
@@ -36,14 +43,14 @@ public class MessageBubble : MonoBehaviour
 
 
 
-    [SerializeField] private Button burgerButton;
-    [SerializeField] private Button editButton;
-    [SerializeField] private Button restoreButton;
-    [SerializeField] private Button deleteButton;
-    [SerializeField] private Button quoteButton;
-    [SerializeField] private Button inQuoteButton;
-    [SerializeField] private Button inQuoteButton2;
-    [SerializeField] private Button fileButton;
+    [SerializeField] private UnityEngine.UI.Button burgerButton;
+    [SerializeField] private UnityEngine.UI.Button editButton;
+    [SerializeField] private UnityEngine.UI.Button restoreButton;
+    [SerializeField] private UnityEngine.UI.Button deleteButton;
+    [SerializeField] private UnityEngine.UI.Button quoteButton;
+    [SerializeField] private UnityEngine.UI.Button inQuoteButton;
+    [SerializeField] private UnityEngine.UI.Button inQuoteButton2;
+    [SerializeField] private UnityEngine.UI.Button fileButton;
 
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBarMain;
@@ -279,6 +286,8 @@ public class MessageBubble : MonoBehaviour
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
 
+        Settings.quoteBar = true;
+
         if(statusBar.activeInHierarchy == false) {
             RectTransform rect = messages.GetComponent<RectTransform>();
             Vector2 size = rect.sizeDelta;
@@ -295,7 +304,6 @@ public class MessageBubble : MonoBehaviour
         messageInput.ActivateInputField();
         messageInput.caretPosition = Settings.lastCaretPosition;
         messageInput.selectionFocusPosition = messageInput.caretPosition;
-
     }
 
     void OnInQuoteButtonClick()
@@ -305,10 +313,66 @@ public class MessageBubble : MonoBehaviour
         MessageShowerWindow.Show(this.qid, this.messages, this.messageInput, this.statusBar, this.quoteBarMain, this.quoteLabel);
     }
 
-    void OnFileButtonClick()
+    async void OnFileButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
-        MessageBox.Show("Информация", "Вы нажали на скачивание файла");
+
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "file"),
+            new KeyValuePair<string, string>("pack[method]", "download"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][id]", this.aid)
+        };
+
+        try
+        {
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Отправляем POST запрос с form-urlencoded данными
+                string json = JsonConverter.To(formData);
+                json = Crypt.Encrypt(json);
+                var content = new StringContent(json, Encoding.UTF8, "text/plain");
+
+                MessageBox.Show("Информация", "Началось скачивание файла. Пожалуйста, ожидайте конца");
+                using (var response = await client.PostAsync(Settings.Url, content))
+                {
+                    response.EnsureSuccessStatusCode();
+
+                    // Получаем файл как массив байтов
+                    byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+
+                    string path = StandaloneFileBrowser.SaveFilePanel("Сохранить файл", "", this.aname, "*");
+
+                    // Проверяем, не нажал ли пользователь "Отмена"
+                    if (string.IsNullOrEmpty(path))
+                    {
+                        MessageBox.Show("Ошибка", "Сохранение отменено!");
+                        return;
+                    }
+
+                    // Если путь получен, сохраняем ваш массив байтов в файл
+                    try
+                    {
+                        // Записываем все байты из массива в выбранный файл
+                        File.WriteAllBytes(path, fileBytes);
+                        MessageBox.Show("Ошибка", $"Файл сохранен: {path}");
+                    }
+                    catch (System.Exception e)
+                    {
+                        MessageBox.Show("Ошибка", $"Ошибка при сохранении файла: {e.Message}");
+                    }
+                }
+
+            }
+
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Ошибка", "Файл не удалось сохранить!");
+        }
     }
 
     public void HideButtons()

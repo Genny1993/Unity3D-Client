@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -24,6 +25,8 @@ public static class Settings
     public static string QuotedId = "";
     public static int lastCaretPosition = 0;
     public static int currentMessagesListHeight = 960;
+    public static bool fileBar = false;
+    public static bool quoteBar = false;
 }
 
 public static class MessageBox
@@ -435,5 +438,112 @@ public static class MessageShowerWindow
 
         // Инициализируем окно
         window.Initialize(id, messageList, i_f, status_bar, quote_bar, quoteLabel);
+    }
+}
+
+public static class FileInfo
+{
+    public static string FileName = "";
+    public static long FileSize = 0;
+    public static string FileType = "";
+    public static string FileContentBase64 = "";
+
+    // Метод для загрузки файла
+    public static bool LoadFile(string filePath)
+    {
+        try
+        {
+            if (!System.IO.File.Exists(filePath))
+                return false;
+
+            // Получаем имя файла
+            FileName = Path.GetFileName(filePath);
+
+            // Получаем размер файла
+            var fileInfo = new System.IO.FileInfo(filePath);
+            FileSize = fileInfo.Length;
+
+            // Определяем тип файла (на основе расширения)
+            FileType = GetFileType(filePath);
+
+            // Читаем содержимое и конвертируем в Base64
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            FileContentBase64 = Convert.ToBase64String(fileBytes);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Ошибка загрузки файла: {ex.Message}");
+            return false;
+        }
+    }
+
+    // Метод для определения типа файла
+    private static string GetFileType(string filePath)
+    {
+        string extension = Path.GetExtension(filePath).ToLower();
+
+        // Изображения
+        if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" ||
+            extension == ".gif" || extension == ".bmp" || extension == ".ico" ||
+            extension == ".webp" || extension == ".tiff")
+            return "image/" + extension.TrimStart('.');
+
+        // Видео
+        if (extension == ".mp4" || extension == ".avi" || extension == ".mov" ||
+            extension == ".wmv" || extension == ".flv" || extension == ".mkv" ||
+            extension == ".webm" || extension == ".mpeg" || extension == ".mpg")
+            return "video/" + extension.TrimStart('.');
+
+        // Аудио
+        if (extension == ".mp3" || extension == ".wav" || extension == ".ogg" ||
+            extension == ".flac" || extension == ".aac" || extension == ".m4a")
+            return "audio/" + extension.TrimStart('.');
+
+        // Исполняемые файлы
+        if (extension == ".exe" || extension == ".msi" || extension == ".bat" ||
+            extension == ".cmd" || extension == ".com")
+            return "application/x-msdownload";
+
+        // Текстовые файлы
+        if (extension == ".txt" || extension == ".csv" || extension == ".log")
+            return "text/plain";
+
+        // Документы
+        if (extension == ".pdf")
+            return "application/pdf";
+        if (extension == ".doc" || extension == ".docx")
+            return "application/msword";
+        if (extension == ".xls" || extension == ".xlsx")
+            return "application/vnd.ms-excel";
+        if (extension == ".ppt" || extension == ".pptx")
+            return "application/vnd.ms-powerpoint";
+
+        // HTML/XML
+        if (extension == ".html" || extension == ".htm")
+            return "text/html";
+        if (extension == ".xml")
+            return "application/xml";
+        if (extension == ".json")
+            return "application/json";
+
+        // По умолчанию
+        return "application/octet-stream";
+    }
+
+    // Метод для сброса информации
+    public static void Clear()
+    {
+        FileName = "";
+        FileSize = 0;
+        FileType = "";
+        FileContentBase64 = "";
+    }
+
+    // Метод для отображения информации (для отладки)
+    public static string GetFileInfo()
+    {
+        return $"Имя: {FileName}\nРазмер: {FileSize} байт\nТип: {FileType}\nBase64 длина: {FileContentBase64.Length} символов";
     }
 }

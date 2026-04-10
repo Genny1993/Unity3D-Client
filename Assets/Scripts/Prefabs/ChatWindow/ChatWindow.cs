@@ -1,10 +1,13 @@
 using Newtonsoft.Json.Linq;
+using SFB;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ChatWindow : MonoBehaviour
 {
@@ -19,6 +22,8 @@ public class ChatWindow : MonoBehaviour
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBar;
     [SerializeField] private TMP_Text quoteLabel;
+    [SerializeField] private GameObject fileBar;
+    [SerializeField] private TMP_Text fileLabel;
 
     [Header("Настройки префаба")]
     [SerializeField] private string prefabPath = "Prefabs/ChatPrefab";
@@ -48,6 +53,7 @@ public class ChatWindow : MonoBehaviour
         emojiPanel.SetActive(false);
         statusBar.SetActive(false);
         quoteBar.SetActive(false);
+        fileBar.SetActive(false);
         GetChats();
     }
 
@@ -161,6 +167,47 @@ public class ChatWindow : MonoBehaviour
     void OnFileButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
+
+        // Последний параметр false — выбираем только один файл
+        string[] paths = StandaloneFileBrowser.OpenFilePanel("Выберите файл", "", "*", false);
+
+        if (paths != null && paths.Length > 0)
+        {
+            string selectedFilePath = paths[0];
+
+            if (FileInfo.LoadFile(selectedFilePath))
+            {
+
+                Settings.fileBar = true;
+                fileLabel.text = FileInfo.FileName;
+
+                if (statusBar.activeInHierarchy == false)
+                {
+                    statusBar.SetActive(true);
+
+                    RectTransform rect = messagesList.GetComponent<RectTransform>();
+                    Vector2 size = rect.sizeDelta;
+                    size.y = Settings.currentMessagesListHeight - 40;
+                    Settings.currentMessagesListHeight = (int)size.y;
+                    rect.sizeDelta = size;
+                }
+
+                fileBar.SetActive(true);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Ошибка при загрузке файла!");
+            }
+
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+
+        }
+        else
+        {
+            MessageBox.Show("Ошибка", "Выбор файла отменен");
+        }
     }
 
     IEnumerator ScrollToBottomNextFrame()

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Prefabs\QuitGameButton.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MessageBubble\EditMessage.cs" />
     <Compile Include="Assets\Scripts\Prefabs\LoginWindow.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\ChatWindow\FileBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -643,6 +644,18 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit@d8c07649098d\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Mono.Posix">
+      <HintPath>Library\PackageCache\io.github.gkngkc.unity-standalone-file-browser@0360b61bc12e\Plugins\Mono.Posix.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.WinForms">
+      <HintPath>Library\PackageCache\io.github.gkngkc.unity-standalone-file-browser@0360b61bc12e\Plugins\Ookii.Dialogs.WinForms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.WebBrowser">
+      <HintPath>Library\PackageCache\io.github.gkngkc.unity-standalone-file-browser@0360b61bc12e\Plugins\Mono.WebBrowser.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.IO.Hashing">
       <HintPath>Library\PackageCache\com.unity.collections@538ace9075bc\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
       <Private>False</Private>
@@ -657,6 +670,10 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>Library\PackageCache\io.github.gkngkc.unity-standalone-file-browser@0360b61bc12e\Plugins\System.Windows.Forms.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
@@ -1481,6 +1498,10 @@
     </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="StandaloneFileBrowser">
+      <HintPath>Library\ScriptAssemblies\StandaloneFileBrowser.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Purchasing.Codeless">
