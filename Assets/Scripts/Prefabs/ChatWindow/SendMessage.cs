@@ -69,9 +69,14 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
 
             RectTransform rect = messagesList.GetComponent<RectTransform>();
             Vector2 size = rect.sizeDelta;
-            size.y = Settings.currentMessagesListHeight + 40;
-            Settings.currentMessagesListHeight = (int)size.y;
-            rect.sizeDelta = size;
+            if (Settings.fileBar == true || Settings.quoteBar == true)
+            {
+                Settings.fileBar = false;
+                Settings.quoteBar = false;
+                size.y = Settings.currentMessagesListHeight + 40;
+                Settings.currentMessagesListHeight = (int)size.y;
+                rect.sizeDelta = size;
+            }
 
             inputField.ActivateInputField();
             inputField.caretPosition = Settings.lastCaretPosition;

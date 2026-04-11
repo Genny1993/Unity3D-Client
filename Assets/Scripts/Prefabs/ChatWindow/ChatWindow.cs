@@ -14,6 +14,7 @@ public class ChatWindow : MonoBehaviour
     bool emojis;
     [Header("Ссылки на UI")]
     [SerializeField] private ScrollRect chatsList;
+    [SerializeField] private ScrollRect usersList;
     [SerializeField] private ScrollRect messagesList;
     [SerializeField] private TMP_InputField messageInput;
     [SerializeField] private UnityEngine.UI.Button emojiButton;
@@ -27,9 +28,12 @@ public class ChatWindow : MonoBehaviour
 
     [Header("Настройки префаба")]
     [SerializeField] private string prefabPath = "Prefabs/ChatPrefab";
+    [SerializeField] private string userPrefabPath = "Prefabs/UserPrefab";
 
     [Header("Таймеры")]
     [SerializeField] public UpdateMessageTimer timer;
+    [SerializeField] public UpdateUserTimer userTimer;
+    [SerializeField] public UpdateOnlineTimer onlineTimer;
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;
@@ -48,13 +52,14 @@ public class ChatWindow : MonoBehaviour
             fileButton.onClick.AddListener(OnFileButtonClick);
         RectTransform rect = messagesList.GetComponent<RectTransform>();
         Vector2 size = rect.sizeDelta;
-        size.y = 970;
+        size.y = Settings.currentMessagesListHeight;
         rect.sizeDelta = size;
         emojiPanel.SetActive(false);
         statusBar.SetActive(false);
         quoteBar.SetActive(false);
         fileBar.SetActive(false);
         GetChats();
+        GetUsers();
     }
 
     // Update is called once per frame
@@ -128,6 +133,78 @@ public class ChatWindow : MonoBehaviour
         catch (Exception)
         {
         } finally
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
+    }
+
+    async void GetUsers()
+    {
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "account"),
+            new KeyValuePair<string, string>("pack[method]", "getList"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info]","")
+        };
+
+        try
+        {
+
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+
+            JArray UserArray = result["info"] as JArray;
+
+            if (UserArray != null)
+            {
+
+                Transform contentTransform = usersList.content;
+                if (contentTransform == null)
+                {
+                    Debug.LogError("ScrollView не имеет контейнера Content!");
+                    return;
+                }
+
+                foreach (Transform child in contentTransform)
+                {
+                    Destroy(child.gameObject);
+                }
+
+                GameObject userPrefab = Resources.Load<GameObject>(userPrefabPath);
+                if (userPrefab == null)
+                {
+                    Debug.LogError($"Не удалось загрузить префаб по пути: {userPrefabPath}");
+                    return;
+                }
+
+                foreach (JToken item in UserArray)
+                {
+                    if (item is JObject obj)
+                    {
+                        // Создаём экземпляр префаба
+                        GameObject newChatItem = Instantiate(userPrefab, contentTransform);
+
+                        UserPrefab user = newChatItem.GetComponent<UserPrefab>();
+                        user.Initializate(
+                             item["id"]?.ToString() ?? "",
+                             item["name"]?.ToString() ?? "",
+                             item["online"]?.ToString() ?? "",
+                             item["last_activity"]?.ToString() ?? "",
+                             item["is_i"]?.ToString() ?? "",
+                             item["is_admin"]?.ToString() ?? ""
+                        );
+                    }
+                }
+            }
+            this.userTimer.StartTimer();
+            this.onlineTimer.StartTimer();
+        }
+        catch (Exception)
+        {
+        }
+        finally
         {
             messageInput.ActivateInputField();
             messageInput.caretPosition = Settings.lastCaretPosition;

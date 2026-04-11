@@ -12,7 +12,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using SFB;
 using System.IO;
 
 public class MessageBubble : MonoBehaviour
@@ -358,7 +357,7 @@ public class MessageBubble : MonoBehaviour
                     {
                         // Записываем все байты из массива в выбранный файл
                         File.WriteAllBytes(path, fileBytes);
-                        MessageBox.Show("Ошибка", $"Файл сохранен: {path}");
+                        MessageBox.Show("Информация", $"Файл сохранен: {path}");
                     }
                     catch (System.Exception e)
                     {

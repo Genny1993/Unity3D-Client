@@ -24,7 +24,7 @@ public static class Settings
     public static string LastMessageId;
     public static string QuotedId = "";
     public static int lastCaretPosition = 0;
-    public static int currentMessagesListHeight = 960;
+    public static int currentMessagesListHeight = 900;
     public static bool fileBar = false;
     public static bool quoteBar = false;
     public static int CountMessages = 0;
@@ -482,6 +482,35 @@ public static class HistoryWindowStart
 
         // Инициализируем окно
         window.Initialize(id, messageList, i_f, status_bar, quote_bar, quoteLabel);
+    }
+}
+
+public static class SettingsWindowStart
+{
+    private static GameObject settingsWindowPrefab;
+
+    // Загрузка префаба (вызовите один раз при старте игры)
+    public static void Initialize()
+    {
+        if (settingsWindowPrefab == null)
+        {
+            settingsWindowPrefab = Resources.Load<GameObject>("Prefabs/SettingsWindow");
+            if (settingsWindowPrefab == null)
+                Debug.LogError("SettingsWindow prefab not found in Resources/Prefabs/");
+        }
+    }
+
+    // Показать окно сообщения
+    public static void Show()
+    {
+        if (settingsWindowPrefab == null)
+        {
+            Debug.LogError("SettingsWindow not initialized! Call SettingsWindow.Initialize() first.");
+            return;
+        }
+
+        // Создаем экземпляр окна
+        GameObject windowObject = UnityEngine.Object.Instantiate(settingsWindowPrefab);
     }
 }
 
