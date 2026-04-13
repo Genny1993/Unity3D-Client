@@ -54,6 +54,7 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
         {
             messageEditor.interactable = false;
             Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            message.text = messageEditor.text;
 
         }
         catch (Exception){}

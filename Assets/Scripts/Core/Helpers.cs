@@ -30,6 +30,7 @@ public static class Settings
     public static int CountMessages = 0;
     public static int Page = 0;
     public static bool isShowed = false;
+    public static bool isAdmin = false;
 }
 
 public static class MessageBox
@@ -269,7 +270,7 @@ public static class Sender
         }
         else if (status == "AUTH_ERROR")
         {
-            MessageBox.Show("Ошибка авторизации", "У вас нет прав на совершение этого действия");
+            MessageBox.Show("Ошибка авторизации", result["info"]["message"].ToString());
             throw new Exception("Error");
         }
         else if (status == "C_ERROR")
@@ -288,6 +289,8 @@ public static class Sender
 public static class UIManager
 {
     private static Canvas mainCanvas;
+    private static GameObject chatWindow;
+    private static GameObject adminWindow;
 
     public static void ShowLoginWindow()
     {
@@ -334,10 +337,10 @@ public static class UIManager
         }
 
         // Загружаем и показываем окно
-        GameObject loginPrefab = Resources.Load<GameObject>("Prefabs/RegisterWindow");
-        if (loginPrefab != null)
+        GameObject regPrefab = Resources.Load<GameObject>("Prefabs/RegisterWindow");
+        if (regPrefab != null)
         {
-            UnityEngine.Object.Instantiate(loginPrefab, mainCanvas.transform);
+            UnityEngine.Object.Instantiate(regPrefab, mainCanvas.transform);
         }
     }
 
@@ -361,11 +364,49 @@ public static class UIManager
         }
 
         // Загружаем и показываем окно
-        GameObject loginPrefab = Resources.Load<GameObject>("Prefabs/ChatWindow");
-        if (loginPrefab != null)
+        GameObject chatPrefab = Resources.Load<GameObject>("Prefabs/ChatWindow");
+        if (chatPrefab != null)
         {
-            UnityEngine.Object.Instantiate(loginPrefab, mainCanvas.transform);
+            chatWindow = UnityEngine.Object.Instantiate(chatPrefab, mainCanvas.transform);
         }
+    }
+
+    public static void HideChatWindow()
+    {
+        ChatWindow chatCode = chatWindow.GetComponent<ChatWindow>();
+        chatCode.Close();
+    }
+
+    public static void ShowAdminWindow()
+    {
+        // Находим Canvas
+        if (mainCanvas == null)
+        {
+            GameObject canvasObj = GameObject.Find("MainCanvas");
+
+            if (canvasObj == null)
+            {
+                Debug.LogError("Canvas не найден!");
+                return;
+            }
+            else
+            {
+                mainCanvas = canvasObj.GetComponent<Canvas>();
+            }
+        }
+
+        // Загружаем и показываем окно
+        GameObject adminPrefab = Resources.Load<GameObject>("Prefabs/AdminPanelWindow");
+        if (adminPrefab != null)
+        {
+            adminWindow = UnityEngine.Object.Instantiate(adminPrefab, mainCanvas.transform);
+        }
+    }
+
+    public static void HideAdminWindow()
+    {
+        AdminWindow adminCode = adminWindow.GetComponent<AdminWindow>();
+        adminCode.Close();
     }
 }
 

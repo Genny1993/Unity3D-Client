@@ -898,13 +898,14 @@ GameObject:
   - component: {fileID: 1924986134}
   - component: {fileID: 1924986133}
   - component: {fileID: 1924986132}
+  - component: {fileID: 1924986135}
   m_Layer: 5
   m_Name: AdminPanelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1924986131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -971,7 +972,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuitGameButton, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1019,6 +1020,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924986130}
   m_CullTransparentMesh: 1
+--- !u!114 &1924986135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924986130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e915307c032ae0f46ab47d228a19cf21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AdminPanelButton
+  button: {fileID: 1924986132}
+  buttonText: {fileID: 667692664}
+  buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
+  clickVolume: 0.7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

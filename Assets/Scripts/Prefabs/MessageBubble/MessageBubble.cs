@@ -24,6 +24,7 @@ public class MessageBubble : MonoBehaviour
     private string aid;
     private string aname;
     private string asize;
+    public bool my_message = false;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text quoteName;
@@ -92,6 +93,7 @@ public class MessageBubble : MonoBehaviour
         this.aid = a_id;
         this.aname = a_name;
         this.asize = a_size;
+        this.my_message = my_message;
 
 
         if (my_message)
@@ -111,6 +113,25 @@ public class MessageBubble : MonoBehaviour
             }
 
             this.username.enabled = false;
+
+        }
+
+        if(my_message || Settings.isAdmin)
+        {
+            editButton.gameObject.SetActive(false);
+            restoreButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(false);
+            quoteButton.gameObject.SetActive(false);
+            messageEditor.gameObject.SetActive(false);
+            burgerButton.gameObject.SetActive(true);
+        } else
+        {
+            editButton.gameObject.SetActive(false);
+            restoreButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(false);
+            quoteButton.gameObject.SetActive(true);
+            messageEditor.gameObject.SetActive(false);
+            burgerButton.gameObject.SetActive(false);
         }
 
         if(quotemessage == "")
@@ -129,12 +150,6 @@ public class MessageBubble : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        showed = false;
-        editButton.gameObject.SetActive(false);
-        restoreButton.gameObject.SetActive(false);
-        deleteButton.gameObject.SetActive(false);
-        quoteButton.gameObject.SetActive(false);
-        messageEditor.gameObject.SetActive(false);
 
         if (burgerButton != null)
             burgerButton.onClick.AddListener(OnBurgerButtonClick);
@@ -376,13 +391,26 @@ public class MessageBubble : MonoBehaviour
 
     public void HideButtons()
     {
-        showed = false;
-        editButton.gameObject.SetActive(false);
-        restoreButton.gameObject.SetActive(false);
-        deleteButton.gameObject.SetActive(false);
-        quoteButton.gameObject.SetActive(false);
-        messageEditor.gameObject.SetActive(false);
-        message.gameObject.SetActive(true);
+        if (my_message || Settings.isAdmin)
+        {
+            showed = false;
+            editButton.gameObject.SetActive(false);
+            restoreButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(false);
+            quoteButton.gameObject.SetActive(false);
+            messageEditor.gameObject.SetActive(false);
+            message.gameObject.SetActive(true);
+        } else
+        {
+            showed = false;
+            editButton.gameObject.SetActive(false);
+            restoreButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(false);
+            quoteButton.gameObject.SetActive(true);
+            messageEditor.gameObject.SetActive(false);
+            message.gameObject.SetActive(true);
+            burgerButton.gameObject.SetActive(false);
+        }
     }
 
 
@@ -403,8 +431,6 @@ public class MessageBubble : MonoBehaviour
                targetCanvas = canvasObj.GetComponent<Canvas>();
             }
         }
-
-        // Вспышка света
 
         // Выброс звездочек
         if (starParticlePrefab == null)

@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 public class ChatWindow : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class ChatWindow : MonoBehaviour
         fileBar.SetActive(false);
         GetChats();
         GetUsers();
+        IsAdmin();
     }
 
     // Update is called once per frame
@@ -68,6 +70,50 @@ public class ChatWindow : MonoBehaviour
         
     }
 
+    private async void IsAdmin()
+    {
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "account"),
+            new KeyValuePair<string, string>("pack[method]", "isAdmin"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info]", "")
+        };
+
+        try
+        {
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            Settings.isAdmin = result["info"].ToString() == "1" ? true : false;
+
+            var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+            foreach (var obj in allObjects)
+            {
+                // Проверяем, что объект не является prefab'ом и находится в сцене
+                if (obj.name == "AdminPanelButton" && obj.scene.isLoaded)
+                {
+                    if (Settings.isAdmin)
+                    {
+                        obj.SetActive(true);
+                    }
+                    else
+                    {
+                        obj.SetActive(false);
+                    }
+                    break;
+                }
+            }
+        }
+        catch (Exception)
+        {
+        }
+        finally
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
+    }
     private async void GetChats()
     {
         var formData = new List<KeyValuePair<string, string>>
@@ -291,5 +337,10 @@ public class ChatWindow : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         messagesList.verticalNormalizedPosition = 0f;
+    }
+
+    public void Close()
+    {
+        Destroy(gameObject);
     }
 }
