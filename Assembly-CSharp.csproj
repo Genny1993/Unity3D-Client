@@ -68,8 +68,8 @@
     <Compile Include="Assets\Scripts\Prefabs\UserPrefab\OnlineCircle.cs" />
     <Compile Include="Assets\Scripts\Core\Helpers.cs" />
     <Compile Include="Assets\Scripts\Core\StartMessengerInitializer.cs" />
-    <Compile Include="Assets\Scripts\Prefabs\QuitGameButton.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MessageBubble\EditMessage.cs" />
+    <Compile Include="Assets\Scripts\Core\QuitGame.cs" />
     <Compile Include="Assets\Scripts\Prefabs\HistoryWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\LoginWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\FileBar.cs" />

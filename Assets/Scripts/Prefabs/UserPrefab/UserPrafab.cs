@@ -35,6 +35,12 @@ public class UserPrefab : MonoBehaviour
 
         OnlineCircle circle = onlineCircle.GetComponent<OnlineCircle>();
         circle.SetOnline(online_status == "1" ? true : false);
+        
+        if(is_i == "1")
+        {
+            circle.SetOnline(true);
+        }
+
         panel.GetComponent<Image>().color = is_i == "1" ? new Color32(128, 166, 255, 180) : new Color32(255, 192, 203, 180);
         if(is_admin == "1")
         {

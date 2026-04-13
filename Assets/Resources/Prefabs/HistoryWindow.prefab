@@ -319,7 +319,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7634155654741871258}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.2
+  m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.2
   m_ScrollSensitivity: 12

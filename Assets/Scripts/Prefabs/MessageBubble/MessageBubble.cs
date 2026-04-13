@@ -348,7 +348,7 @@ public class MessageBubble : MonoBehaviour
                     // Проверяем, не нажал ли пользователь "Отмена"
                     if (string.IsNullOrEmpty(path))
                     {
-                        MessageBox.Show("Ошибка", "Сохранение отменено!");
+                        //MessageBox.Show("Ошибка", "Сохранение отменено!");
                         return;
                     }
 
@@ -357,7 +357,7 @@ public class MessageBubble : MonoBehaviour
                     {
                         // Записываем все байты из массива в выбранный файл
                         File.WriteAllBytes(path, fileBytes);
-                        MessageBox.Show("Информация", $"Файл сохранен: {path}");
+                        //MessageBox.Show("Информация", $"Файл сохранен: {path}");
                     }
                     catch (System.Exception e)
                     {

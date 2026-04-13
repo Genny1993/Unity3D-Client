@@ -55,7 +55,10 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
             messageEditor.interactable = false;
             Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
 
-            message.text = messageEditor.text;
+        }
+        catch (Exception){}
+        finally
+        {
             messageEditor.text = "";
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
@@ -63,13 +66,7 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
             mb.messageInput.ActivateInputField();
             mb.messageInput.caretPosition = Settings.lastCaretPosition;
             mb.messageInput.selectionFocusPosition = mb.messageInput.caretPosition;
-
-        }
-        catch (Exception){}
-        finally
-        {
             messageEditor.interactable = true;
-            messageEditor.text = "";
         }
     }
 

@@ -112,7 +112,9 @@ public class MessageBoxWindow : MonoBehaviour
 
     public void Initialize(string title, string message, Action onClose = null)
     {
+        Settings.isShowed = true;
         AudioManager.PlayOneShot(showMessage, clickVolume);
+            
         if (titleText != null)
             titleText.text = title;
 
@@ -124,11 +126,13 @@ public class MessageBoxWindow : MonoBehaviour
 
     private void OnOkClicked()
     {
+        Settings.isShowed = false;
         Close();
     }
 
     private void OnCloseClicked()
     {
+        Settings.isShowed = false;
         Close();
     }
 

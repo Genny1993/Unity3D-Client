@@ -29,6 +29,7 @@ public static class Settings
     public static bool quoteBar = false;
     public static int CountMessages = 0;
     public static int Page = 0;
+    public static bool isShowed = false;
 }
 
 public static class MessageBox
@@ -49,27 +50,30 @@ public static class MessageBox
     // Показать окно сообщения
     public static void Show(string title, string message, System.Action onClose = null)
     {
-        if (messageBoxPrefab == null)
+        if (!Settings.isShowed)
         {
-            Debug.LogError("MessageBox not initialized! Call MessageBox.Initialize() first.");
-            return;
+            if (messageBoxPrefab == null)
+            {
+                Debug.LogError("MessageBox not initialized! Call MessageBox.Initialize() first.");
+                return;
+            }
+
+            // Создаем экземпляр окна
+            GameObject windowObject = UnityEngine.Object.Instantiate(messageBoxPrefab);
+
+            // Находим компонент MessageBoxWindow
+            MessageBoxWindow window = windowObject.GetComponent<MessageBoxWindow>();
+
+            if (window == null)
+            {
+                Debug.LogError("MessageBoxWindow component not found on prefab!");
+                UnityEngine.Object.Destroy(windowObject);
+                return;
+            }
+
+            // Инициализируем окно
+            window.Initialize(title, message, onClose);
         }
-
-        // Создаем экземпляр окна
-        GameObject windowObject = UnityEngine.Object.Instantiate(messageBoxPrefab);
-
-        // Находим компонент MessageBoxWindow
-        MessageBoxWindow window = windowObject.GetComponent<MessageBoxWindow>();
-
-        if (window == null)
-        {
-            Debug.LogError("MessageBoxWindow component not found on prefab!");
-            UnityEngine.Object.Destroy(windowObject);
-            return;
-        }
-
-        // Инициализируем окно
-        window.Initialize(title, message, onClose);
     }
 }
 

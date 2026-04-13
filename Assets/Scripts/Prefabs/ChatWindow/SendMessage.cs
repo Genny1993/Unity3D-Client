@@ -58,6 +58,7 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
 
         try
         {
+            inputField.interactable = false;
             Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
             Settings.QuotedId = "";
             FileInfo.Clear();
@@ -81,16 +82,16 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
             inputField.ActivateInputField();
             inputField.caretPosition = Settings.lastCaretPosition;
             inputField.selectionFocusPosition = inputField.caretPosition;
+            inputField.text = "";
 
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception){}
         finally
         {
             inputField.interactable = true;
             inputField.ActivateInputField();
-            inputField.text = "";
+            inputField.caretPosition = Settings.lastCaretPosition;
+            inputField.selectionFocusPosition = inputField.caretPosition;
         }
     }
 }

@@ -283,7 +283,7 @@ public class ChatWindow : MonoBehaviour
         }
         else
         {
-            MessageBox.Show("Ошибка", "Выбор файла отменен");
+            //MessageBox.Show("Ошибка", "Выбор файла отменен");
         }
     }
 
