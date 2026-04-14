@@ -559,6 +559,90 @@ public static class SettingsWindowStart
     }
 }
 
+public static class NewUserWindowStart
+{
+    private static GameObject newUserWindowPrefab;
+
+    // Загрузка префаба (вызовите один раз при старте игры)
+    public static void Initialize()
+    {
+        if (newUserWindowPrefab == null)
+        {
+            newUserWindowPrefab = Resources.Load<GameObject>("Prefabs/NewUserWindow");
+            if (newUserWindowPrefab == null)
+                Debug.LogError("NewUserWindow prefab not found in Resources/Prefabs/");
+        }
+    }
+
+    // Показать окно сообщения
+    public static void Show(GameObject admin_panel)
+    {
+        if (newUserWindowPrefab == null)
+        {
+            Debug.LogError("NewUserWindow not initialized! Call NewUserWindowStart.Initialize() first.");
+            return;
+        }
+
+        // Создаем экземпляр окна
+        GameObject windowObject = UnityEngine.Object.Instantiate(newUserWindowPrefab);
+
+        // Находим компонент MessageBoxWindow
+        NewUserWindow window = windowObject.GetComponent<NewUserWindow>();
+
+        if (window == null)
+        {
+            Debug.LogError("NewUserWindow component not found on prefab!");
+            UnityEngine.Object.Destroy(windowObject);
+            return;
+        }
+
+        // Инициализируем окно
+        window.Initialize(admin_panel);
+    }
+}
+
+public static class NewChatWindowStart
+{
+    private static GameObject newChatWindowPrefab;
+
+    // Загрузка префаба (вызовите один раз при старте игры)
+    public static void Initialize()
+    {
+        if (newChatWindowPrefab == null)
+        {
+            newChatWindowPrefab = Resources.Load<GameObject>("Prefabs/NewChatWindow");
+            if (newChatWindowPrefab == null)
+                Debug.LogError("NewChatWindow prefab not found in Resources/Prefabs/");
+        }
+    }
+
+    // Показать окно сообщения
+    public static void Show(GameObject admin_panel)
+    {
+        if (newChatWindowPrefab == null)
+        {
+            Debug.LogError("NewChatWindow not initialized! Call NewChatWindowStart.Initialize() first.");
+            return;
+        }
+
+        // Создаем экземпляр окна
+        GameObject windowObject = UnityEngine.Object.Instantiate(newChatWindowPrefab);
+
+        // Находим компонент MessageBoxWindow
+        NewChatWindow window = windowObject.GetComponent<NewChatWindow>();
+
+        if (window == null)
+        {
+            Debug.LogError("NewChatWindow component not found on prefab!");
+            UnityEngine.Object.Destroy(windowObject);
+            return;
+        }
+
+        // Инициализируем окно
+        window.Initialize(admin_panel);
+    }
+}
+
 public static class FileInfo
 {
     public static string FileName = "";

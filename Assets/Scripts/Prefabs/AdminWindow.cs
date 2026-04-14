@@ -1,8 +1,10 @@
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+using static LoginWindow;
 
 public class AdminWindow : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class AdminWindow : MonoBehaviour
 
     [Header("Настройки префаба")]
     [SerializeField] private string userPrefabPath = "Prefabs/UserPanel";
+    [SerializeField] private string chatPrefabPath = "Prefabs/ChatPanel";
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;
@@ -26,7 +29,7 @@ public class AdminWindow : MonoBehaviour
     [SerializeField] private float clickVolume = 0.7f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    async void Start()
     {
         if (addUserButton != null)
             addUserButton.onClick.AddListener(AddUserButtonClick);
@@ -37,31 +40,39 @@ public class AdminWindow : MonoBehaviour
         if (refreshChatButton != null)
             refreshChatButton.onClick.AddListener(RefreshChatButtonClick);
 
-        GetUserList();
+        await GetUserList();
+        await GetChatList();
     }
 
     void AddUserButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
+        NewUserWindowStart.Show(this.gameObject);
     }
 
-    void RefreshUserButtonClick()
+    async void RefreshUserButtonClick()
     {
+        refreshUserButton.interactable = false;
         AudioManager.PlayOneShot(buttonClick, clickVolume);
-        GetUserList();
+        await GetUserList();
+        refreshUserButton.interactable = true;
     }
 
     void AddChatButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
+        NewChatWindowStart.Show(this.gameObject);
     }
 
-    void RefreshChatButtonClick()
+    async void RefreshChatButtonClick()
     {
+        refreshChatButton.interactable = false;
         AudioManager.PlayOneShot(buttonClick, clickVolume);
+        await GetChatList();
+        refreshChatButton.interactable = true;
     }
 
-    async void GetUserList ()
+    public async Task GetUserList ()
     {
         var formData = new List<KeyValuePair<string, string>>
         {
@@ -115,6 +126,69 @@ public class AdminWindow : MonoBehaviour
                             item["name"]?.ToString() ?? "",
                             "",
                             item["roles"]?.ToString() ?? "",
+                            item["deleted"]?.ToString() ?? ""
+                        );
+                    }
+                }
+            }
+
+        }
+        catch (Exception)
+        {
+        }
+    }
+
+    public async Task GetChatList()
+    {
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "chat"),
+            new KeyValuePair<string, string>("pack[method]", "getListAdmin"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info]", "")
+        };
+
+        try
+        {
+
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+
+            JArray ChatArray = result["info"] as JArray;
+
+            if (ChatArray != null)
+            {
+
+                Transform contentTransform = chatList.content;
+                if (contentTransform == null)
+                {
+                    Debug.LogError("ScrollView не имеет контейнера Content!");
+                    return;
+                }
+
+                foreach (Transform child in contentTransform)
+                {
+                    Destroy(child.gameObject);
+                }
+
+                GameObject chatPrefab = Resources.Load<GameObject>(chatPrefabPath);
+                if (chatPrefab == null)
+                {
+                    Debug.LogError($"Не удалось загрузить префаб по пути: {chatPrefabPath}");
+                    return;
+                }
+
+                foreach (JToken item in ChatArray)
+                {
+                    if (item is JObject obj)
+                    {
+                        // Создаём экземпляр префаба
+                        GameObject newChatItem = Instantiate(chatPrefab, contentTransform);
+
+                        ChatPanel chat = newChatItem.GetComponent<ChatPanel>();
+                        chat.Initializate(
+                            item["id"]?.ToString() ?? "",
+                            item["regdate"]?.ToString() ?? "",
+                            item["name"]?.ToString() ?? "",
                             item["deleted"]?.ToString() ?? ""
                         );
                     }

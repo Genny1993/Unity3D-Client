@@ -11,6 +11,8 @@ public class StartMessengerInitializer : MonoBehaviour
         MessageShowerWindow.Initialize();
         HistoryWindowStart.Initialize();
         SettingsWindowStart.Initialize();
+        NewUserWindowStart.Initialize();
+        NewChatWindowStart.Initialize();
 
         //Загружаем файловый менеджер
         GameObject go = new GameObject("FileManagerInit");

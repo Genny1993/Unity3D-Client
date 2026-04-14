@@ -349,7 +349,7 @@ public class HistoryWindow : MonoBehaviour
                             item["aid"]?.ToString() ?? "",
                             item["aname"]?.ToString() ?? "",
                             item["asize"]?.ToString() ?? "",
-                            messages,
+                            historyList,
                             messageInput,
                             statusBar,
                             quoteBarMain,

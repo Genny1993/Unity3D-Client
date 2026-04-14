@@ -64,9 +64,14 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
             mb.edited = false;
-            mb.messageInput.ActivateInputField();
-            mb.messageInput.caretPosition = Settings.lastCaretPosition;
-            mb.messageInput.selectionFocusPosition = mb.messageInput.caretPosition;
+            
+            if (mb.messageInput != null)
+            {
+                mb.messageInput.ActivateInputField();
+                mb.messageInput.caretPosition = Settings.lastCaretPosition;
+                mb.messageInput.selectionFocusPosition = mb.messageInput.caretPosition;
+            }
+
             messageEditor.interactable = true;
         }
     }
@@ -76,6 +81,7 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
         messageEditor.text = "";
         messageEditor.gameObject.SetActive(false);
         message.gameObject.SetActive(true);
+
         mb.edited = false;
     }
 

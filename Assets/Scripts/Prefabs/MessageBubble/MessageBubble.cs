@@ -25,6 +25,7 @@ public class MessageBubble : MonoBehaviour
     private string aname;
     private string asize;
     public bool my_message = false;
+    private bool is_admin_history = false;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text quoteName;
@@ -95,6 +96,14 @@ public class MessageBubble : MonoBehaviour
         this.asize = a_size;
         this.my_message = my_message;
 
+        if( i_f == null
+            && status_bar == null
+            && quote_bar == null
+            && quoteLabel == null)
+        {
+            this.is_admin_history = true;
+        }
+
 
         if (my_message)
         {
@@ -129,7 +138,10 @@ public class MessageBubble : MonoBehaviour
             editButton.gameObject.SetActive(false);
             restoreButton.gameObject.SetActive(false);
             deleteButton.gameObject.SetActive(false);
-            quoteButton.gameObject.SetActive(true);
+            if (!this.is_admin_history)
+            {
+                quoteButton.gameObject.SetActive(true);
+            }
             messageEditor.gameObject.SetActive(false);
             burgerButton.gameObject.SetActive(false);
         }
@@ -195,7 +207,11 @@ public class MessageBubble : MonoBehaviour
             editButton.gameObject.SetActive(true);
             restoreButton.gameObject.SetActive(true);
             deleteButton.gameObject.SetActive(true);
-            quoteButton.gameObject.SetActive(true);
+
+            if (!this.is_admin_history)
+            {
+                quoteButton.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -206,9 +222,12 @@ public class MessageBubble : MonoBehaviour
             quoteButton.gameObject.SetActive(false);
         }
 
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (!this.is_admin_history)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 
     async void OnDeleteButtonClick()
@@ -233,9 +252,13 @@ public class MessageBubble : MonoBehaviour
         finally
         {
             deleteButton.interactable = true;
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+
+            if (!this.is_admin_history)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -261,9 +284,13 @@ public class MessageBubble : MonoBehaviour
         finally
         {
             restoreButton.interactable = true;
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+
+            if (!this.is_admin_history)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -290,9 +317,13 @@ public class MessageBubble : MonoBehaviour
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
             messageEditor.text = "";
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+
+            if (!this.is_admin_history)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -302,22 +333,29 @@ public class MessageBubble : MonoBehaviour
 
         Settings.quoteBar = true;
 
-        if(statusBar.activeInHierarchy == false) {
-            RectTransform rect = messages.GetComponent<RectTransform>();
-            Vector2 size = rect.sizeDelta;
-            size.y = Settings.currentMessagesListHeight - 40;
-            Settings.currentMessagesListHeight = (int)size.y;
-            rect.sizeDelta = size;
+        if (!this.is_admin_history)
+        {
+            if (statusBar.activeInHierarchy == false)
+            {
+                RectTransform rect = messages.GetComponent<RectTransform>();
+                Vector2 size = rect.sizeDelta;
+                size.y = Settings.currentMessagesListHeight - 40;
+                Settings.currentMessagesListHeight = (int)size.y;
+                rect.sizeDelta = size;
+            }
+
+            Settings.QuotedId = this.id;
+            statusBar.SetActive(true);
+            quoteBarMain.SetActive(true);
+            quoteLabel.text = "Цитата: " + this.id;
         }
 
-        Settings.QuotedId = this.id;
-        statusBar.SetActive(true);
-        quoteBarMain.SetActive(true);
-        quoteLabel.text = "Цитата: " + this.id;
-
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (!this.is_admin_history)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 
     void OnInQuoteButtonClick()
@@ -406,7 +444,10 @@ public class MessageBubble : MonoBehaviour
             editButton.gameObject.SetActive(false);
             restoreButton.gameObject.SetActive(false);
             deleteButton.gameObject.SetActive(false);
-            quoteButton.gameObject.SetActive(true);
+            if (!this.is_admin_history)
+            {
+                quoteButton.gameObject.SetActive(true);
+            }
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
             burgerButton.gameObject.SetActive(false);
