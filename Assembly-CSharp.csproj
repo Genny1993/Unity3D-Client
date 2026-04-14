@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\BackPanel.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateUserTimer.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\UserPanel\UserPanel.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MessageShower.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatPrefab.cs" />
     <Compile Include="Assets\Scripts\Prefabs\AdminWindow.cs" />
@@ -57,13 +58,16 @@
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\QuoteBar.cs" />
     <Compile Include="Assets\Scripts\Prefabs\SettingsWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPrefab\UserPrafab.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\UserPanel\GroupInput.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MessageBubble\MessageBubble.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\SendMessage.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\UserPanel\PasswordInput.cs" />
     <Compile Include="Assets\Scripts\Prefabs\RegisterWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\EmojiController.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\SaveCaretPosition.cs" />
     <Compile Include="Assets\Scripts\Core\FileManager.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\ChatWindow.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\UserPanel\UsernameInput.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateMessageTimer.cs" />
     <Compile Include="Assets\Scripts\Core\MessageBoxWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPrefab\OnlineCircle.cs" />

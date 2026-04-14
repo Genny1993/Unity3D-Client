@@ -1,5 +1,8 @@
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class AdminWindow : MonoBehaviour
 {
@@ -8,6 +11,12 @@ public class AdminWindow : MonoBehaviour
     [SerializeField] private Button refreshUserButton;
     [SerializeField] private Button addChatButton;
     [SerializeField] private Button refreshChatButton;
+
+    [SerializeField] private ScrollRect userList;
+    [SerializeField] private ScrollRect chatList;
+
+    [Header("Настройки префаба")]
+    [SerializeField] private string userPrefabPath = "Prefabs/UserPanel";
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;
@@ -27,6 +36,8 @@ public class AdminWindow : MonoBehaviour
             addChatButton.onClick.AddListener(AddChatButtonClick);
         if (refreshChatButton != null)
             refreshChatButton.onClick.AddListener(RefreshChatButtonClick);
+
+        GetUserList();
     }
 
     void AddUserButtonClick()
@@ -37,6 +48,7 @@ public class AdminWindow : MonoBehaviour
     void RefreshUserButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
+        GetUserList();
     }
 
     void AddChatButtonClick()
@@ -47,6 +59,72 @@ public class AdminWindow : MonoBehaviour
     void RefreshChatButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
+    }
+
+    async void GetUserList ()
+    {
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "account"),
+            new KeyValuePair<string, string>("pack[method]", "getListAdmin"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info]", "")
+        };
+
+        try
+        {
+
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+
+            JArray UserArray = result["info"] as JArray;
+
+            if (UserArray != null)
+            {
+
+                Transform contentTransform = userList.content;
+                if (contentTransform == null)
+                {
+                    Debug.LogError("ScrollView не имеет контейнера Content!");
+                    return;
+                }
+
+                foreach (Transform child in contentTransform)
+                {
+                    Destroy(child.gameObject);
+                }
+
+                GameObject userPrefab = Resources.Load<GameObject>(userPrefabPath);
+                if (userPrefab == null)
+                {
+                    Debug.LogError($"Не удалось загрузить префаб по пути: {userPrefabPath}");
+                    return;
+                }
+
+                foreach (JToken item in UserArray)
+                {
+                    if (item is JObject obj)
+                    {
+                        // Создаём экземпляр префаба
+                        GameObject newUserItem = Instantiate(userPrefab, contentTransform);
+
+                        UserPanel user = newUserItem.GetComponent<UserPanel>();
+                        user.Initializate(
+                            item["id"]?.ToString() ?? "",
+                            item["regdate"]?.ToString() ?? "",
+                            item["login"]?.ToString() ?? "",
+                            item["name"]?.ToString() ?? "",
+                            "",
+                            item["roles"]?.ToString() ?? "",
+                            item["deleted"]?.ToString() ?? ""
+                        );
+                    }
+                }
+            }
+
+        }
+        catch (Exception)
+        {
+        }
     }
 
     // Update is called once per frame

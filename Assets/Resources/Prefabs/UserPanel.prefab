@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.875, y: -15}
+  m_AnchoredPosition: {x: 182.875, y: -20}
   m_SizeDelta: {x: 365.75, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2776819657677993164
@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 5286386672909728277}
   - component: {fileID: 2511380716146117565}
   - component: {fileID: 4687810002154297497}
+  - component: {fileID: 1632978407431638340}
   m_Layer: 5
   m_Name: UsernameInput
   m_TagString: Untagged
@@ -445,12 +446,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: 350
-  m_MinHeight: 30
+  m_MinHeight: 40
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1632978407431638340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455932580587746172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86dbe923ead17e74081d43c0684d2dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UsernameInput
+  id: 
+  usernameEditor: {fileID: 5286386672909728277}
+  usernameText: {fileID: 5738577644291005993}
+  user: {fileID: 8503764627881117075}
+  buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
+  clickVolume: 0.7
 --- !u!1 &512677190991084618
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +899,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 208.16667, y: -15}
+  m_AnchoredPosition: {x: 208.16667, y: -20}
   m_SizeDelta: {x: 416.33334, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9147815378705125584
@@ -1133,7 +1152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.875, y: -15}
+  m_AnchoredPosition: {x: 182.875, y: -20}
   m_SizeDelta: {x: 365.75, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5780591755708525852
@@ -1522,7 +1541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.5, y: -102.93}
+  m_AnchoredPosition: {x: 431.5, y: -117.93}
   m_SizeDelta: {x: 843, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7672356066947281439
@@ -1942,7 +1961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.875, y: -15}
+  m_AnchoredPosition: {x: 182.875, y: -20}
   m_SizeDelta: {x: 365.75, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1529476464803674001
@@ -2074,7 +2093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: 350
-  m_MinHeight: 30
+  m_MinHeight: 40
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -2253,7 +2272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.5, y: -62.93}
+  m_AnchoredPosition: {x: 431.5, y: -67.93}
   m_SizeDelta: {x: 843, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7680550996216080965
@@ -2332,7 +2351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.83334, y: -15}
+  m_AnchoredPosition: {x: 182.83334, y: -20}
   m_SizeDelta: {x: 365.6667, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475267853225087908
@@ -2411,7 +2430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.83334, y: -15}
+  m_AnchoredPosition: {x: 182.83334, y: -20}
   m_SizeDelta: {x: 365.6667, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3355088713662870257
@@ -2542,7 +2561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: 350
-  m_MinHeight: 30
+  m_MinHeight: 40
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -2624,7 +2643,7 @@ GameObject:
   - component: {fileID: 7565934021016556764}
   - component: {fileID: 2558331867058754130}
   m_Layer: 5
-  m_Name: DeleteButton
+  m_Name: RestoreButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2832,7 +2851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.875, y: -15}
+  m_AnchoredPosition: {x: 182.875, y: -20}
   m_SizeDelta: {x: 365.75, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2164912497269384892
@@ -2963,7 +2982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: 350
-  m_MinHeight: 30
+  m_MinHeight: 40
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -3183,6 +3202,7 @@ GameObject:
   - component: {fileID: 4670828131369048809}
   - component: {fileID: 2352452321599838386}
   - component: {fileID: 2096835735560851782}
+  - component: {fileID: 1849216877908361613}
   m_Layer: 5
   m_Name: GroupInput
   m_TagString: Untagged
@@ -3377,12 +3397,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: 350
-  m_MinHeight: 30
+  m_MinHeight: 25
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1849216877908361613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566803058490321663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e83aeb4af9db849a7cc6019eebad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroupInput
+  id: 
+  groupEditor: {fileID: 4670828131369048809}
+  groupText: {fileID: 8726762509168424501}
+  user: {fileID: 8503764627881117075}
+  buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
+  clickVolume: 0.7
 --- !u!1 &5611697307160405031
 GameObject:
   m_ObjectHideFlags: 0
@@ -3670,6 +3708,7 @@ GameObject:
   - component: {fileID: 3567555488879642410}
   - component: {fileID: 5610077803237105402}
   - component: {fileID: 6536347209113227522}
+  - component: {fileID: 8503764627881117075}
   m_Layer: 5
   m_Name: UserPanel
   m_TagString: Untagged
@@ -3777,6 +3816,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &8503764627881117075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392107055784013649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f34f051387795145be19cc19d0e2000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UserPanel
+  editingUsername: 0
+  editingPassword: 0
+  editingGroup: 0
+  userDLogin: {fileID: 2535274122334360684}
+  usernameText: {fileID: 5738577644291005993}
+  passwordText: {fileID: 1573916157552750502}
+  groupText: {fileID: 8726762509168424501}
+  usernameInput: {fileID: 5286386672909728277}
+  passwordInput: {fileID: 5096498529466044524}
+  groupInput: {fileID: 4670828131369048809}
+  usernameButton: {fileID: 8486861790048688562}
+  passwordButton: {fileID: 7360735809609417072}
+  groupButton: {fileID: 7677338812068855596}
+  deleteButton: {fileID: 7559280607364277853}
+  restoreButton: {fileID: 2558331867058754130}
+  buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
+  clickVolume: 0.7
 --- !u!1 &6662122946581449184
 GameObject:
   m_ObjectHideFlags: 0
@@ -4054,7 +4122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 634.75, y: -15}
+  m_AnchoredPosition: {x: 634.75, y: -20}
   m_SizeDelta: {x: 416.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7343346086281746242
@@ -4133,7 +4201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 208.25, y: -15}
+  m_AnchoredPosition: {x: 208.25, y: -20}
   m_SizeDelta: {x: 416.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7963851769393583962
@@ -4190,6 +4258,7 @@ GameObject:
   - component: {fileID: 5096498529466044524}
   - component: {fileID: 7290154879808692971}
   - component: {fileID: 9147073217041578228}
+  - component: {fileID: 588777754445524624}
   m_Layer: 5
   m_Name: PassswordInput
   m_TagString: Untagged
@@ -4384,12 +4453,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: 350
-  m_MinHeight: 30
+  m_MinHeight: 40
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &588777754445524624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435638199835009888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93bf291e6452164bbd0c56c94db8923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PasswordInput
+  id: 
+  passwordEditor: {fileID: 5096498529466044524}
+  passwordText: {fileID: 1573916157552750502}
+  user: {fileID: 8503764627881117075}
+  buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
+  clickVolume: 0.7
 --- !u!1 &7682425521713154410
 GameObject:
   m_ObjectHideFlags: 0

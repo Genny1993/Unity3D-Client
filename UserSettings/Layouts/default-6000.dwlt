@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1913
     height: 988
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -273,13 +273,13 @@ MonoBehaviour:
     height: 736
   m_MinSize: {x: 202, y: 226}
   m_MaxSize: {x: 4002, y: 4026}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 14}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -699,7 +699,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs
+    - Assets/Materials
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -709,20 +709,23 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Prefabs
+  - Assets/Materials
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\viono\Client
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 174}
+    scrollPos: {x: 0, y: 60}
     m_SelectedIDs:
-    - m_Data: 55318
+    - m_Data: 55328
     m_LastClickedID:
-      m_Data: 55318
+      m_Data: 55328
     m_ExpandedIDs:
     - m_Data: 0
+    - m_Data: 54980
+    - m_Data: 54982
+    - m_Data: 54984
     - m_Data: 54986
     - m_Data: 54988
     - m_Data: 54990
@@ -730,9 +733,6 @@ MonoBehaviour:
     - m_Data: 54994
     - m_Data: 54996
     - m_Data: 54998
-    - m_Data: 55000
-    - m_Data: 55002
-    - m_Data: 55004
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -766,6 +766,9 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
+    - m_Data: 54980
+    - m_Data: 54982
+    - m_Data: 54984
     - m_Data: 54986
     - m_Data: 54988
     - m_Data: 54990
@@ -773,9 +776,6 @@ MonoBehaviour:
     - m_Data: 54994
     - m_Data: 54996
     - m_Data: 54998
-    - m_Data: 55000
-    - m_Data: 55002
-    - m_Data: 55004
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -803,13 +803,15 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
+    m_SelectedInstanceIDs:
+    - m_Data: 54854
     m_LastClickedEntityId:
-      m_Data: 0
+      m_Data: 54854
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 74272
     - m_Data: 54882
+    - m_Data: 54926
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -836,7 +838,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 85}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 199
@@ -885,17 +887,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -3080462
-      - m_Data: -3080046
-      - m_Data: 264896
-      - m_Data: 264908
-      - m_Data: 264918
-      - m_Data: 264934
-      - m_Data: 264946
-      - m_Data: 265044
-      - m_Data: 265064
-      - m_Data: 265086
-      - m_Data: 265120
+      - m_Data: -1386
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -943,8 +935,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 375
-    y: 24
+    x: 380
+    y: 87
     width: 1222
     height: 710
   m_SerializedDataModeController:
@@ -1519,7 +1511,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 576.8076, y: 314.5124, z: -3.791508}
     speed: 2
-    m_Value: {x: 582.85565, y: 385.29276, z: 2.187938}
+    m_Value: {x: 576.8076, y: 314.5124, z: -3.791508}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1572,7 +1564,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 415.3899
     speed: 2
-    m_Value: 824.38074
+    m_Value: 415.3899
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1627,8 +1619,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 383
-    y: 89
+    x: 375
+    y: 24
     width: 1222
     height: 710
   m_SerializedDataModeController:
@@ -1677,7 +1669,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
