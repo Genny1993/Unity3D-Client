@@ -56,7 +56,6 @@
     <Compile Include="Assets\Scripts\Prefabs\MessageShower.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatPrefab.cs" />
     <Compile Include="Assets\Scripts\Prefabs\AdminWindow.cs" />
-    <Compile Include="Assets\Scripts\TextScaler\TextWindowScaleCompensator.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateOnlineTimer.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\QuoteBar.cs" />
     <Compile Include="Assets\Scripts\Prefabs\SettingsWindow.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\ChatWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPanel\UsernameInput.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateMessageTimer.cs" />
-    <Compile Include="Assets\Scripts\TextScaler\FixedPixelSizeInputField.cs" />
     <Compile Include="Assets\Scripts\Core\MessageBoxWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPrefab\OnlineCircle.cs" />
     <Compile Include="Assets\Scripts\Core\Helpers.cs" />

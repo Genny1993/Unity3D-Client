@@ -78,7 +78,7 @@ public class MessageBubble : MonoBehaviour
     public float destroyAfter = 3f;       // Через сколько секунд удалить звездочки
 
 
-    public void Initialize(string id, string username, string message, string time, string quoteid, string quotename, string quotemessage, bool my_message, string a_id, string a_name, string a_size, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel)
+    public void Initialize(string id, string username, string message, string time, string quoteid, string quotename, string quotemessage, bool my_message, string a_id, string a_name, string a_size, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel, bool show_window = false)
     {
         this.id = id;
         this.username.text = username;
@@ -171,6 +171,15 @@ public class MessageBubble : MonoBehaviour
         } else
         {
             fileName.text = "📄  " + this.aname + ", " + FormatBytes(long.Parse(this.asize));
+        }
+
+        if (show_window)
+        {
+            HorizontalLayoutGroup layoutGroup = GetComponent<HorizontalLayoutGroup>();
+            layoutGroup.padding.left = 5;
+            layoutGroup.padding.right = 5;
+            leftPadding.SetActive(false);
+            rightPadding.SetActive(false);
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

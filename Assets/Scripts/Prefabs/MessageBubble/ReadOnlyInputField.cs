@@ -1,16 +1,19 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Компонент, делающий TMP_InputField доступным только для чтения.
 /// Текст можно выделять и копировать, но нельзя редактировать или удалять.
+/// Прокрутка передается родительскому ScrollRect.
 /// </summary>
-public class ReadOnlyInputField : MonoBehaviour, IPointerClickHandler
+public class ReadOnlyInputField : MonoBehaviour, IPointerClickHandler, IScrollHandler
 {
     public TMP_InputField inputField;
     private string currentText;
     private bool isInitialized = false;
+    private ScrollRect parentScrollRect;
 
     void Awake()
     {
@@ -24,6 +27,9 @@ public class ReadOnlyInputField : MonoBehaviour, IPointerClickHandler
                 return;
             }
         }
+
+        // Находим родительский ScrollRect
+        parentScrollRect = GetComponentInParent<ScrollRect>();
     }
 
     void Start()
@@ -78,12 +84,26 @@ public class ReadOnlyInputField : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // Этот метод обрабатывает попытки вставки через контекстное меню (ПКМ)
+    // Обработка прокрутки колесиком мыши
+    public void OnScroll(PointerEventData eventData)
+    {
+        // Если есть родительский ScrollRect, передаем ему событие прокрутки
+        if (parentScrollRect != null)
+        {
+            // Отправляем событие прокрутки родителю
+            ExecuteEvents.Execute(parentScrollRect.gameObject, eventData, ExecuteEvents.scrollHandler);
+        }
+    }
+
+    // Обработка кликов (оставляем для выделения текста)
     public void OnPointerClick(PointerEventData eventData)
     {
+        // Ничего не блокируем, чтобы выделение работало
+        // При правом клике можно было бы добавить кастомное меню с Copy
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            // Блокируем появление стандартного контекстного меню с опциями Cut/Copy/Paste
+            // Здесь можно добавить кастомное контекстное меню с опцией Copy
+            // Но стандартное меню не появляется, так что оставляем пустым
         }
     }
 

@@ -165,7 +165,8 @@ public class MessageShower : MonoBehaviour
                             messageInput,
                             statusBar,
                             quoteBarMain,
-                            quoteLabel
+                            quoteLabel,
+                            true
                         );
 
                         message.Depadding();
