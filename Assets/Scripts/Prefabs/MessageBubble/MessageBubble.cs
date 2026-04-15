@@ -33,7 +33,7 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] private Image quoteColorBar;
     [SerializeField] private GameObject quoteBar;
     [SerializeField] private TMP_Text username;
-    [SerializeField] private TMP_Text message;
+    [SerializeField] private TMP_InputField message;
     [SerializeField] private TMP_Text time;
     [SerializeField] private GameObject panel;
     [SerializeField] private TMP_InputField messageEditor;
@@ -41,6 +41,8 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] public TMP_InputField messageInput;
     [SerializeField] private GameObject fileBar;
     [SerializeField] public TMP_Text fileName;
+    [SerializeField] private GameObject leftPadding;
+    [SerializeField] private GameObject rightPadding;
 
 
 
@@ -107,11 +109,13 @@ public class MessageBubble : MonoBehaviour
 
         if (my_message)
         {
-            VerticalLayoutGroup layoutGroup = GetComponent<VerticalLayoutGroup>();
+            HorizontalLayoutGroup layoutGroup = GetComponent<HorizontalLayoutGroup>();
             if (layoutGroup != null)
             {
-                layoutGroup.padding.left = 600;
-                layoutGroup.padding.right = 20;
+                layoutGroup.padding.left = 100;
+                layoutGroup.padding.right = 0;
+                leftPadding.SetActive(true);
+                rightPadding.SetActive(false);
             }
 
             Image img = panel.GetComponent<Image>();
@@ -123,6 +127,16 @@ public class MessageBubble : MonoBehaviour
 
             this.username.enabled = false;
 
+        } else
+        {
+            HorizontalLayoutGroup layoutGroup = GetComponent<HorizontalLayoutGroup>();
+            if (layoutGroup != null)
+            {
+                layoutGroup.padding.left = 5;
+                layoutGroup.padding.right = 100;
+                leftPadding.SetActive(false);
+                rightPadding.SetActive(true);
+            }
         }
 
         if(my_message || Settings.isAdmin)
@@ -186,6 +200,7 @@ public class MessageBubble : MonoBehaviour
 
         if (fileButton != null)
             fileButton.onClick.AddListener(OnFileButtonClick);
+
     }
 
     void Update()

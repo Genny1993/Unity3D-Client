@@ -1108,7 +1108,7 @@ MonoBehaviour:
   cancelButton: {fileID: 3617990358963018519}
   nameInput: {fileID: 3904261629642000213}
   adminPanel: {fileID: 0}
-  panelToAnimate: {fileID: 6133049975627688156}
+  panelToAnimate: {fileID: 7432236200446236732}
   throwForce: 1000
   upForce: 1000
   randomTorque: 5

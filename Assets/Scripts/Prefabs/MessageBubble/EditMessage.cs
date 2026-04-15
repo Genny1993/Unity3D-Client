@@ -11,7 +11,7 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
     public string id;
 
     [Header("Игровые обьекты")]
-    [SerializeField] public TMP_Text message;
+    [SerializeField] public TMP_InputField message;
     [SerializeField] TMP_InputField messageEditor;
     [SerializeField] public MessageBubble mb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
