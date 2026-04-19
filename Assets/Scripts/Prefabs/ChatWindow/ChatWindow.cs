@@ -344,6 +344,12 @@ public class ChatWindow : MonoBehaviour
             }
 
             messageInput.text = ""; // Очищаем поле
+            FixTMPDeleteBug inputFixer = messageInput.GetComponent<FixTMPDeleteBug>();
+            if(inputFixer != null)
+            {
+                inputFixer.lastText = "";
+                inputFixer.lastCaret = 0;
+            }
 
             if (Settings.isPCProgram)
             {

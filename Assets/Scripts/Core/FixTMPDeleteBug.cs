@@ -5,8 +5,8 @@ public class FixTMPDeleteBug : MonoBehaviour
 {
     public TMP_InputField input;
 
-    private string lastText = "";
-    private int lastCaret = 0;
+    public string lastText = "";
+    public int lastCaret = 0;
 
     void Update()
     {
