@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
     using NativeFilePickerNamespace;
@@ -499,6 +499,8 @@ public class MessageBubble : MonoBehaviour
             messageEditor.GetComponent<EditMessage>().id = this.id;
             messageEditor.GetComponent<EditMessage>().message = this.message;
             messageEditor.GetComponent<EditMessage>().mb = this;
+            messageEditor.ActivateInputField();
+            StartCoroutine(CenterCoroutine());
 
         } else
         {
@@ -647,6 +649,7 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             copyButton.gameObject.SetActive(false);
             this.message.interactable = false;
             this.messageSelectButton.gameObject.SetActive(true);
+            this.edited = false;
         } else
         {
             showed = false;
@@ -664,6 +667,7 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             copyButton.gameObject.SetActive(false);
             this.message.interactable = false;
             this.messageSelectButton.gameObject.SetActive(true);
+            this.edited = false;
         }
     }
 
@@ -796,5 +800,49 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
         string result = $"{size:F2} {units[unitIndex]}";
 
         return result;
+    }
+
+    private IEnumerator CenterCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        RectTransform target = (RectTransform)transform;
+        RectTransform content = messages.content;
+        RectTransform viewport = messages.viewport;
+
+        // Обновляем layout (критично при разной высоте)
+        LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+
+        // Центр элемента
+        Vector3 worldPoint = target.TransformPoint(target.rect.center);
+        Vector3 localPoint = content.InverseTransformPoint(worldPoint);
+
+        // Центр viewport
+        Vector3 viewportLocal = content.InverseTransformPoint(
+            viewport.TransformPoint(viewport.rect.center)
+        );
+
+        // Смещение
+        Vector2 delta = (Vector2)(viewportLocal - localPoint);
+
+        // Новая позиция content
+        Vector2 targetPos = content.anchoredPosition + new Vector2(0, delta.y);
+
+        // Ограничение
+        float maxY = Mathf.Max(0, content.rect.height - viewport.rect.height);
+        targetPos.y = Mathf.Clamp(targetPos.y, 0, maxY);
+
+        // Плавный скролл
+        Vector2 startPos = content.anchoredPosition;
+        float time = 0f;
+
+        while (time < 0.25f)
+        {
+            time += Time.deltaTime;
+            content.anchoredPosition = Vector2.Lerp(startPos, targetPos, time / 0.25f);
+            yield return null;
+        }
+
+        content.anchoredPosition = targetPos;
     }
 }

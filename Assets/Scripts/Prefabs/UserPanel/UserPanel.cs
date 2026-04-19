@@ -31,8 +31,12 @@ public class UserPanel : MonoBehaviour
     [SerializeField] private Button usernameButton;
     [SerializeField] private Button passwordButton;
     [SerializeField] private Button groupButton;
+    [SerializeField] private Button saveUsernameButton;
+    [SerializeField] private Button savePasswordButton;
+    [SerializeField] private Button saveGroupButton;
     [SerializeField] private Button deleteButton;
     [SerializeField] private Button restoreButton;
+
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;
@@ -53,12 +57,22 @@ public class UserPanel : MonoBehaviour
         if (groupButton != null)
             groupButton.onClick.AddListener(OnGroupClicked);
 
+        if (saveUsernameButton != null)
+            saveUsernameButton.onClick.AddListener(OnSaveUsernameClicked);
+
+        if (savePasswordButton != null)
+            savePasswordButton.onClick.AddListener(OnSavePasswordClicked);
+
+        if (saveGroupButton != null)
+            saveGroupButton.onClick.AddListener(OnSaveGroupClicked);
+
         if (deleteButton != null)
             deleteButton.onClick.AddListener(OnDeleteClicked);
 
         if (restoreButton != null)
             restoreButton.onClick.AddListener(OnRestoreClicked);
     }
+
 
     public void Initializate(string id, string regdate, string login, string username, string password, string group, string deleted)
     {
@@ -75,12 +89,111 @@ public class UserPanel : MonoBehaviour
         this.passwordText.text = "**********";
         this.groupText.text = group;
 
+        this.saveUsernameButton.gameObject.SetActive(false);
+        this.savePasswordButton.gameObject.SetActive(false);
+        this.saveGroupButton.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    async void OnSaveUsernameClicked()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "account"),
+            new KeyValuePair<string, string>("pack[method]", "changeNameAdmin"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][id]", this.id),
+            new KeyValuePair<string, string>("pack[info][name]", usernameInput.text.Trim())
+        };
+
+        try
+        {
+            usernameInput.interactable = false;
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            usernameText.text = usernameInput.text;
+            RefreshUser();
+
+        }
+        catch (Exception) { }
+        finally
+        {
+            usernameInput.interactable = true;
+            usernameInput.text = "";
+            usernameInput.gameObject.SetActive(false);
+            usernameText.gameObject.SetActive(true);
+            this.editingUsername = false;
+            saveUsernameButton.gameObject.SetActive(false);
+        }
+    }
+
+    async void OnSavePasswordClicked()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "account"),
+            new KeyValuePair<string, string>("pack[method]", "changePasswordAdmin"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][id]", this.id),
+            new KeyValuePair<string, string>("pack[info][password]", passwordInput.text.Trim())
+        };
+
+        try
+        {
+            passwordInput.interactable = false;
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            passwordText.text = passwordInput.text;
+            RefreshUser();
+
+        }
+        catch (Exception) { }
+        finally
+        {
+            passwordInput.interactable = true;
+            passwordInput.text = "";
+            passwordInput.gameObject.SetActive(false);
+            passwordText.gameObject.SetActive(true);
+            this.editingPassword = false;
+            savePasswordButton.gameObject.SetActive(false);
+        }
+    }
+
+    async void OnSaveGroupClicked()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "account"),
+            new KeyValuePair<string, string>("pack[method]", "changeGroupAdmin"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][id]", this.id),
+            new KeyValuePair<string, string>("pack[info][roles]", groupInput.text.Trim())
+        };
+
+        try
+        {
+            groupInput.interactable = false;
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            groupText.text = groupInput.text;
+            RefreshUser();
+
+        }
+        catch (Exception) { }
+        finally
+        {
+            groupInput.interactable = true;
+            groupInput.text = "";
+            groupInput.gameObject.SetActive(false);
+            groupText.gameObject.SetActive(true);
+            this.editingGroup = false;
+            saveGroupButton.gameObject.SetActive(false);
+        }
     }
 
     void OnUsernameClicked()
@@ -93,6 +206,7 @@ public class UserPanel : MonoBehaviour
             this.usernameInput.text = "";
             this.usernameInput.gameObject.SetActive(false);
             this.usernameText.gameObject.SetActive(true);
+            this.saveUsernameButton.gameObject.SetActive(false);
 
         } else
         {
@@ -100,8 +214,8 @@ public class UserPanel : MonoBehaviour
             this.usernameInput.text = this.usernameText.text;
             this.usernameInput.gameObject.SetActive(true);
             this.usernameText.gameObject.SetActive(false);
-            usernameInput.GetComponent<UsernameInput>().id = this.id;
             usernameInput.ActivateInputField();
+            this.saveUsernameButton.gameObject.SetActive(true);
         }
     }
 
@@ -115,6 +229,7 @@ public class UserPanel : MonoBehaviour
             this.passwordInput.text = "";
             this.passwordInput.gameObject.SetActive(false);
             this.passwordText.gameObject.SetActive(true);
+            this.savePasswordButton.gameObject.SetActive(false);
 
         }
         else
@@ -123,8 +238,8 @@ public class UserPanel : MonoBehaviour
             this.passwordInput.text = "";
             this.passwordInput.gameObject.SetActive(true);
             this.passwordText.gameObject.SetActive(false);
-            passwordInput.GetComponent<PasswordInput>().id = this.id;
             passwordInput.ActivateInputField();
+            this.savePasswordButton.gameObject.SetActive(true);
         }
     }
 
@@ -138,6 +253,7 @@ public class UserPanel : MonoBehaviour
             this.groupInput.text = "";
             this.groupInput.gameObject.SetActive(false);
             this.groupText.gameObject.SetActive(true);
+            this.saveGroupButton.gameObject.SetActive(false);
 
         }
         else
@@ -146,8 +262,8 @@ public class UserPanel : MonoBehaviour
             this.groupInput.text = this.groupText.text;
             this.groupInput.gameObject.SetActive(true);
             this.groupText.gameObject.SetActive(false);
-            groupInput.GetComponent<GroupInput>().id = this.id;
             groupInput.ActivateInputField();
+            this.saveGroupButton.gameObject.SetActive(true);
         }
     }
 

@@ -23,6 +23,7 @@ public class ChatPanel : MonoBehaviour
     [SerializeField] private Button deleteButton;
     [SerializeField] private Button restoreButton;
     [SerializeField] private Button historyButton;
+    [SerializeField] private Button saveNameButton;
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;
@@ -45,6 +46,9 @@ public class ChatPanel : MonoBehaviour
 
         if (historyButton != null)
             historyButton.onClick.AddListener(OnHistoryClicked);
+        
+        if (saveNameButton != null)
+            saveNameButton.onClick.AddListener(OnSaveNameClicked);
     }
 
     public void Initializate(string id, string regdate, string name, string deleted)
@@ -56,6 +60,8 @@ public class ChatPanel : MonoBehaviour
 
         chatDName.text = "ID: " + id + " " + (this.deleted == "" ? regdate : "Деактивирован");
         this.nameText.text = name;
+
+        this.saveNameButton.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,25 +70,65 @@ public class ChatPanel : MonoBehaviour
         
     }
 
+    async void OnSaveNameClicked()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "chat"),
+            new KeyValuePair<string, string>("pack[method]", "rename"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][id]", this.id),
+            new KeyValuePair<string, string>("pack[info][name]", nameInput.text.Trim())
+        };
+
+        try
+        {
+            nameInput.interactable = false;
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            nameText.text = nameInput.text;
+            RefreshChat();
+
+        }
+        catch (Exception) { }
+        finally
+        {
+            nameInput.interactable = true;
+            if (this.editingName)
+            {
+                this.editingName = false;
+                this.nameInput.text = "";
+                this.nameInput.gameObject.SetActive(false);
+                this.nameText.gameObject.SetActive(true);
+                this.saveNameButton.gameObject.SetActive(false);
+
+            }
+        }
+
+    }
+
     void OnNameClicked()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
-        
-        if(this.editingName)
+
+        if (this.editingName)
         {
             this.editingName = false;
             this.nameInput.text = "";
             this.nameInput.gameObject.SetActive(false);
             this.nameText.gameObject.SetActive(true);
+            this.saveNameButton.gameObject.SetActive(false);
 
-        } else
+        }
+        else
         {
             this.editingName = true;
             this.nameInput.text = this.nameText.text;
             this.nameInput.gameObject.SetActive(true);
             this.nameText.gameObject.SetActive(false);
-            nameInput.GetComponent<NameInput>().id = this.id;
             nameInput.ActivateInputField();
+            this.saveNameButton.gameObject.SetActive(true);
         }
     }
 

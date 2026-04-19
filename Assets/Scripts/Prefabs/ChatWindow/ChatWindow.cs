@@ -323,6 +323,7 @@ public class ChatWindow : MonoBehaviour
         try
         {
             messageInput.interactable = false;
+            sendButton.interactable = false;
             Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
             Settings.QuotedId = "";
             FileInfo.Clear();
@@ -358,6 +359,7 @@ public class ChatWindow : MonoBehaviour
         finally
         {
             messageInput.interactable = true;
+            sendButton.interactable = true;
             if (Settings.isPCProgram)
             {
                 messageInput.ActivateInputField();
