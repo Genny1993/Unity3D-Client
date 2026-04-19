@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class StartMessengerInitializer : MonoBehaviour
@@ -20,17 +21,20 @@ public class StartMessengerInitializer : MonoBehaviour
         runner.StartCoroutine(InitializeFileManagerAndCrypt());
         Object.DontDestroyOnLoad(go);
 
-        //Загружаем ключ шифрования
-        Crypt.LoadKey();
 
         //Показываем форму логина
+        LoadCryptKey();
+    }
+
+    private static async Task LoadCryptKey()
+    {
+        await Crypt.LoadKey();
         UIManager.ShowLoginWindow();
     }
 
     private static IEnumerator InitializeFileManagerAndCrypt()
     {
         yield return FileManager.Initialize();
-        Crypt.LoadKey(); // теперь внутри Crypt.LoadKey() уже можно использовать FileManager
     }
 
     private class CoroutineRunner : MonoBehaviour { }

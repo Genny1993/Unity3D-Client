@@ -49,8 +49,11 @@ public class QuotePanel : MonoBehaviour
             rect.sizeDelta = size;
         }
 
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (Settings.isPCProgram)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 }

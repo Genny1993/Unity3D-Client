@@ -6,6 +6,7 @@ public class AdminPanelButton : MonoBehaviour
 {
     private bool switched = false;
     [SerializeField] private Button button;
+    [SerializeField] private GameObject switcher;
     [SerializeField] private TMP_Text buttonText;
 
     [Header("Аудио SFX")]
@@ -32,6 +33,7 @@ public class AdminPanelButton : MonoBehaviour
 
             UIManager.HideAdminWindow();
             UIManager.ShowChatWindow();
+            switcher.SetActive(true);
         } else
         {
             switched = true;
@@ -39,6 +41,7 @@ public class AdminPanelButton : MonoBehaviour
 
             UIManager.HideChatWindow();
             UIManager.ShowAdminWindow();
+            switcher.SetActive(false);
         }
     }
 }

@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 public class BackPanel : MonoBehaviour
 {
@@ -45,9 +44,12 @@ public class BackPanel : MonoBehaviour
         chatList.SetActive(true);
         userList.SetActive(false);
 
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (Settings.isPCProgram)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 
     void OnUserClicked()
@@ -56,8 +58,11 @@ public class BackPanel : MonoBehaviour
         chatList.SetActive(false);
         userList.SetActive(true);
 
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (Settings.isPCProgram)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 }

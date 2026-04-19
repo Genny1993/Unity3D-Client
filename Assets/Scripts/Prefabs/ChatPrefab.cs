@@ -21,6 +21,8 @@ public class ChatPrefab : MonoBehaviour
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBar;
     [SerializeField] private TMP_Text quoteLabel;
+    private GameObject chats;
+    private GameObject messages;
 
     [Header("Настройки префаба")]
     [SerializeField] private string prefabPath = "Prefabs/MessageBubble";
@@ -35,7 +37,7 @@ public class ChatPrefab : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float clickVolume = 0.7f;
 
-    public void Initializate(string chat_id, string chat_name, ScrollRect messages_list, TMP_InputField message_input, UpdateMessageTimer timer, GameObject status_bar, GameObject quote_bar, TMP_Text quote_label)
+    public void Initializate(string chat_id, string chat_name, ScrollRect messages_list, TMP_InputField message_input, UpdateMessageTimer timer, GameObject status_bar, GameObject quote_bar, TMP_Text quote_label, GameObject chats, GameObject messages)
     {
         chatId = chat_id;
         chatName.text = chat_name;
@@ -45,6 +47,8 @@ public class ChatPrefab : MonoBehaviour
         this.statusBar = status_bar;
         this.quoteBar = quote_bar;
         this.quoteLabel = quote_label;
+        this.chats = chats;
+        this.messages = messages;
 
         if (historyButton != null)
             historyButton.onClick.AddListener(OnHistoryButtonClick);
@@ -147,7 +151,17 @@ public class ChatPrefab : MonoBehaviour
                 messagesList.enabled = wasEnabled;
                 this.timer.StartTimer();
                 // Прокрутка до самого низа
-                StartCoroutine(ScrollToBottomNextFrame());
+
+                GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+                foreach (GameObject obj in allObjects)
+                {
+                    if (obj.name == "SwitchButton" && obj.scene.isLoaded)
+                    {
+                        ChatSwitcher cs = obj.GetComponent<ChatSwitcher>();
+                        cs.Switch();
+                    }
+                }
+                Invoke(nameof(ScrollToBottomNextFrame), 0.2f);
             }
 
         }
@@ -156,15 +170,17 @@ public class ChatPrefab : MonoBehaviour
         } finally
         {
             chatButton.interactable = true;
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
-    IEnumerator ScrollToBottomNextFrame()
+    void ScrollToBottomNextFrame()
     {
-        yield return new WaitForSeconds(0.1f);
         messagesList.verticalNormalizedPosition = 0f;
     }
 }

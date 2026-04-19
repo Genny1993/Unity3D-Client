@@ -1,13 +1,18 @@
 using Newtonsoft.Json.Linq;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+    using NativeFilePickerNamespace;
+#elif UNITY_STANDALONE_WIN
 using SFB;
+#endif
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ChatWindow : MonoBehaviour
 {
@@ -19,12 +24,15 @@ public class ChatWindow : MonoBehaviour
     [SerializeField] private TMP_InputField messageInput;
     [SerializeField] private UnityEngine.UI.Button emojiButton;
     [SerializeField] private UnityEngine.UI.Button fileButton;
+    [SerializeField] private UnityEngine.UI.Button sendButton;
     [SerializeField] private GameObject emojiPanel;
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBar;
     [SerializeField] private TMP_Text quoteLabel;
     [SerializeField] private GameObject fileBar;
     [SerializeField] private TMP_Text fileLabel;
+    [SerializeField] private GameObject backPanel;
+    [SerializeField] private GameObject messagePanel;
 
     [Header("Настройки префаба")]
     [SerializeField] private string prefabPath = "Prefabs/ChatPrefab";
@@ -50,6 +58,8 @@ public class ChatWindow : MonoBehaviour
             emojiButton.onClick.AddListener(OnEmojiButtonClick);
         if (fileButton != null)
             fileButton.onClick.AddListener(OnFileButtonClick);
+        if (sendButton != null)
+            sendButton.onClick.AddListener(OnSendButtonClick);
         RectTransform rect = messagesList.GetComponent<RectTransform>();
         Vector2 size = rect.sizeDelta;
         size.y = Settings.currentMessagesListHeight;
@@ -61,6 +71,15 @@ public class ChatWindow : MonoBehaviour
         GetChats();
         GetUsers();
         IsAdmin();
+
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name == "SwitchButton" && obj.scene.isLoaded)
+            {
+                obj.SetActive(true);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -108,9 +127,12 @@ public class ChatWindow : MonoBehaviour
         }
         finally
         {
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
     private async void GetChats()
@@ -168,7 +190,9 @@ public class ChatWindow : MonoBehaviour
                             this.timer,
                             this.statusBar,
                             this.quoteBar,
-                            this.quoteLabel
+                            this.quoteLabel,
+                            this.backPanel,
+                            this.messagePanel
                         );
                     }
                 }
@@ -179,9 +203,12 @@ public class ChatWindow : MonoBehaviour
         {
         } finally
         {
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -251,9 +278,92 @@ public class ChatWindow : MonoBehaviour
         }
         finally
         {
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
+        }
+    }
+
+    async void OnSendButtonClick()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        // Очищаем текст от символов перевода строки перед отправкой
+        string cleanText = messageInput.text.Trim().Replace("\n", "").Replace("\r", "");
+
+        // Если сообщение пустое после очистки - не отправляем
+        if (string.IsNullOrWhiteSpace(cleanText) &&
+            string.IsNullOrWhiteSpace(FileInfo.FileName) &&
+            string.IsNullOrWhiteSpace(Settings.QuotedId))
+        {
+            messageInput.text = "";
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+            }
+            return;
+        }
+
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "message"),
+            new KeyValuePair<string, string>("pack[method]", "post"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][chat_id]", Settings.CurretChat),
+            new KeyValuePair<string, string>("pack[info][message]", cleanText), // Используем очищенный текст
+            new KeyValuePair<string, string>("pack[info][quoted_id]", Settings.QuotedId.Trim()),
+            new KeyValuePair<string, string>("pack[info][file][name]", FileInfo.FileName.Trim()),
+            new KeyValuePair<string, string>("pack[info][file][size]", FileInfo.FileSize.ToString()),
+            new KeyValuePair<string, string>("pack[info][file][type]", FileInfo.FileType.Trim()),
+            new KeyValuePair<string, string>("pack[info][file][content]", FileInfo.FileContentBase64.Trim()),
+        };
+
+        try
+        {
+            messageInput.interactable = false;
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            Settings.QuotedId = "";
+            FileInfo.Clear();
+            quoteLabel.text = "";
+            quoteBar.SetActive(false);
+            fileBar.SetActive(false);
+            statusBar.SetActive(false);
+
+            RectTransform rect = messagesList.GetComponent<RectTransform>();
+            Vector2 size = rect.sizeDelta;
+            if (Settings.fileBar == true || Settings.quoteBar == true)
+            {
+                Settings.fileBar = false;
+                Settings.quoteBar = false;
+                size.y = Settings.currentMessagesListHeight + 40;
+                Settings.currentMessagesListHeight = (int)size.y;
+                rect.sizeDelta = size;
+            }
+
+            messageInput.text = ""; // Очищаем поле
+
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
+        }
+        catch (Exception)
+        {
+            // Можно добавить логирование ошибки
+        }
+        finally
+        {
+            messageInput.interactable = true;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -281,28 +391,33 @@ public class ChatWindow : MonoBehaviour
             rect.sizeDelta = size;
         }
 
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (Settings.isPCProgram)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 
     void OnFileButtonClick()
     {
+
         AudioManager.PlayOneShot(buttonClick, clickVolume);
 
-        // Последний параметр false — выбираем только один файл
-        string[] paths = StandaloneFileBrowser.OpenFilePanel("Выберите файл", "", "*", false);
 
-        if (paths != null && paths.Length > 0)
+#if UNITY_ANDROID && !UNITY_EDITOR
+    if (NativeFilePicker.IsFilePickerBusy()) return;
+// Вызов диалога выбора ЛЮБОГО файла (параметр null = показываем все файлы)
+NativeFilePicker.PickFile((path) =>
+{
+        if (path != null)
         {
-            string selectedFilePath = paths[0];
-
+            string selectedFilePath = path;
             if (FileInfo.LoadFile(selectedFilePath))
             {
 
                 Settings.fileBar = true;
                 fileLabel.text = FileInfo.FileName;
-
                 if (statusBar.activeInHierarchy == false)
                 {
                     statusBar.SetActive(true);
@@ -321,15 +436,67 @@ public class ChatWindow : MonoBehaviour
                 MessageBox.Show("Ошибка", "Ошибка при загрузке файла!");
             }
 
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
 
         }
         else
         {
             //MessageBox.Show("Ошибка", "Выбор файла отменен");
         }
+}, null);
+#elif UNITY_STANDALONE_WIN
+        string filePath = null;
+        string[] paths = StandaloneFileBrowser.OpenFilePanel("Выберите файл", "", "*", false);
+        if (paths != null && paths.Length > 0)
+        {
+            filePath = paths[0];
+        }
+
+        if (filePath != null)
+        {
+            string selectedFilePath = filePath;
+            if (FileInfo.LoadFile(selectedFilePath))
+            {
+
+                Settings.fileBar = true;
+                fileLabel.text = FileInfo.FileName;
+                if (statusBar.activeInHierarchy == false)
+                {
+                    statusBar.SetActive(true);
+
+                    RectTransform rect = messagesList.GetComponent<RectTransform>();
+                    Vector2 size = rect.sizeDelta;
+                    size.y = Settings.currentMessagesListHeight - 40;
+                    Settings.currentMessagesListHeight = (int)size.y;
+                    rect.sizeDelta = size;
+                }
+
+                fileBar.SetActive(true);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Ошибка при загрузке файла!");
+            }
+
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
+
+        }
+        else
+        {
+            //MessageBox.Show("Ошибка", "Выбор файла отменен");
+        }
+#endif
+
     }
 
     IEnumerator ScrollToBottomNextFrame()

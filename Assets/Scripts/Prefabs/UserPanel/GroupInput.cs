@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 public class GroupInput : MonoBehaviour, IEventSystemHandler
 {

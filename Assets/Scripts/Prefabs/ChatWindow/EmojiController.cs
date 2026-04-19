@@ -53,9 +53,12 @@ public class EmojiController : MonoBehaviour
         // Перемещаемся на длину эмодзи
         messageInput.stringPosition = pos + buttonName.Length;
 
-        messageInput.ActivateInputField();
-        messageInput.caretPosition = Settings.lastCaretPosition;
-        messageInput.selectionFocusPosition = messageInput.caretPosition;
+        if (Settings.isPCProgram)
+        {
+            messageInput.ActivateInputField();
+            messageInput.caretPosition = Settings.lastCaretPosition;
+            messageInput.selectionFocusPosition = messageInput.caretPosition;
+        }
     }
 
     // Update is called once per frame

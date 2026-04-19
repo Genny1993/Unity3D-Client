@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class SendMessage : MonoBehaviour, IEventSystemHandler
 {
@@ -16,6 +14,9 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
     [SerializeField] private GameObject statusBar;
     [SerializeField] private ScrollRect messagesList;
     [SerializeField] private TMP_Text quoteLabel;
+
+    // Флаг для отслеживания реального нажатия Enter
+    private bool isRealEnterPressed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,26 +30,65 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
         inputField.onSubmit.AddListener(OnSubmitCallback);
     }
 
+    void Update()
+    {
+        // Проверяем реальное нажатие Enter на клавиатуре
+        if (inputField != null && inputField.isFocused && Input.GetKeyDown(KeyCode.Return))
+        {
+            isRealEnterPressed = true;
+            // Вызываем отправку сообщения
+            inputField.onSubmit.Invoke(inputField.text);
+            // Сбрасываем флаг в следующем кадре
+            Invoke(nameof(ResetEnterFlag), 0.1f);
+        }
+    }
+
+    private void ResetEnterFlag()
+    {
+        isRealEnterPressed = false;
+    }
+
     private char ValidateInput(string text, int charIndex, char addedChar)
     {
-        // Если нажат Enter (символ '\n') и не зажат Shift
+        // Если это символ Enter
         if (addedChar == '\n')
         {
-            inputField.onSubmit.Invoke(inputField.text);
-            return '\0'; // отменяем вставку
+            // Отправляем сообщение ТОЛЬКО если это реальное нажатие клавиши
+            if (isRealEnterPressed)
+            {
+                return '\0';
+            }
+            // Всегда отменяем вставку символа \n
+            return '\n';
         }
         return addedChar;
     }
 
     private async void OnSubmitCallback(string text)
     {
+        // Очищаем текст от символов перевода строки перед отправкой
+        string cleanText = inputField.text.Trim().Replace("\n", "").Replace("\r", "");
+
+        // Если сообщение пустое после очистки - не отправляем
+        if (string.IsNullOrWhiteSpace(cleanText) &&
+            string.IsNullOrWhiteSpace(FileInfo.FileName) &&
+            string.IsNullOrWhiteSpace(Settings.QuotedId))
+        {
+            inputField.text = "";
+            if (Settings.isPCProgram)
+            {
+                inputField.ActivateInputField();
+            }
+            return;
+        }
+
         var formData = new List<KeyValuePair<string, string>>
         {
             new KeyValuePair<string, string>("pack[service]", "message"),
             new KeyValuePair<string, string>("pack[method]", "post"),
             new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
             new KeyValuePair<string, string>("pack[info][chat_id]", Settings.CurretChat),
-            new KeyValuePair<string, string>("pack[info][message]", inputField.text.Trim()),
+            new KeyValuePair<string, string>("pack[info][message]", cleanText), // Используем очищенный текст
             new KeyValuePair<string, string>("pack[info][quoted_id]", Settings.QuotedId.Trim()),
             new KeyValuePair<string, string>("pack[info][file][name]", FileInfo.FileName.Trim()),
             new KeyValuePair<string, string>("pack[info][file][size]", FileInfo.FileSize.ToString()),
@@ -67,7 +107,6 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
             fileBar.SetActive(false);
             statusBar.SetActive(false);
 
-
             RectTransform rect = messagesList.GetComponent<RectTransform>();
             Vector2 size = rect.sizeDelta;
             if (Settings.fileBar == true || Settings.quoteBar == true)
@@ -79,19 +118,28 @@ public class SendMessage : MonoBehaviour, IEventSystemHandler
                 rect.sizeDelta = size;
             }
 
-            inputField.ActivateInputField();
-            inputField.caretPosition = Settings.lastCaretPosition;
-            inputField.selectionFocusPosition = inputField.caretPosition;
-            inputField.text = "";
+            inputField.text = ""; // Очищаем поле
 
+            if (Settings.isPCProgram)
+            {
+                inputField.ActivateInputField();
+                inputField.caretPosition = Settings.lastCaretPosition;
+                inputField.selectionFocusPosition = inputField.caretPosition;
+            }
         }
-        catch (Exception){}
+        catch (Exception)
+        {
+            // Можно добавить логирование ошибки
+        }
         finally
         {
             inputField.interactable = true;
-            inputField.ActivateInputField();
-            inputField.caretPosition = Settings.lastCaretPosition;
-            inputField.selectionFocusPosition = inputField.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                inputField.ActivateInputField();
+                inputField.caretPosition = Settings.lastCaretPosition;
+                inputField.selectionFocusPosition = inputField.caretPosition;
+            }
         }
     }
 }

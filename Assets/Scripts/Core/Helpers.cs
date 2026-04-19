@@ -31,6 +31,8 @@ public static class Settings
     public static int Page = 0;
     public static bool isShowed = false;
     public static bool isAdmin = false;
+    public static bool isPCProgram = false;
+
 }
 
 public static class MessageBox
@@ -155,8 +157,9 @@ public static class Crypt
         }
     }
 
-    public static void LoadKey()
+    public async static Task LoadKey()
     {
+        await Task.Delay(1000);
         Crypt.key = FileManager.ReadKey();
     }
 }

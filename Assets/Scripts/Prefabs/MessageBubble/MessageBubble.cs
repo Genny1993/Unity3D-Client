@@ -1,18 +1,20 @@
-using SFB;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Net.Http;
 using System.Text;
-using System.Windows.Forms;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using System.IO;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+    using NativeFilePickerNamespace;
+#elif UNITY_STANDALONE_WIN
+using SFB;
+#endif
+
+
 
 public class MessageBubble : MonoBehaviour
 {
@@ -248,9 +250,12 @@ public class MessageBubble : MonoBehaviour
 
         if (!this.is_admin_history)
         {
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -279,9 +284,12 @@ public class MessageBubble : MonoBehaviour
 
             if (!this.is_admin_history)
             {
-                messageInput.ActivateInputField();
-                messageInput.caretPosition = Settings.lastCaretPosition;
-                messageInput.selectionFocusPosition = messageInput.caretPosition;
+                if (Settings.isPCProgram)
+                {
+                    messageInput.ActivateInputField();
+                    messageInput.caretPosition = Settings.lastCaretPosition;
+                    messageInput.selectionFocusPosition = messageInput.caretPosition;
+                }
             }
         }
     }
@@ -311,9 +319,12 @@ public class MessageBubble : MonoBehaviour
 
             if (!this.is_admin_history)
             {
-                messageInput.ActivateInputField();
-                messageInput.caretPosition = Settings.lastCaretPosition;
-                messageInput.selectionFocusPosition = messageInput.caretPosition;
+                if (Settings.isPCProgram)
+                {
+                    messageInput.ActivateInputField();
+                    messageInput.caretPosition = Settings.lastCaretPosition;
+                    messageInput.selectionFocusPosition = messageInput.caretPosition;
+                }
             }
         }
     }
@@ -328,9 +339,14 @@ public class MessageBubble : MonoBehaviour
             messageEditor.gameObject.SetActive(true);
             message.gameObject.SetActive(false);
             messageEditor.text = message.text;
-            messageEditor.ActivateInputField();
-            messageEditor.caretPosition = messageEditor.text.Length;
-            messageEditor.selectionFocusPosition = messageEditor.caretPosition;
+
+            if (Settings.isPCProgram)
+            {
+                messageEditor.ActivateInputField();
+                messageEditor.caretPosition = messageEditor.text.Length;
+                messageEditor.selectionFocusPosition = messageEditor.caretPosition;
+            }
+
             messageEditor.GetComponent<EditMessage>().id = this.id;
             messageEditor.GetComponent<EditMessage>().message = this.message;
             messageEditor.GetComponent<EditMessage>().mb = this;
@@ -344,9 +360,12 @@ public class MessageBubble : MonoBehaviour
 
             if (!this.is_admin_history)
             {
-                messageInput.ActivateInputField();
-                messageInput.caretPosition = Settings.lastCaretPosition;
-                messageInput.selectionFocusPosition = messageInput.caretPosition;
+                if (Settings.isPCProgram)
+                {
+                    messageInput.ActivateInputField();
+                    messageInput.caretPosition = Settings.lastCaretPosition;
+                    messageInput.selectionFocusPosition = messageInput.caretPosition;
+                }
             }
         }
     }
@@ -376,9 +395,12 @@ public class MessageBubble : MonoBehaviour
 
         if (!this.is_admin_history)
         {
-            messageInput.ActivateInputField();
-            messageInput.caretPosition = Settings.lastCaretPosition;
-            messageInput.selectionFocusPosition = messageInput.caretPosition;
+            if (Settings.isPCProgram)
+            {
+                messageInput.ActivateInputField();
+                messageInput.caretPosition = Settings.lastCaretPosition;
+                messageInput.selectionFocusPosition = messageInput.caretPosition;
+            }
         }
     }
 
@@ -420,8 +442,16 @@ public class MessageBubble : MonoBehaviour
                     byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
 
 
-                    string path = StandaloneFileBrowser.SaveFilePanel("Сохранить файл", "", this.aname, "*");
-
+#if UNITY_ANDROID && !UNITY_EDITOR
+string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
+        File.WriteAllBytes(tempPath, fileBytes);
+        
+        // Открываем диалог сохранения (экспорта)
+        NativeFilePicker.ExportFile(tempPath, (success) => {
+            Debug.Log(success ? "Файл сохранён" : "Сохранение отменено");
+        });
+#elif UNITY_STANDALONE_WIN
+                    string path = StandaloneFileBrowser.SaveFilePanel("Сохранить файл", "", this.aname, "");
                     // Проверяем, не нажал ли пользователь "Отмена"
                     if (string.IsNullOrEmpty(path))
                     {
@@ -440,6 +470,7 @@ public class MessageBubble : MonoBehaviour
                     {
                         MessageBox.Show("Ошибка", $"Ошибка при сохранении файла: {e.Message}");
                     }
+#endif
                 }
 
             }

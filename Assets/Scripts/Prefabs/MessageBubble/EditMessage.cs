@@ -67,9 +67,12 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
             
             if (mb.messageInput != null)
             {
-                mb.messageInput.ActivateInputField();
-                mb.messageInput.caretPosition = Settings.lastCaretPosition;
-                mb.messageInput.selectionFocusPosition = mb.messageInput.caretPosition;
+                if (Settings.isPCProgram)
+                {
+                    mb.messageInput.ActivateInputField();
+                    mb.messageInput.caretPosition = Settings.lastCaretPosition;
+                    mb.messageInput.selectionFocusPosition = mb.messageInput.caretPosition;
+                }
             }
 
             messageEditor.interactable = true;
