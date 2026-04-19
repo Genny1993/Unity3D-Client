@@ -49,8 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Prefabs\ChatPanel\NameInput.cs" />
+    <Compile Include="Assets\Scripts\Core\FixTMPDeleteBug.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\BackPanel.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateUserTimer.cs" />
+    <Compile Include="Assets\Scripts\Core\GlobalKeyboardAdjuster.cs" />
     <Compile Include="Assets\Scripts\Prefabs\NewUserWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPanel\UserPanel.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MessageShower.cs" />
@@ -69,10 +71,12 @@
     <Compile Include="Assets\Scripts\Prefabs\RegisterWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\EmojiController.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\SaveCaretPosition.cs" />
+    <Compile Include="Assets\Scripts\Core\EmojiPreloader.cs" />
     <Compile Include="Assets\Scripts\Core\FileManager.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\ChatWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPanel\UsernameInput.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateMessageTimer.cs" />
+    <Compile Include="Assets\Scripts\Core\InputFieldScrollFix.cs" />
     <Compile Include="Assets\Scripts\Core\MessageBoxWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatSwitcher.cs" />
     <Compile Include="Assets\Scripts\Prefabs\UserPrefab\OnlineCircle.cs" />

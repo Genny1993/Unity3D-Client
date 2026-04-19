@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartMessengerInitializer : MonoBehaviour
 {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void OnBeforeSceneLoad()
+    private static async void OnBeforeSceneLoad()
     {
         AudioManager.Initialize(); //Инициализируем проигрывание звуков
         MessageBox.Initialize(); //Инициализируем MessageBox
@@ -23,7 +23,7 @@ public class StartMessengerInitializer : MonoBehaviour
 
 
         //Показываем форму логина
-        LoadCryptKey();
+        await LoadCryptKey();
     }
 
     private static async Task LoadCryptKey()

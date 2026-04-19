@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 public class EditMessage : MonoBehaviour, IEventSystemHandler
-{
+{ 
     public string id;
 
     [Header("Игровые обьекты")]
@@ -15,15 +15,14 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
     [SerializeField] TMP_InputField messageEditor;
     [SerializeField] public MessageBubble mb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     private char ValidateInput(string text, int charIndex, char addedChar)
     {
-        // Если нажат Enter (символ '\n') и не зажат Shift
+        /*// Если нажат Enter (символ '\n') и не зажат Shift
         if (addedChar == '\n')
         {
             messageEditor.onSubmit.Invoke(messageEditor.text);
             return '\0'; // отменяем вставку
-        }
+        }*/
         return addedChar;
     }
 
@@ -39,9 +38,9 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
         messageEditor.onEndEdit.AddListener(OnFocusLost);
     }
 
-    private async void OnSubmitCallback(string text)
+    private void OnSubmitCallback(string text)
     {
-        var formData = new List<KeyValuePair<string, string>>
+        /*var formData = new List<KeyValuePair<string, string>>
         {
             new KeyValuePair<string, string>("pack[service]", "message"),
             new KeyValuePair<string, string>("pack[method]", "edit"),
@@ -76,16 +75,15 @@ public class EditMessage : MonoBehaviour, IEventSystemHandler
             }
 
             messageEditor.interactable = true;
-        }
+        }*/
     }
 
     private void OnFocusLost(string text)
     {
-        messageEditor.text = "";
-        messageEditor.gameObject.SetActive(false);
-        message.gameObject.SetActive(true);
+        //messageEditor.text = "";
+        //messageEditor.gameObject.SetActive(false);
+        //message.gameObject.SetActive(true);
 
-        mb.edited = false;
+        //mb.edited = false;
     }
-
 }

@@ -291,7 +291,7 @@ public static class Sender
 
 public static class UIManager
 {
-    private static Canvas mainCanvas;
+    private static GameObject mainCanvas;
     private static GameObject chatWindow;
     private static GameObject adminWindow;
 
@@ -300,7 +300,7 @@ public static class UIManager
         // Находим Canvas
         if (mainCanvas == null)
         {
-            GameObject canvasObj = GameObject.Find("MainCanvas");
+            GameObject canvasObj = GameObject.Find("MainLayer");
 
             if (canvasObj == null)
             {
@@ -309,7 +309,7 @@ public static class UIManager
             }
             else
             {
-                mainCanvas = canvasObj.GetComponent<Canvas>();
+                mainCanvas = canvasObj;
             }
         }
 
@@ -326,7 +326,7 @@ public static class UIManager
         // Находим Canvas
         if (mainCanvas == null)
         {
-            GameObject canvasObj = GameObject.Find("MainCanvas");
+            GameObject canvasObj = GameObject.Find("MainLayer");
 
             if (canvasObj == null)
             {
@@ -335,7 +335,7 @@ public static class UIManager
             }
             else
             {
-                mainCanvas = canvasObj.GetComponent<Canvas>();
+                mainCanvas = canvasObj;
             }
         }
 
@@ -353,7 +353,7 @@ public static class UIManager
         // Находим Canvas
         if (mainCanvas == null)
         {
-            GameObject canvasObj = GameObject.Find("MainCanvas");
+            GameObject canvasObj = GameObject.Find("MainLayer");
 
             if (canvasObj == null)
             {
@@ -362,7 +362,7 @@ public static class UIManager
             }
             else
             {
-                mainCanvas = canvasObj.GetComponent<Canvas>();
+                mainCanvas = canvasObj;
             }
         }
 
@@ -385,7 +385,7 @@ public static class UIManager
         // Находим Canvas
         if (mainCanvas == null)
         {
-            GameObject canvasObj = GameObject.Find("MainCanvas");
+            GameObject canvasObj = GameObject.Find("MainLayer");
 
             if (canvasObj == null)
             {
@@ -394,7 +394,7 @@ public static class UIManager
             }
             else
             {
-                mainCanvas = canvasObj.GetComponent<Canvas>();
+                mainCanvas = canvasObj;
             }
         }
 

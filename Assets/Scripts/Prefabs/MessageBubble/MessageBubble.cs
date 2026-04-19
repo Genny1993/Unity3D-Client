@@ -56,6 +56,9 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Button inQuoteButton;
     [SerializeField] private UnityEngine.UI.Button inQuoteButton2;
     [SerializeField] private UnityEngine.UI.Button fileButton;
+    [SerializeField] private UnityEngine.UI.Button editOkButton;
+    [SerializeField] private UnityEngine.UI.Button messageSelectButton;
+    [SerializeField] private UnityEngine.UI.Button copyButton;
 
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBarMain;
@@ -183,6 +186,10 @@ public class MessageBubble : MonoBehaviour
             leftPadding.SetActive(false);
             rightPadding.SetActive(false);
         }
+
+        editOkButton.gameObject.SetActive(false);
+        this.message.interactable = false;
+        this.copyButton.gameObject.SetActive(false);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -212,10 +219,151 @@ public class MessageBubble : MonoBehaviour
         if (fileButton != null)
             fileButton.onClick.AddListener(OnFileButtonClick);
 
+        if (editOkButton != null)
+            editOkButton.onClick.AddListener(OnEditOkButtonClick);
+
+        if (messageSelectButton != null)
+            messageSelectButton.onClick.AddListener(OnMessageSelectButtonClick);
+
+        if (copyButton != null)
+            copyButton.onClick.AddListener(OnCopyButtonClick);
+
     }
 
     void Update()
     {
+    }
+
+    void OnCopyButtonClick()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        this.message.interactable = false;
+        this.messageSelectButton.gameObject.SetActive(true);
+        this.copyButton.gameObject.SetActive(false);
+
+        int anchorPos = this.message.selectionAnchorPosition;
+        int focusPos = this.message.selectionFocusPosition;
+
+        int startIndex = Mathf.Min(anchorPos, focusPos);
+        int endIndex = Mathf.Max(anchorPos, focusPos);
+
+        string fullText = this.message.text;
+
+        if (startIndex < 0 || endIndex > fullText.Length)
+        {
+            Debug.LogWarning($"Индексы выделения выходят за границы: start={startIndex}, end={endIndex}, text.Length={fullText.Length}");
+            return;
+        }
+
+        // Правильное извлечение текста с учётом эмодзи
+        string selectedText = GetSubstringWithEmojis(fullText, startIndex, endIndex - startIndex);
+
+        CopyToClipboard(selectedText);
+    }
+
+    private void CopyToClipboard(string text)
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+    using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            AndroidJavaObject context = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
+            using (AndroidJavaObject clipboard = context.Call<AndroidJavaObject>("getSystemService", "clipboard"))
+            {
+                using (AndroidJavaClass clipDataClass = new AndroidJavaClass("android.content.ClipData"))
+                {
+                    AndroidJavaObject clipData = clipDataClass.CallStatic<AndroidJavaObject>(
+                        "newPlainText",
+                        "label",
+                        text
+                    );
+
+                    clipboard.Call("setPrimaryClip", clipData);
+                }
+            }
+        }
+#else
+        GUIUtility.systemCopyBuffer = text;
+#endif
+    }
+
+    private string GetSubstringWithEmojis(string text, int startIndex, int length)
+    {
+        if (string.IsNullOrEmpty(text))
+            return "";
+
+        // Преобразуем строку в массив символов Unicode (с учётом суррогатных пар)
+        var stringInfo = new System.Globalization.StringInfo(text);
+
+        int charCount = stringInfo.LengthInTextElements; // реальное количество символов (эмодзи считаются за 1)
+
+        if (startIndex < 0 || startIndex >= charCount)
+            return "";
+
+        int endCharIndex = Mathf.Min(startIndex + length, charCount);
+        int actualLength = endCharIndex - startIndex;
+
+        if (actualLength <= 0)
+            return "";
+
+        return stringInfo.SubstringByTextElements(startIndex, actualLength);
+    }
+
+
+    void OnMessageSelectButtonClick()
+    {
+        foreach (Transform child in messages.content)
+        {
+            child.GetComponent<MessageBubble>()?.HideButtons();
+        }
+
+        this.message.interactable = true;
+        this.messageSelectButton.gameObject.SetActive(false);
+        this.copyButton.gameObject.SetActive(true);
+
+    }
+
+    async void OnEditOkButtonClick()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+
+        var formData = new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("pack[service]", "message"),
+            new KeyValuePair<string, string>("pack[method]", "edit"),
+            new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+            new KeyValuePair<string, string>("pack[info][id]", this.id),
+            new KeyValuePair<string, string>("pack[info][message]", messageEditor.text.Trim())
+        };
+
+        try
+        {
+            messageEditor.interactable = false;
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            message.text = messageEditor.text.Trim();
+
+        }
+        catch (Exception) { }
+        finally
+        {
+            messageEditor.text = "";
+            messageEditor.gameObject.SetActive(false);
+            message.gameObject.SetActive(true);
+            edited = false;
+
+            if (messageInput != null)
+            {
+                if (Settings.isPCProgram)
+                {
+                    messageInput.ActivateInputField();
+                    messageInput.caretPosition = Settings.lastCaretPosition;
+                    messageInput.selectionFocusPosition = messageInput.caretPosition;
+                }
+            }
+
+            messageEditor.interactable = true;
+            editOkButton.gameObject.SetActive(false);
+        }
     }
 
     void OnBurgerButtonClick()
@@ -335,6 +483,7 @@ public class MessageBubble : MonoBehaviour
 
         if (edited == false)
         {
+            editOkButton.gameObject.SetActive(true);
             edited = true;
             messageEditor.gameObject.SetActive(true);
             message.gameObject.SetActive(false);
@@ -353,6 +502,7 @@ public class MessageBubble : MonoBehaviour
 
         } else
         {
+            editOkButton.gameObject.SetActive(false);
             edited = false;
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
@@ -493,6 +643,10 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             quoteButton.gameObject.SetActive(false);
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
+            editOkButton.gameObject.SetActive(false);
+            copyButton.gameObject.SetActive(false);
+            this.message.interactable = false;
+            this.messageSelectButton.gameObject.SetActive(true);
         } else
         {
             showed = false;
@@ -506,6 +660,10 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             messageEditor.gameObject.SetActive(false);
             message.gameObject.SetActive(true);
             burgerButton.gameObject.SetActive(false);
+            editOkButton.gameObject.SetActive(false);
+            copyButton.gameObject.SetActive(false);
+            this.message.interactable = false;
+            this.messageSelectButton.gameObject.SetActive(true);
         }
     }
 

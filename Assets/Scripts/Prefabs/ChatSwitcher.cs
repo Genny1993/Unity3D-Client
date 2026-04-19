@@ -58,7 +58,7 @@ public class ChatSwitcher : MonoBehaviour
         } else
         {
             switched = true;
-            buttonText.text = "📄";
+            buttonText.text = "📜";
 
             GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
             foreach (GameObject obj in allObjects)

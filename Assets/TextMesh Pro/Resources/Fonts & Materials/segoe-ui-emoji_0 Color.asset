@@ -153,7 +153,7 @@ MonoBehaviour:
   m_AtlasTextures:
   - {fileID: -3183340967290724755}
   m_AtlasTextureIndex: 0
-  m_IsMultiAtlasTexturesEnabled: 0
+  m_IsMultiAtlasTexturesEnabled: 1
   m_GetFontFeatures: 1
   m_ClearDynamicDataOnBuild: 1
   m_AtlasWidth: 1024
@@ -169,6 +169,26 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords:
+    - m_ComponentGlyphIDs: 0d06000029040000
+      m_LigatureGlyphID: 1553
+    - m_ComponentGlyphIDs: 0d0600002c040000
+      m_LigatureGlyphID: 1554
+    - m_ComponentGlyphIDs: 0d0600002f040000
+      m_LigatureGlyphID: 1555
+    - m_ComponentGlyphIDs: 0d06000032040000
+      m_LigatureGlyphID: 1556
+    - m_ComponentGlyphIDs: 0d06000035040000
+      m_LigatureGlyphID: 1557
+    - m_ComponentGlyphIDs: 1f06000029040000
+      m_LigatureGlyphID: 1571
+    - m_ComponentGlyphIDs: 1f0600002c040000
+      m_LigatureGlyphID: 1572
+    - m_ComponentGlyphIDs: 1f0600002f040000
+      m_LigatureGlyphID: 1573
+    - m_ComponentGlyphIDs: 1f06000032040000
+      m_LigatureGlyphID: 1574
+    - m_ComponentGlyphIDs: 1f06000035040000
+      m_LigatureGlyphID: 1575
     - m_ComponentGlyphIDs: fd0900008601000016040000
       m_LigatureGlyphID: 11189
     - m_ComponentGlyphIDs: fd09000086010000e70a0000
