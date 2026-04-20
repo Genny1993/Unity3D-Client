@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -88,8 +89,8 @@ public class MessageBubble : MonoBehaviour
         this.id = id;
         this.username.text = username;
         this.message.text = message;
-        this.time.text = time;
-        this.timestring = time;
+        this.time.text = FormatDate(time);
+        this.timestring = FormatDate(time);
         this.messages = messageList;
         this.messageInput = i_f;
         this.qid = quoteid;
@@ -844,5 +845,12 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
         }
 
         content.anchoredPosition = targetPos;
+    }
+
+    public string FormatDate(string dateString)
+    {
+        DateTime date = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+        return date.ToString("dd MMMM HH:mm", new CultureInfo("ru-RU"));
     }
 }

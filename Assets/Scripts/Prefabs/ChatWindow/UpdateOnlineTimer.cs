@@ -11,7 +11,7 @@ public class UpdateOnlineTimer : MonoBehaviour
 {
 
     [Header("Настройки таймера")]
-    [SerializeField] private float interval = 20f; // Частота в секундах
+    [SerializeField] private float interval = 5f; // Частота в секундах
 
 
     [Header("События")]

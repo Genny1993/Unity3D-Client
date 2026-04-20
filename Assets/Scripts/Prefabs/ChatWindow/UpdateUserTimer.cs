@@ -13,7 +13,7 @@ public class UpdateUserTimer : MonoBehaviour
     [SerializeField] private ScrollRect usersList;
 
     [Header("Настройки таймера")]
-    [SerializeField] private float interval = 30f; // Частота в секундах
+    [SerializeField] private float interval = 5f; // Частота в секундах
 
 
     [Header("События")]

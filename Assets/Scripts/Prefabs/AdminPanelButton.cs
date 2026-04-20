@@ -42,6 +42,12 @@ public class AdminPanelButton : MonoBehaviour
             UIManager.HideChatWindow();
             UIManager.ShowAdminWindow();
             switcher.SetActive(false);
+            TMP_Text sb = switcher.GetComponentInChildren<TMP_Text>();
+            if(sb != null)
+            {
+                sb.text = "💬";
+            }
+            Settings.CurretChat = null;
         }
     }
 }

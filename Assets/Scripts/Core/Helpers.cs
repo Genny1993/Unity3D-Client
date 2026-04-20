@@ -19,8 +19,8 @@ public static class Settings
 {
     public static string Url;
     public static string AuthKey;
-    public static string ChatSelected;
-    public static string CurretChat;
+    public static string ChatSelected = null;
+    public static string CurretChat = null;
     public static string LastMessageId;
     public static string QuotedId = "";
     public static int lastCaretPosition = 0;

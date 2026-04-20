@@ -57,21 +57,24 @@ public class ChatSwitcher : MonoBehaviour
             
         } else
         {
-            switched = true;
-            buttonText.text = "📜";
-
-            GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-            foreach (GameObject obj in allObjects)
+            if (Settings.CurretChat != null)
             {
-                if (obj.name == "BackPanel" && obj.scene.isLoaded)
-                {
-                    obj.SetActive(false);
-                }
-                if (obj.name == "ChatPanel" && obj.scene.isLoaded)
-                {
-                    obj.SetActive(true);
-                }
+                switched = true;
+                buttonText.text = "📜";
 
+                GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+                foreach (GameObject obj in allObjects)
+                {
+                    if (obj.name == "BackPanel" && obj.scene.isLoaded)
+                    {
+                        obj.SetActive(false);
+                    }
+                    if (obj.name == "ChatPanel" && obj.scene.isLoaded)
+                    {
+                        obj.SetActive(true);
+                    }
+
+                }
             }
         }
     }

@@ -124,7 +124,7 @@ public class UpdateMessageTimer : MonoBehaviour
                     messagesList.enabled = wasEnabled;
                     AudioManager.PlayOneShot(newMessage);
                     // Прокрутка до самого низа
-                    StartCoroutine(ScrollToBottomNextFrame());
+                    ScrollListOnNewMessage();
                 }
             }
         }
@@ -133,6 +133,28 @@ public class UpdateMessageTimer : MonoBehaviour
         {
             // Запускаем таймер снова
             this.StartTimer();
+        }
+    }
+
+    void ScrollListOnNewMessage(string none = "")
+    {
+
+        float contentHeight = messagesList.content.rect.height;
+        float viewportHeight = messagesList.viewport.rect.height;
+        float maxScroll = contentHeight - viewportHeight;
+
+        if (maxScroll <= 0)
+        {
+            return;
+        }
+
+        float normalizedPos = messagesList.verticalNormalizedPosition;
+        float distanceToBottom = normalizedPos * maxScroll;
+
+
+        if (distanceToBottom < 300)
+        {
+            StartCoroutine(ScrollToBottomNextFrame());
         }
     }
 

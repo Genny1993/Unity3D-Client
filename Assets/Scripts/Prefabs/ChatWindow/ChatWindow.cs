@@ -11,7 +11,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 using static UnityEngine.Rendering.DebugUI;
 
 public class ChatWindow : MonoBehaviour
@@ -80,6 +82,24 @@ public class ChatWindow : MonoBehaviour
                 obj.SetActive(true);
             }
         }
+
+        //Навешиваем событие при клике на поле ввода
+        var trigger = messageInput.gameObject.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+            trigger = messageInput.gameObject.AddComponent<EventTrigger>();
+
+        var entry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+
+        entry.callback.AddListener((data) =>
+        {
+            OnInputFieldFocused();
+        });
+
+        trigger.triggers.Add(entry);
     }
 
     // Update is called once per frame
@@ -349,7 +369,10 @@ public class ChatWindow : MonoBehaviour
             {
                 inputFixer.lastText = "";
                 inputFixer.lastCaret = 0;
-            }
+                inputFixer.lastSelectionStart = 0;
+                inputFixer.lastSelectionEnd = 0;
+                inputFixer.isUpdating = false;
+}
 
             if (Settings.isPCProgram)
             {
@@ -516,5 +539,27 @@ NativeFilePicker.PickFile((path) =>
     public void Close()
     {
         Destroy(gameObject);
+    }
+
+    void OnInputFieldFocused()
+    {
+
+        float contentHeight = messagesList.content.rect.height;
+        float viewportHeight = messagesList.viewport.rect.height;
+        float maxScroll = contentHeight - viewportHeight;
+
+        if (maxScroll <= 0)
+        {
+            return;
+        }
+
+        float normalizedPos = messagesList.verticalNormalizedPosition;
+        float distanceToBottom = normalizedPos * maxScroll;
+
+
+        if (distanceToBottom < 600)
+        {
+            StartCoroutine(ScrollToBottomNextFrame());
+        }
     }
 }
