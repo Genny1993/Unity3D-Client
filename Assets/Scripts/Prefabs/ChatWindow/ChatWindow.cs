@@ -363,7 +363,6 @@ public class ChatWindow : MonoBehaviour
                 rect.sizeDelta = size;
             }
 
-            messageInput.text = ""; // Очищаем поле
             FixTMPDeleteBug inputFixer = messageInput.GetComponent<FixTMPDeleteBug>();
             if(inputFixer != null)
             {
@@ -372,7 +371,8 @@ public class ChatWindow : MonoBehaviour
                 inputFixer.lastSelectionStart = 0;
                 inputFixer.lastSelectionEnd = 0;
                 inputFixer.isUpdating = false;
-}
+            }
+            messageInput.text = ""; // Очищаем поле
 
             if (Settings.isPCProgram)
             {
