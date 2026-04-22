@@ -8,6 +8,11 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Analytics.IAnalytic;
+using System.Threading.Tasks;
+using static UniGif;
+
+
 
 #if UNITY_ANDROID && !UNITY_EDITOR
     using NativeFilePickerNamespace;
@@ -28,8 +33,12 @@ public class MessageBubble : MonoBehaviour
     private string aname;
     private string asize;
     private string apreview;
+    private string atype;
     public bool my_message = false;
     private bool is_admin_history = false;
+    private List<UniGif.GifTexture> gifTextures;
+    private int currentFrame = 0;
+    private float timer = 0f;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text quoteName;
@@ -48,6 +57,7 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] private GameObject leftPadding;
     [SerializeField] private GameObject rightPadding;
     [SerializeField] private Image preview;
+    [SerializeField] private RawImage gifImage;
 
 
 
@@ -87,7 +97,7 @@ public class MessageBubble : MonoBehaviour
     public float destroyAfter = 3f;       // Через сколько секунд удалить звездочки
 
 
-    public void Initialize(string id, string username, string message, string time, string quoteid, string quotename, string quotemessage, bool my_message, string a_id, string a_name, string a_size, string preview, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel, bool show_window = false)
+    public void Initialize(string id, string username, string message, string time, string quoteid, string quotename, string quotemessage, bool my_message, string a_id, string a_name, string a_size, string preview, string type, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel, bool show_window = false)
     {
         this.id = id;
         this.username.text = username;
@@ -107,8 +117,9 @@ public class MessageBubble : MonoBehaviour
         this.asize = a_size;
         this.apreview = preview;
         this.my_message = my_message;
+        this.atype = type;
 
-        if( i_f == null
+        if (i_f == null
             && status_bar == null
             && quote_bar == null
             && quoteLabel == null)
@@ -137,7 +148,8 @@ public class MessageBubble : MonoBehaviour
 
             this.username.enabled = false;
 
-        } else
+        }
+        else
         {
             HorizontalLayoutGroup layoutGroup = GetComponent<HorizontalLayoutGroup>();
             if (layoutGroup != null)
@@ -149,7 +161,7 @@ public class MessageBubble : MonoBehaviour
             }
         }
 
-        if(my_message || Settings.isAdmin)
+        if (my_message || Settings.isAdmin)
         {
             editButton.gameObject.SetActive(false);
             restoreButton.gameObject.SetActive(false);
@@ -157,7 +169,8 @@ public class MessageBubble : MonoBehaviour
             quoteButton.gameObject.SetActive(false);
             messageEditor.gameObject.SetActive(false);
             burgerButton.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             editButton.gameObject.SetActive(false);
             restoreButton.gameObject.SetActive(false);
@@ -170,15 +183,16 @@ public class MessageBubble : MonoBehaviour
             burgerButton.gameObject.SetActive(false);
         }
 
-        if(quotemessage == "")
+        if (quotemessage == "")
         {
             quoteBar.SetActive(false);
         }
 
-        if(this.aid == "")
+        if (this.aid == "")
         {
             fileBar.SetActive(false);
-        } else
+        }
+        else
         {
             fileName.text = "📄  " + this.aname + ", " + FormatBytes(long.Parse(this.asize));
         }
@@ -195,7 +209,14 @@ public class MessageBubble : MonoBehaviour
         editOkButton.gameObject.SetActive(false);
         this.message.interactable = false;
         this.copyButton.gameObject.SetActive(false);
+        
+        if (this.atype != "image/gif")
+        {
+            this.gifImage.gameObject.SetActive(false);
+        }
+
         this.LoadPreviewFromBase64();
+        this.LoadGif();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -241,6 +262,16 @@ public class MessageBubble : MonoBehaviour
 
     void Update()
     {
+        if (gifTextures == null || gifTextures.Count == 0) return;
+
+        // 3. Ручное управление анимацией по таймеру
+        timer += Time.deltaTime;
+        if (timer >= gifTextures[currentFrame].m_delaySec)
+        {
+            timer = 0f;
+            currentFrame = (currentFrame + 1) % gifTextures.Count;
+            gifImage.texture = gifTextures[currentFrame].m_texture2d;
+        }
     }
 
     void OnShowImageButtonClick()
@@ -248,7 +279,7 @@ public class MessageBubble : MonoBehaviour
         AudioManager.PlayOneShot(buttonClick, clickVolume);
         ImageWindowStart.Show(this.aid);
     }
-        void OnCopyButtonClick()
+    void OnCopyButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
         this.message.interactable = false;
@@ -439,7 +470,7 @@ public class MessageBubble : MonoBehaviour
             Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
             this.time.text = "Удалено";
         }
-        catch (Exception){}
+        catch (Exception) { }
         finally
         {
             deleteButton.interactable = true;
@@ -516,7 +547,8 @@ public class MessageBubble : MonoBehaviour
             messageEditor.ActivateInputField();
             StartCoroutine(CenterCoroutine());
 
-        } else
+        }
+        else
         {
             editOkButton.gameObject.SetActive(false);
             edited = false;
@@ -665,7 +697,8 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             this.message.interactable = false;
             this.messageSelectButton.gameObject.SetActive(true);
             this.edited = false;
-        } else
+        }
+        else
         {
             showed = false;
             editButton.gameObject.SetActive(false);
@@ -701,7 +734,7 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             }
             else
             {
-               targetCanvas = canvasObj.GetComponent<Canvas>();
+                targetCanvas = canvasObj.GetComponent<Canvas>();
             }
         }
 
@@ -870,7 +903,7 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
 
     void LoadPreviewFromBase64()
     {
-        if(this.apreview != null && this.apreview != "")
+        if (this.apreview != null && this.apreview != "")
         {
             Sprite loadedSprite;
 
@@ -915,9 +948,55 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
                 preview.gameObject.SetActive(false);
                 Debug.LogError("Failed to load preview from Base64");
             }
-        } else
+        }
+        else
         {
             preview.gameObject.SetActive(false);
         }
+    }
+
+    async void LoadGif()
+    {
+        if (this.apreview != "" && this.atype == "image/gif")
+        {
+            this.preview.gameObject.SetActive(false);
+            this.gifImage.gameObject.SetActive(true);
+
+            var formData = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("pack[service]", "file"),
+                new KeyValuePair<string, string>("pack[method]", "download"),
+                new KeyValuePair<string, string>("pack[access_key]", Settings.AuthKey),
+                new KeyValuePair<string, string>("pack[info][id]", this.aid)
+            };
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Отправляем POST запрос с form-urlencoded данными
+                string json = JsonConverter.To(formData);
+                json = Crypt.Encrypt(json);
+                var content = new StringContent(json, Encoding.UTF8, "text/plain");
+
+                using (var response = await client.PostAsync(Settings.Url, content))
+                {
+                    response.EnsureSuccessStatusCode();
+
+                    // Получаем файл как массив байтов
+                    byte[] gifData = await response.Content.ReadAsByteArrayAsync();
+                    gifData = Crypt.DecryptBytes(Encoding.UTF8.GetString(gifData));
+                    StartCoroutine(PrepareGif(gifData));
+                }
+            }
+        }
+    }
+
+    IEnumerator PrepareGif(byte[] gifData)
+    {
+        yield return StartCoroutine(UniGif.GetTextureListCoroutine(gifData,
+           (textureList, loopCount, width, height) =>
+           {
+               gifTextures = new List<UniGif.GifTexture>(textureList);
+               currentFrame = 0;
+           }));
     }
 }

@@ -24,9 +24,9 @@ public class ChatWindow : MonoBehaviour
     [SerializeField] private ScrollRect usersList;
     [SerializeField] private ScrollRect messagesList;
     [SerializeField] private TMP_InputField messageInput;
-    [SerializeField] private UnityEngine.UI.Button emojiButton;
-    [SerializeField] private UnityEngine.UI.Button fileButton;
-    [SerializeField] private UnityEngine.UI.Button sendButton;
+    [SerializeField] private FastButton emojiButton;
+    [SerializeField] private FastButton fileButton;
+    [SerializeField] private FastButton sendButton;
     [SerializeField] private GameObject emojiPanel;
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBar;

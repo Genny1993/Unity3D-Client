@@ -139,6 +139,7 @@ public class ChatPrefab : MonoBehaviour
                             item["aname"]?.ToString() ?? "",
                             item["asize"]?.ToString() ?? "",
                             item["apreview"]?.ToString() ?? "",
+                            item["atype"]?.ToString() ?? "",
                             messagesList,
                             messageInput,
                             statusBar,
