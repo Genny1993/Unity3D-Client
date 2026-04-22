@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\Prefabs\MessageShower.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatPrefab.cs" />
     <Compile Include="Assets\Scripts\Prefabs\AdminWindow.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\ImageWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateOnlineTimer.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\QuoteBar.cs" />
     <Compile Include="Assets\Scripts\Prefabs\SettingsWindow.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\Prefabs\MessageBubble\ReadOnlyInputField.cs" />
     <Compile Include="Assets\Scripts\Prefabs\HistoryWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\LoginWindow.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\MessageBubble\DynamicAspectRatioFitter.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\FileBar.cs" />
   </ItemGroup>
   <ItemGroup>

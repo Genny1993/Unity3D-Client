@@ -110,6 +110,7 @@ public class UpdateMessageTimer : MonoBehaviour
                                 item["aid"]?.ToString() ?? "",
                                 item["aname"]?.ToString() ?? "",
                                 item["asize"]?.ToString() ?? "",
+                                item["apreview"]?.ToString() ?? "",
                                 messagesList,
                                 messageInput,
                                 statusBar,

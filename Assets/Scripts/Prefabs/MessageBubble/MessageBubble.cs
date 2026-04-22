@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
     using NativeFilePickerNamespace;
-#elif UNITY_STANDALONE_WIN
+#else
 using SFB;
 #endif
 
@@ -27,6 +27,7 @@ public class MessageBubble : MonoBehaviour
     private string aid;
     private string aname;
     private string asize;
+    private string apreview;
     public bool my_message = false;
     private bool is_admin_history = false;
 
@@ -46,6 +47,7 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] public TMP_Text fileName;
     [SerializeField] private GameObject leftPadding;
     [SerializeField] private GameObject rightPadding;
+    [SerializeField] private Image preview;
 
 
 
@@ -60,6 +62,7 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Button editOkButton;
     [SerializeField] private UnityEngine.UI.Button messageSelectButton;
     [SerializeField] private UnityEngine.UI.Button copyButton;
+    [SerializeField] private UnityEngine.UI.Button showImageButton;
 
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBarMain;
@@ -84,7 +87,7 @@ public class MessageBubble : MonoBehaviour
     public float destroyAfter = 3f;       // Через сколько секунд удалить звездочки
 
 
-    public void Initialize(string id, string username, string message, string time, string quoteid, string quotename, string quotemessage, bool my_message, string a_id, string a_name, string a_size, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel, bool show_window = false)
+    public void Initialize(string id, string username, string message, string time, string quoteid, string quotename, string quotemessage, bool my_message, string a_id, string a_name, string a_size, string preview, ScrollRect messageList, TMP_InputField i_f, GameObject status_bar, GameObject quote_bar, TMP_Text quoteLabel, bool show_window = false)
     {
         this.id = id;
         this.username.text = username;
@@ -102,6 +105,7 @@ public class MessageBubble : MonoBehaviour
         this.aid = a_id;
         this.aname = a_name;
         this.asize = a_size;
+        this.apreview = preview;
         this.my_message = my_message;
 
         if( i_f == null
@@ -191,6 +195,7 @@ public class MessageBubble : MonoBehaviour
         editOkButton.gameObject.SetActive(false);
         this.message.interactable = false;
         this.copyButton.gameObject.SetActive(false);
+        this.LoadPreviewFromBase64();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -229,13 +234,21 @@ public class MessageBubble : MonoBehaviour
         if (copyButton != null)
             copyButton.onClick.AddListener(OnCopyButtonClick);
 
+        if (showImageButton != null)
+            showImageButton.onClick.AddListener(OnShowImageButtonClick);
+
     }
 
     void Update()
     {
     }
 
-    void OnCopyButtonClick()
+    void OnShowImageButtonClick()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        ImageWindowStart.Show(this.aid);
+    }
+        void OnCopyButtonClick()
     {
         AudioManager.PlayOneShot(buttonClick, clickVolume);
         this.message.interactable = false;
@@ -593,6 +606,7 @@ public class MessageBubble : MonoBehaviour
 
                     // Получаем файл как массив байтов
                     byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+                    fileBytes = Crypt.DecryptBytes(Encoding.UTF8.GetString(fileBytes));
 
 
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -603,7 +617,7 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
         NativeFilePicker.ExportFile(tempPath, (success) => {
             Debug.Log(success ? "Файл сохранён" : "Сохранение отменено");
         });
-#elif UNITY_STANDALONE_WIN
+#else
                     string path = StandaloneFileBrowser.SaveFilePanel("Сохранить файл", "", this.aname, "");
                     // Проверяем, не нажал ли пользователь "Отмена"
                     if (string.IsNullOrEmpty(path))
@@ -852,5 +866,58 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
         DateTime date = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
         return date.ToString("dd MMMM HH:mm", new CultureInfo("ru-RU"));
+    }
+
+    void LoadPreviewFromBase64()
+    {
+        if(this.apreview != null && this.apreview != "")
+        {
+            Sprite loadedSprite;
+
+            try
+            {
+                // Декодируем Base64 в массив байтов
+                byte[] imageBytes = Convert.FromBase64String(this.apreview);
+
+                // Создаем Texture2D
+                Texture2D texture = new Texture2D(2, 2);
+
+                // Загружаем изображение из байтов
+                if (texture.LoadImage(imageBytes))
+                {
+                    // Конвертируем Texture2D в Sprite
+                    Sprite sprite = Sprite.Create(
+                        texture,
+                        new Rect(0, 0, texture.width, texture.height),
+                        new Vector2(0.5f, 0.5f)
+                    );
+
+                    loadedSprite = sprite;
+                }
+                else
+                {
+                    loadedSprite = null;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error converting Base64 to sprite: {e.Message}");
+                loadedSprite = null;
+            }
+
+            if (loadedSprite != null)
+            {
+                this.preview.sprite = loadedSprite;
+                Debug.Log("Preview loaded successfully");
+            }
+            else
+            {
+                preview.gameObject.SetActive(false);
+                Debug.LogError("Failed to load preview from Base64");
+            }
+        } else
+        {
+            preview.gameObject.SetActive(false);
+        }
     }
 }

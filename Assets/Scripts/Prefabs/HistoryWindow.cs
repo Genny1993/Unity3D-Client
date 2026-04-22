@@ -23,7 +23,6 @@ public class HistoryWindow : MonoBehaviour
     [SerializeField] private GameObject quoteBarMain;
     [SerializeField] private TMP_Text quoteLabel;
 
-
     [Header("Ссылка на окошко")]
     [SerializeField] private GameObject panelToAnimate;
 
@@ -349,6 +348,7 @@ public class HistoryWindow : MonoBehaviour
                             item["aid"]?.ToString() ?? "",
                             item["aname"]?.ToString() ?? "",
                             item["asize"]?.ToString() ?? "",
+                            item["apreview"]?.ToString() ?? "",
                             historyList,
                             messageInput,
                             statusBar,

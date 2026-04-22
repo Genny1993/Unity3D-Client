@@ -157,6 +157,34 @@ public static class Crypt
         }
     }
 
+    public static byte[] DecryptBytes(string array)
+    {
+        byte[] fullCipher = Convert.FromBase64String(array);
+        byte[] iv = new byte[IvSize];
+        byte[] cipherText = new byte[fullCipher.Length - IvSize];
+
+        Array.Copy(fullCipher, 0, iv, 0, IvSize);
+        Array.Copy(fullCipher, IvSize, cipherText, 0, cipherText.Length);
+
+        using (Aes aes = Aes.Create())
+        {
+            aes.KeySize = KeySize;
+            aes.BlockSize = BlockSize;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+            aes.IV = iv;
+            aes.Key = Convert.FromBase64String(key);
+
+            using (var decryptor = aes.CreateDecryptor())
+            using (var ms = new MemoryStream(cipherText))
+            using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+            using (var msOutput = new MemoryStream())
+            {
+                cs.CopyTo(msOutput);
+                return msOutput.ToArray();
+            }
+        }
+    }
     public async static Task LoadKey()
     {
         await Task.Delay(1000);
@@ -233,15 +261,15 @@ public static class Sender
 
             HttpResponseMessage response = await client.PostAsync(Settings.Url, content);
 
-
-
             string responseBody = await response.Content.ReadAsStringAsync();
+
             JObject jsonObject = new JObject();
             //Дешифровка
             try
             {
 
                 responseBody = Crypt.Decrypt(responseBody);
+                Debug.Log(responseBody.ToString());
                 jsonObject = JObject.Parse(responseBody);
             }
             catch (Exception ex)
@@ -530,6 +558,48 @@ public static class HistoryWindowStart
 
         // Инициализируем окно
         window.Initialize(id, messageList, i_f, status_bar, quote_bar, quoteLabel);
+    }
+}
+
+public static class  ImageWindowStart
+{
+    private static GameObject messageShowerPrefab;
+
+    // Загрузка префаба (вызовите один раз при старте игры)
+    public static void Initialize()
+    {
+        if (messageShowerPrefab == null)
+        {
+            messageShowerPrefab = Resources.Load<GameObject>("Prefabs/ImageWindow");
+            if (messageShowerPrefab == null)
+                Debug.LogError("MessageShower prefab not found in Resources/Prefabs/");
+        }
+    }
+
+    // Показать окно сообщения
+    public static void Show(string aid)
+    {
+        if (messageShowerPrefab == null)
+        {
+            Debug.LogError("ImageWindow not initialized! Call ImageWindow.Initialize() first.");
+            return;
+        }
+
+        // Создаем экземпляр окна
+        GameObject windowObject = UnityEngine.Object.Instantiate(messageShowerPrefab);
+
+        // Находим компонент HistoryWindow
+        ImageWindow window = windowObject.GetComponent<ImageWindow>();
+
+        if (window == null)
+        {
+            Debug.LogError("ImageWindow component not found on prefab!");
+            UnityEngine.Object.Destroy(windowObject);
+            return;
+        }
+
+        // Инициализируем окно
+        window.Initialize(aid);
     }
 }
 

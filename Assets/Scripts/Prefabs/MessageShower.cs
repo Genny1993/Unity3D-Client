@@ -161,6 +161,7 @@ public class MessageShower : MonoBehaviour
                             item["aid"]?.ToString() ?? "",
                             item["aname"]?.ToString() ?? "",
                             item["asize"]?.ToString() ?? "",
+                            item["apreview"]?.ToString() ?? "",
                             messages,
                             messageInput,
                             statusBar,

@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
     using NativeFilePickerNamespace;
-#elif UNITY_STANDALONE_WIN
+#else
 using SFB;
 #endif
 
@@ -480,7 +480,7 @@ NativeFilePicker.PickFile((path) =>
             //MessageBox.Show("Ошибка", "Выбор файла отменен");
         }
 }, null);
-#elif UNITY_STANDALONE_WIN
+#else
         string filePath = null;
         string[] paths = StandaloneFileBrowser.OpenFilePanel("Выберите файл", "", "*", false);
         if (paths != null && paths.Length > 0)
