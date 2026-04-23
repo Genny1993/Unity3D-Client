@@ -5,7 +5,7 @@ using TMPro;
 public class AdminPanelButton : MonoBehaviour
 {
     private bool switched = false;
-    [SerializeField] private Button button;
+    [SerializeField] private FastButton button;
     [SerializeField] private GameObject switcher;
     [SerializeField] private TMP_Text buttonText;
 

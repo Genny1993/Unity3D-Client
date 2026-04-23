@@ -15,6 +15,7 @@ public class StartMessengerInitializer : MonoBehaviour
         NewUserWindowStart.Initialize();
         NewChatWindowStart.Initialize();
         ImageWindowStart.Initialize();
+        Sandglass.Initialize();
 
         //Загружаем файловый менеджер
         GameObject go = new GameObject("FileManagerInit");

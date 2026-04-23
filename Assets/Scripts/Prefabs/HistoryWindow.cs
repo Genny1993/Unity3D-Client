@@ -12,9 +12,9 @@ public class HistoryWindow : MonoBehaviour
     private int count_messages;
 
     [Header("UI Elements")]
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button prevButton;
-    [SerializeField] private Button nextButton;
+    [SerializeField] private FastButton closeButton;
+    [SerializeField] private FastButton prevButton;
+    [SerializeField] private FastButton nextButton;
     [SerializeField] private ScrollRect historyList;
 
     [SerializeField] private ScrollRect messages;

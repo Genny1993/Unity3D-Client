@@ -12,8 +12,8 @@ public class LoginWindow : MonoBehaviour
     [SerializeField] private TMP_InputField ServerInput;
     [SerializeField] private TMP_InputField LoginInput;
     [SerializeField] private TMP_InputField PasswordInput;
-    [SerializeField] private Button LoginButton;
-    [SerializeField] private Button RegisterButton;
+    [SerializeField] private FastButton LoginButton;
+    [SerializeField] private FastButton RegisterButton;
 
     [Header("Ссылка на окошко")]
     [SerializeField] private GameObject panelToAnimate;
@@ -135,7 +135,7 @@ public class LoginWindow : MonoBehaviour
 
             // Сериализуем в JSON и сохраняем
             string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
-            jsonData = Crypt.Encrypt(jsonData);
+            jsonData = Convert.ToBase64String(Crypt.Encrypt(jsonData));
             FileManager.WriteSettings(jsonData);
         }
         catch (Exception ex)
@@ -191,7 +191,7 @@ public class LoginWindow : MonoBehaviour
         try
         {
             string jsonData = FileManager.ReadSettings();
-            jsonData = Crypt.Decrypt(jsonData);
+            jsonData = Crypt.Decrypt(Convert.FromBase64String(jsonData));
             var formData = JsonConvert.DeserializeObject<FormData>(jsonData);
 
             if (formData != null)

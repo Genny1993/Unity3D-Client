@@ -19,11 +19,11 @@ public class ChatPanel : MonoBehaviour
     [SerializeField] private TMP_Text chatDName;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_InputField nameInput;
-    [SerializeField] private Button nameButton;
-    [SerializeField] private Button deleteButton;
-    [SerializeField] private Button restoreButton;
-    [SerializeField] private Button historyButton;
-    [SerializeField] private Button saveNameButton;
+    [SerializeField] private FastButton nameButton;
+    [SerializeField] private FastButton deleteButton;
+    [SerializeField] private FastButton restoreButton;
+    [SerializeField] private FastButton historyButton;
+    [SerializeField] private FastButton saveNameButton;
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;

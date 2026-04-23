@@ -17,7 +17,7 @@ public class UserPrefab : MonoBehaviour
     [SerializeField] private TMP_Text userName;
     [SerializeField] private GameObject onlineCircle;
     [SerializeField] private GameObject panel;
-    [SerializeField] private Button settingsButton;
+    [SerializeField] private FastButton settingsButton;
 
     [Header("Аудио SFX")]
     [SerializeField] private AudioClip buttonClick;

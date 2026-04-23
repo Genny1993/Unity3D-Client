@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
@@ -16,7 +17,7 @@ public class ImageWindow : MonoBehaviour
     private string aid = "";
 
     [Header("UI Elements")]
-    [SerializeField] private Button closeButton;
+    [SerializeField] private FastButton closeButton;
     [SerializeField] private Image image;
     [SerializeField] private ScrollRect Scroll;
 
@@ -190,6 +191,7 @@ public class ImageWindow : MonoBehaviour
 
     async Task<bool> LoadImage()
     {
+        Sandglass.Show();
         var formData = new List<KeyValuePair<string, string>>
         {
             new KeyValuePair<string, string>("pack[service]", "file"),
@@ -202,17 +204,21 @@ public class ImageWindow : MonoBehaviour
         {
             // Отправляем POST запрос с form-urlencoded данными
             string json = JsonConverter.To(formData);
-            json = Crypt.Encrypt(json);
-            var content = new StringContent(json, Encoding.UTF8, "text/plain");
-
+            byte[] package = Crypt.Encrypt(json);
+            Sandglass.NextFrame();
+            // Отправляем byte[] напрямую через ByteArrayContent
+            var content = new ByteArrayContent(package);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            Sandglass.NextFrame();
             using (var response = await client.PostAsync(Settings.Url, content))
             {
                 response.EnsureSuccessStatusCode();
 
                 // Получаем файл как массив байтов
                 byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-                fileBytes = Crypt.DecryptBytes(Encoding.UTF8.GetString(fileBytes));
-
+                Sandglass.NextFrame();
+                fileBytes = Crypt.DecryptBytes(fileBytes);
+                Sandglass.NextFrame();
                 Texture2D originalTexture = new Texture2D(2, 2);
                 if (!originalTexture.LoadImage(fileBytes))
                 {
@@ -245,7 +251,7 @@ public class ImageWindow : MonoBehaviour
                 Scroll.horizontalNormalizedPosition = 1f;
             }
         }
-
+        Sandglass.Hide();
         return true;
     }
 

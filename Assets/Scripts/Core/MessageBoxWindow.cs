@@ -8,8 +8,8 @@ public class MessageBoxWindow : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text messageText;
-    [SerializeField] private Button okButton;
-    [SerializeField] private Button closeButton;
+    [SerializeField] private FastButton okButton;
+    [SerializeField] private FastButton closeButton;
 
     private Action onCloseCallback;
 

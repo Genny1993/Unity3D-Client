@@ -13,8 +13,8 @@ public class RegisterWindow : MonoBehaviour
     [SerializeField] private TMP_InputField NameInput;
     [SerializeField] private TMP_InputField PasswordInput;
     [SerializeField] private TMP_InputField Password2Input;
-    [SerializeField] private Button LoginButton;
-    [SerializeField] private Button RegisterButton;
+    [SerializeField] private FastButton LoginButton;
+    [SerializeField] private FastButton RegisterButton;
 
     [Header("Ссылка на окошко")]
     [SerializeField] private GameObject panelToAnimate;

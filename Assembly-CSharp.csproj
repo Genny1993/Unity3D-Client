@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Prefabs\ChatPrefab.cs" />
     <Compile Include="Assets\Scripts\Prefabs\AdminWindow.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ImageWindow.cs" />
+    <Compile Include="Assets\Scripts\Core\SandglassWindow.cs" />
     <Compile Include="Assets\UniGif\Example\Script\Utility\UniGifImageAspectController.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\UpdateOnlineTimer.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ChatWindow\QuoteBar.cs" />

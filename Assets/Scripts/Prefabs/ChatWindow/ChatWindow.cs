@@ -309,6 +309,9 @@ public class ChatWindow : MonoBehaviour
 
     async void OnSendButtonClick()
     {
+        messageInput.interactable = false;
+        sendButton.interactable = false;
+
         AudioManager.PlayOneShot(buttonClick, clickVolume);
         // Очищаем текст от символов перевода строки перед отправкой
         string cleanText = messageInput.text.Trim().Replace("\n", "").Replace("\r", "");
@@ -342,9 +345,8 @@ public class ChatWindow : MonoBehaviour
 
         try
         {
-            messageInput.interactable = false;
-            sendButton.interactable = false;
-            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData, true);
+            messageInput.text = ""; // Очищаем поле
             Settings.QuotedId = "";
             FileInfo.Clear();
             quoteLabel.text = "";
@@ -362,17 +364,6 @@ public class ChatWindow : MonoBehaviour
                 Settings.currentMessagesListHeight = (int)size.y;
                 rect.sizeDelta = size;
             }
-
-            FixTMPDeleteBug inputFixer = messageInput.GetComponent<FixTMPDeleteBug>();
-            if(inputFixer != null)
-            {
-                inputFixer.lastText = "";
-                inputFixer.lastCaret = 0;
-                inputFixer.lastSelectionStart = 0;
-                inputFixer.lastSelectionEnd = 0;
-                inputFixer.isUpdating = false;
-            }
-            messageInput.text = ""; // Очищаем поле
 
             if (Settings.isPCProgram)
             {

@@ -28,14 +28,14 @@ public class UserPanel : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private TMP_InputField groupInput;
-    [SerializeField] private Button usernameButton;
-    [SerializeField] private Button passwordButton;
-    [SerializeField] private Button groupButton;
-    [SerializeField] private Button saveUsernameButton;
-    [SerializeField] private Button savePasswordButton;
-    [SerializeField] private Button saveGroupButton;
-    [SerializeField] private Button deleteButton;
-    [SerializeField] private Button restoreButton;
+    [SerializeField] private FastButton usernameButton;
+    [SerializeField] private FastButton passwordButton;
+    [SerializeField] private FastButton groupButton;
+    [SerializeField] private FastButton saveUsernameButton;
+    [SerializeField] private FastButton savePasswordButton;
+    [SerializeField] private FastButton saveGroupButton;
+    [SerializeField] private FastButton deleteButton;
+    [SerializeField] private FastButton restoreButton;
 
 
     [Header("Аудио SFX")]

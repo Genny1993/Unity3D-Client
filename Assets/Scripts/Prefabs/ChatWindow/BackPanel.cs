@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class BackPanel : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private Button chatButton;
-    [SerializeField] private Button userButton;
+    [SerializeField] private FastButton chatButton;
+    [SerializeField] private FastButton userButton;
     [SerializeField] private GameObject chatList;
     [SerializeField] private GameObject userList;
     [SerializeField] private TMP_InputField messageInput;

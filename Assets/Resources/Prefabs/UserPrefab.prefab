@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 9156690634430570316}
   - component: {fileID: 9124916651870252521}
   - component: {fileID: 3530207921584169738}
-  - component: {fileID: 8267649063851038238}
+  - component: {fileID: 4910498201507280875}
   m_Layer: 5
   m_Name: UserButton
   m_TagString: Untagged
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7529412, b: 0.79607844, a: 0.27450982}
+  m_Color: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8267649063851038238
+--- !u!114 &4910498201507280875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,9 +294,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2985339610375484271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -466,7 +466,7 @@ MonoBehaviour:
   userName: {fileID: 4104595720796017132}
   onlineCircle: {fileID: 7144879109663697687}
   panel: {fileID: 4638285773951071399}
-  settingsButton: {fileID: 8267649063851038238}
+  settingsButton: {fileID: 4910498201507280875}
   buttonClick: {fileID: 8300000, guid: 01b7ca7a63adce04b9db5ff7a8c0e548, type: 3}
   clickVolume: 0.7
 --- !u!114 &3586865882459901615

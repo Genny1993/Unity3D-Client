@@ -10,7 +10,7 @@ public class MessageShower : MonoBehaviour
     private string id;
 
     [Header("UI Elements")]
-    [SerializeField] private Button closeButton;
+    [SerializeField] private FastButton closeButton;
 
     [SerializeField] private ScrollRect messages;
     [SerializeField] public TMP_InputField messageInput;

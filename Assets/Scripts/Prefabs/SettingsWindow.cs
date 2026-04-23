@@ -9,9 +9,9 @@ public class SettingsWindow : MonoBehaviour
 {
 
     [Header("UI Elements")]
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button nameButton;
-    [SerializeField] private Button passwordButton;
+    [SerializeField] private FastButton closeButton;
+    [SerializeField] private FastButton nameButton;
+    [SerializeField] private FastButton passwordButton;
 
     [SerializeField] private TMP_InputField nameField;
     [SerializeField] private TMP_InputField passwordField;

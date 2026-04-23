@@ -11,6 +11,8 @@ using UnityEngine.UI;
 using static UnityEngine.Analytics.IAnalytic;
 using System.Threading.Tasks;
 using static UniGif;
+using System.Net.Http.Headers;
+
 
 
 
@@ -61,18 +63,18 @@ public class MessageBubble : MonoBehaviour
 
 
 
-    [SerializeField] private UnityEngine.UI.Button burgerButton;
-    [SerializeField] private UnityEngine.UI.Button editButton;
-    [SerializeField] private UnityEngine.UI.Button restoreButton;
-    [SerializeField] private UnityEngine.UI.Button deleteButton;
-    [SerializeField] private UnityEngine.UI.Button quoteButton;
-    [SerializeField] private UnityEngine.UI.Button inQuoteButton;
-    [SerializeField] private UnityEngine.UI.Button inQuoteButton2;
-    [SerializeField] private UnityEngine.UI.Button fileButton;
-    [SerializeField] private UnityEngine.UI.Button editOkButton;
-    [SerializeField] private UnityEngine.UI.Button messageSelectButton;
-    [SerializeField] private UnityEngine.UI.Button copyButton;
-    [SerializeField] private UnityEngine.UI.Button showImageButton;
+    [SerializeField] private FastButton burgerButton;
+    [SerializeField] private FastButton editButton;
+    [SerializeField] private FastButton restoreButton;
+    [SerializeField] private FastButton deleteButton;
+    [SerializeField] private FastButton quoteButton;
+    [SerializeField] private FastButton inQuoteButton;
+    [SerializeField] private FastButton inQuoteButton2;
+    [SerializeField] private FastButton fileButton;
+    [SerializeField] private FastButton editOkButton;
+    [SerializeField] private FastButton messageSelectButton;
+    [SerializeField] private FastButton copyButton;
+    [SerializeField] private FastButton showImageButton;
 
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBarMain;
@@ -183,7 +185,7 @@ public class MessageBubble : MonoBehaviour
             burgerButton.gameObject.SetActive(false);
         }
 
-        if (quotemessage == "")
+        if (quotename == "")
         {
             quoteBar.SetActive(false);
         }
@@ -611,6 +613,7 @@ public class MessageBubble : MonoBehaviour
 
     async void OnFileButtonClick()
     {
+        Sandglass.Show();
         AudioManager.PlayOneShot(buttonClick, clickVolume);
 
         var formData = new List<KeyValuePair<string, string>>
@@ -628,19 +631,25 @@ public class MessageBubble : MonoBehaviour
             {
                 // Отправляем POST запрос с form-urlencoded данными
                 string json = JsonConverter.To(formData);
-                json = Crypt.Encrypt(json);
-                var content = new StringContent(json, Encoding.UTF8, "text/plain");
+                byte[] package = Crypt.Encrypt(json);
 
-                MessageBox.Show("Информация", "Началось скачивание файла. Пожалуйста, ожидайте конца");
+                // Отправляем byte[] напрямую через ByteArrayContent
+                var content = new ByteArrayContent(package);
+                Sandglass.NextFrame();
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                
+                Sandglass.NextFrame();
+
                 using (var response = await client.PostAsync(Settings.Url, content))
                 {
+                    Sandglass.NextFrame();
                     response.EnsureSuccessStatusCode();
 
                     // Получаем файл как массив байтов
                     byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-                    fileBytes = Crypt.DecryptBytes(Encoding.UTF8.GetString(fileBytes));
-
-
+                    fileBytes = Crypt.DecryptBytes(fileBytes);
+                    Sandglass.NextFrame();
+                    Sandglass.Hide();
 #if UNITY_ANDROID && !UNITY_EDITOR
 string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
         File.WriteAllBytes(tempPath, fileBytes);
@@ -974,8 +983,12 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
             {
                 // Отправляем POST запрос с form-urlencoded данными
                 string json = JsonConverter.To(formData);
-                json = Crypt.Encrypt(json);
-                var content = new StringContent(json, Encoding.UTF8, "text/plain");
+                byte[] package = Crypt.Encrypt(json);
+
+                // Отправляем byte[] напрямую через ByteArrayContent
+                var content = new ByteArrayContent(package);
+
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
                 using (var response = await client.PostAsync(Settings.Url, content))
                 {
@@ -983,7 +996,13 @@ string tempPath = Path.Combine(Application.persistentDataPath, this.aname);
 
                     // Получаем файл как массив байтов
                     byte[] gifData = await response.Content.ReadAsByteArrayAsync();
-                    gifData = Crypt.DecryptBytes(Encoding.UTF8.GetString(gifData));
+                    
+
+                    System.Diagnostics.Stopwatch sendTime = new System.Diagnostics.Stopwatch();
+                    sendTime.Start();
+                    gifData = Crypt.DecryptBytes(gifData);
+                    sendTime.Stop();
+                    Debug.Log($"дешифровано за: {sendTime.Elapsed.TotalMilliseconds:F3} мс");
                     StartCoroutine(PrepareGif(gifData));
                 }
             }

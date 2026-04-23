@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8595288423433030769}
   - component: {fileID: 5976047509789929928}
   - component: {fileID: 455898086925028122}
-  - component: {fileID: 3443731198650900423}
   - component: {fileID: 402434518769497991}
+  - component: {fileID: 7462642870378875581}
   m_Layer: 5
   m_Name: RestoreButton
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3443731198650900423
+--- !u!114 &402434518769497991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,9 +87,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 138171774672803383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &7462642870378875581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138171774672803383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -122,26 +142,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &402434518769497991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138171774672803383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &515812797401468648
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 3577758091311853995}
   - component: {fileID: 2959372562660544020}
   - component: {fileID: 1498012603991333085}
-  - component: {fileID: 7975277716943341819}
+  - component: {fileID: 7571060702308709285}
   m_Layer: 5
   m_Name: MessageSelectButton
   m_TagString: Untagged
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7975277716943341819
+--- !u!114 &7571060702308709285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -483,9 +483,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1310805944148592202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -1706,8 +1706,8 @@ GameObject:
   - component: {fileID: 8006061106653986925}
   - component: {fileID: 9186038097514761266}
   - component: {fileID: 7624035164197210922}
-  - component: {fileID: 2357295746405773509}
   - component: {fileID: 29228289342875965}
+  - component: {fileID: 5128216756312396995}
   m_Layer: 5
   m_Name: BurgerButton
   m_TagString: Untagged
@@ -1773,7 +1773,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2357295746405773509
+--- !u!114 &29228289342875965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1782,9 +1782,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3105660133606690337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &5128216756312396995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105660133606690337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -1817,26 +1837,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &29228289342875965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3105660133606690337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &3153194203139038306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,7 +2146,7 @@ GameObject:
   - component: {fileID: 5151076168496930190}
   - component: {fileID: 491258961027165852}
   - component: {fileID: 4466135327812296055}
-  - component: {fileID: 659085291197997474}
+  - component: {fileID: 337957202980122922}
   m_Layer: 5
   m_Name: ShowImageButton
   m_TagString: Untagged
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &659085291197997474
+--- !u!114 &337957202980122922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2221,9 +2221,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3489316194176932870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -2910,8 +2910,8 @@ GameObject:
   - component: {fileID: 7691298156427598765}
   - component: {fileID: 8665145617425175583}
   - component: {fileID: 8669407139673727435}
-  - component: {fileID: 1369688655135177472}
   - component: {fileID: 7054967209931542394}
+  - component: {fileID: 7599545805075908002}
   m_Layer: 5
   m_Name: QuoteButton
   m_TagString: Untagged
@@ -2977,7 +2977,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1369688655135177472
+--- !u!114 &7054967209931542394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2986,9 +2986,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5070678074712723239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &7599545805075908002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070678074712723239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -3021,26 +3041,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7054967209931542394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5070678074712723239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &5117450561362972305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,18 +3186,18 @@ MonoBehaviour:
   rightPadding: {fileID: 5117450561362972305}
   preview: {fileID: 2995065222766360266}
   gifImage: {fileID: 1495954882983056790}
-  burgerButton: {fileID: 2357295746405773509}
-  editButton: {fileID: 3122771552855121433}
-  restoreButton: {fileID: 3443731198650900423}
-  deleteButton: {fileID: 2315328618356695075}
-  quoteButton: {fileID: 1369688655135177472}
-  inQuoteButton: {fileID: 7423201215067885773}
-  inQuoteButton2: {fileID: 6312044950711433632}
-  fileButton: {fileID: 5690040366330240193}
-  editOkButton: {fileID: 7053652996701145562}
-  messageSelectButton: {fileID: 7975277716943341819}
-  copyButton: {fileID: 3397049497691624487}
-  showImageButton: {fileID: 659085291197997474}
+  burgerButton: {fileID: 5128216756312396995}
+  editButton: {fileID: 3352515155437755408}
+  restoreButton: {fileID: 7462642870378875581}
+  deleteButton: {fileID: 4454136498450067220}
+  quoteButton: {fileID: 7599545805075908002}
+  inQuoteButton: {fileID: 3549950859566469497}
+  inQuoteButton2: {fileID: 1735127255279260550}
+  fileButton: {fileID: 5625849041183150602}
+  editOkButton: {fileID: 2476667582592353992}
+  messageSelectButton: {fileID: 7571060702308709285}
+  copyButton: {fileID: 1013881634150793534}
+  showImageButton: {fileID: 337957202980122922}
   statusBar: {fileID: 0}
   quoteBarMain: {fileID: 0}
   quoteLabel: {fileID: 0}
@@ -3958,7 +3958,7 @@ GameObject:
   - component: {fileID: 3088964020611068179}
   - component: {fileID: 2203648211373021482}
   - component: {fileID: 3167814108821524193}
-  - component: {fileID: 6312044950711433632}
+  - component: {fileID: 1735127255279260550}
   m_Layer: 5
   m_Name: QuoteButton
   m_TagString: Untagged
@@ -4024,7 +4024,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6312044950711433632
+--- !u!114 &1735127255279260550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4033,9 +4033,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6349048301833901625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -4079,8 +4079,8 @@ GameObject:
   - component: {fileID: 3382553441065554808}
   - component: {fileID: 1898808198730888130}
   - component: {fileID: 3661845806994984813}
-  - component: {fileID: 7053652996701145562}
   - component: {fileID: 7836093736324224161}
+  - component: {fileID: 2476667582592353992}
   m_Layer: 5
   m_Name: EditOkButton
   m_TagString: Untagged
@@ -4146,7 +4146,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7053652996701145562
+--- !u!114 &7836093736324224161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4155,9 +4155,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 6468404311988240655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &2476667582592353992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6468404311988240655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -4190,26 +4210,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7836093736324224161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468404311988240655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &6545092849151877121
 GameObject:
   m_ObjectHideFlags: 0
@@ -4342,7 +4342,7 @@ GameObject:
   - component: {fileID: 4961146124683953813}
   - component: {fileID: 1044460884390033073}
   - component: {fileID: 8343570009614684981}
-  - component: {fileID: 5690040366330240193}
+  - component: {fileID: 5625849041183150602}
   m_Layer: 5
   m_Name: FileButton
   m_TagString: Untagged
@@ -4408,7 +4408,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5690040366330240193
+--- !u!114 &5625849041183150602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4417,9 +4417,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6608387426177045505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -5345,7 +5345,7 @@ GameObject:
   - component: {fileID: 1947914750152197227}
   - component: {fileID: 2860089527513633730}
   - component: {fileID: 4720497562245182530}
-  - component: {fileID: 7423201215067885773}
+  - component: {fileID: 3549950859566469497}
   m_Layer: 5
   m_Name: QuoteButton
   m_TagString: Untagged
@@ -5411,7 +5411,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7423201215067885773
+--- !u!114 &3549950859566469497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5420,9 +5420,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7478781352921497598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -5753,8 +5753,8 @@ GameObject:
   - component: {fileID: 7730561437553200280}
   - component: {fileID: 7496944481142882980}
   - component: {fileID: 6052116911967138671}
-  - component: {fileID: 3397049497691624487}
   - component: {fileID: 3031830167162471263}
+  - component: {fileID: 1013881634150793534}
   m_Layer: 5
   m_Name: CopyButton
   m_TagString: Untagged
@@ -5820,7 +5820,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3397049497691624487
+--- !u!114 &3031830167162471263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5829,9 +5829,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8118554994880123292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &1013881634150793534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118554994880123292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -5864,26 +5884,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3031830167162471263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8118554994880123292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &8207697082269796669
 GameObject:
   m_ObjectHideFlags: 0
@@ -5895,8 +5895,8 @@ GameObject:
   - component: {fileID: 7727890420237585311}
   - component: {fileID: 7783760816246357988}
   - component: {fileID: 8687124573300906616}
-  - component: {fileID: 2315328618356695075}
   - component: {fileID: 9104970681193614759}
+  - component: {fileID: 4454136498450067220}
   m_Layer: 5
   m_Name: DeleteButton
   m_TagString: Untagged
@@ -5962,7 +5962,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2315328618356695075
+--- !u!114 &9104970681193614759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5971,9 +5971,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8207697082269796669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &4454136498450067220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8207697082269796669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -6006,26 +6026,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9104970681193614759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8207697082269796669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &8270100407828127592
 GameObject:
   m_ObjectHideFlags: 0
@@ -6448,8 +6448,8 @@ GameObject:
   - component: {fileID: 1920878280740878282}
   - component: {fileID: 5265600354625022726}
   - component: {fileID: 1318668965404857099}
-  - component: {fileID: 3122771552855121433}
   - component: {fileID: 3222153557125532370}
+  - component: {fileID: 3352515155437755408}
   m_Layer: 5
   m_Name: EditButton
   m_TagString: Untagged
@@ -6515,7 +6515,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3122771552855121433
+--- !u!114 &3222153557125532370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6524,9 +6524,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8703672164114727274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: 50
+  m_MinHeight: 50
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &3352515155437755408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8703672164114727274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastButton
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -6559,26 +6579,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3222153557125532370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8703672164114727274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 0
-  m_MinWidth: 50
-  m_MinHeight: 50
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &8840634280407626480
 GameObject:
   m_ObjectHideFlags: 0

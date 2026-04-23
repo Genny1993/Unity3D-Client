@@ -9,13 +9,18 @@ using static LoginWindow;
 public class AdminWindow : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private Button addUserButton;
-    [SerializeField] private Button refreshUserButton;
-    [SerializeField] private Button addChatButton;
-    [SerializeField] private Button refreshChatButton;
+    [SerializeField] private FastButton addUserButton;
+    [SerializeField] private FastButton refreshUserButton;
+    [SerializeField] private FastButton addChatButton;
+    [SerializeField] private FastButton refreshChatButton;
+    [SerializeField] private FastButton chatButton;
+    [SerializeField] private FastButton userButton;
 
     [SerializeField] private ScrollRect userList;
     [SerializeField] private ScrollRect chatList;
+
+    [SerializeField] private GameObject userGroup;
+    [SerializeField] private GameObject chatGroup;
 
     [Header("Настройки префаба")]
     [SerializeField] private string userPrefabPath = "Prefabs/UserPanel";
@@ -39,9 +44,27 @@ public class AdminWindow : MonoBehaviour
             addChatButton.onClick.AddListener(AddChatButtonClick);
         if (refreshChatButton != null)
             refreshChatButton.onClick.AddListener(RefreshChatButtonClick);
+        if (chatButton != null)
+            chatButton.onClick.AddListener(chatButtonClick);
+        if (userButton != null)
+            userButton.onClick.AddListener(userButtonClick);
 
         await GetUserList();
         await GetChatList();
+    }
+
+    void chatButtonClick()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        chatGroup.SetActive(true);
+        userGroup.SetActive(false);
+    }
+
+    void userButtonClick()
+    {
+        AudioManager.PlayOneShot(buttonClick, clickVolume);
+        chatGroup.SetActive(false);
+        userGroup.SetActive(true);
     }
 
     void AddUserButtonClick()

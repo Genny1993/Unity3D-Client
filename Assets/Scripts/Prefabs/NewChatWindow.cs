@@ -11,9 +11,9 @@ public class NewChatWindow : MonoBehaviour
     private string id;
 
     [Header("UI Elements")]
-    [SerializeField] private Button createButton;
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button cancelButton;
+    [SerializeField] private FastButton createButton;
+    [SerializeField] private FastButton closeButton;
+    [SerializeField] private FastButton cancelButton;
 
     [SerializeField] public TMP_InputField nameInput;
 

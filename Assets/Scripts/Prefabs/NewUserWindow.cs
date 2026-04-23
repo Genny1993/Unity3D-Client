@@ -11,9 +11,9 @@ public class NewUserWindow : MonoBehaviour
     private string id;
 
     [Header("UI Elements")]
-    [SerializeField] private Button registerButton;
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button cancelButton;
+    [SerializeField] private FastButton registerButton;
+    [SerializeField] private FastButton closeButton;
+    [SerializeField] private FastButton cancelButton;
 
     [SerializeField] public TMP_InputField loginInput;
     [SerializeField] public TMP_InputField usernameInput;

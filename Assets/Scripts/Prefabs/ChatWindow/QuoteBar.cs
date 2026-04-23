@@ -9,7 +9,7 @@ public class QuotePanel : MonoBehaviour
     [SerializeField] private GameObject quoteBar;
     [SerializeField] private GameObject statusBar;
     [SerializeField] private ScrollRect messagesList;
-    [SerializeField] private Button deleteQuote;
+    [SerializeField] private FastButton deleteQuote;
     [SerializeField] private TMP_Text quoteLabel;
     [SerializeField] private TMP_InputField messageInput;
 

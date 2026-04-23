@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.Loading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -88,7 +90,7 @@ public static class Crypt
     private static readonly int BlockSize = 128; // AES block size
     private static readonly int IvSize = 16; // 128 bits = 16 bytes
 
-    public static string Encrypt(string plainText)
+    public static byte[] Encrypt(string plainText)
     {
         byte[] iv = new byte[IvSize];
         byte[] cipherText;
@@ -124,12 +126,11 @@ public static class Crypt
             }
         }
 
-        return Convert.ToBase64String(cipherText);
+        return cipherText;
     }
 
-    public static string Decrypt(string cipherTextBase64)
+    public static string Decrypt(byte[] fullCipher)
     {
-        byte[] fullCipher = Convert.FromBase64String(cipherTextBase64);
         byte[] iv = new byte[IvSize];
         byte[] cipherText = new byte[fullCipher.Length - IvSize];
 
@@ -157,9 +158,8 @@ public static class Crypt
         }
     }
 
-    public static byte[] DecryptBytes(string array)
-    {
-        byte[] fullCipher = Convert.FromBase64String(array);
+    public static byte[] DecryptBytes(byte[] fullCipher)
+    {;
         byte[] iv = new byte[IvSize];
         byte[] cipherText = new byte[fullCipher.Length - IvSize];
 
@@ -241,8 +241,13 @@ public static class JsonConverter
 
 public static class Sender
 {
-    public static async Task<JObject> SendRequest(List<KeyValuePair<string, string>> list)
+    public static async Task<JObject> SendRequest(List<KeyValuePair<string, string>> list, bool loading = false)
     {
+        if (loading)
+        {
+            Sandglass.Show();
+        }
+
         var handler = new HttpClientHandler
         {
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
@@ -255,38 +260,85 @@ public static class Sender
             client.DefaultRequestHeaders.ExpectContinue = true;
 
             // Отправляем POST запрос с form-urlencoded данными
+
+            System.Diagnostics.Stopwatch encryptTime = new System.Diagnostics.Stopwatch();
+            encryptTime.Start();
+
             string json = JsonConverter.To(list);
-            json = Crypt.Encrypt(json);
-            var content = new StringContent(json, Encoding.UTF8, "text/plain");
+            byte[] package = Crypt.Encrypt(json);
+
+            encryptTime.Stop();
+            Debug.Log($"Зашифровано за: {encryptTime.Elapsed.TotalMilliseconds:F3} мс");
+
+            System.Diagnostics.Stopwatch sendTime = new System.Diagnostics.Stopwatch();
+            sendTime.Start();
+            
+            // Отправляем byte[] напрямую через ByteArrayContent
+            var content = new ByteArrayContent(package);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+            if (loading)
+            {
+                Sandglass.NextFrame();
+            }
 
             HttpResponseMessage response = await client.PostAsync(Settings.Url, content);
-
-            string responseBody = await response.Content.ReadAsStringAsync();
+            if (loading)
+            {
+                Sandglass.NextFrame();
+            }
+            byte[] responseBytes = await response.Content.ReadAsByteArrayAsync();
 
             JObject jsonObject = new JObject();
-            //Дешифровка
+            if (loading)
+            {
+                Sandglass.NextFrame();
+            }
+
+            sendTime.Stop();
+            Debug.Log($"Отправлено и получен ответ за: {sendTime.Elapsed.TotalMilliseconds:F3} мс");
+
             try
             {
-
-                responseBody = Crypt.Decrypt(responseBody);
-                Debug.Log(responseBody.ToString());
+                // Передаем в Decrypt массив байтов
+                System.Diagnostics.Stopwatch decryptTime = new System.Diagnostics.Stopwatch();
+                sendTime.Start();
+                string responseBody = Crypt.Decrypt(responseBytes);
                 jsonObject = JObject.Parse(responseBody);
+                if (loading)
+                {
+                    Sandglass.NextFrame();
+                }
+                //Debug.Log(responseBody);
+
+                sendTime.Stop();
+                Debug.Log($"Дешифровано за: {decryptTime.Elapsed.TotalMilliseconds:F3} мс");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка" + ex.Message, responseBody.ToString());
+                if (loading)
+                {
+                    Sandglass.Hide();
+                }
+
+                MessageBox.Show("Ошибка " + ex.Message, responseBytes.ToString());
+            }
+
+            if (loading)
+            {
+                Sandglass.Hide();
             }
 
             return jsonObject;
         }
     }
 
-    public static async Task<JObject> SendAndGet(List<KeyValuePair<string, string>> list)
+    public static async Task<JObject> SendAndGet(List<KeyValuePair<string, string>> list, bool loading = false)
     {
         JObject result;
         try
         {
-            result = await SendRequest(list);
+            result = await SendRequest(list, loading);
         }
         catch (Exception ex)
         {
@@ -516,6 +568,75 @@ public static class MessageShowerWindow
 
         // Инициализируем окно
         window.Initialize(id, messageList, i_f, status_bar, quote_bar, quoteLabel);
+    }
+}
+
+public static class Sandglass
+{
+    private static GameObject SandglassPrefab;
+    private static GameObject exemplar = null;
+
+    // Загрузка префаба (вызовите один раз при старте игры)
+    public static void Initialize()
+    {
+        if (SandglassPrefab == null)
+        {
+            SandglassPrefab = Resources.Load<GameObject>("Prefabs/Sandglass");
+            if (SandglassPrefab == null)
+                Debug.LogError("Sandglass prefab not found in Resources/Prefabs/");
+        }
+    }
+
+    // Показать окно сообщения
+    public static void Show()
+    {
+        if (SandglassPrefab == null)
+        {
+            Debug.LogError("Sandglass not initialized! Call Sandglass.Initialize() first.");
+            return;
+        }
+
+        if(exemplar != null)
+        {
+            SandglassWindow dwindow = exemplar.GetComponent<SandglassWindow>();
+            if (dwindow != null)
+            {
+                dwindow.ThisDestroy();
+                exemplar = null;
+            }
+        }
+        // Создаем экземпляр окна
+        exemplar = UnityEngine.Object.Instantiate(SandglassPrefab);
+
+        // Находим компонент SandglassScreen
+        SandglassWindow window = exemplar.GetComponent<SandglassWindow>();
+
+        if (window == null)
+        {
+            Debug.LogError("SandglassWindow component not found on prefab!");
+            UnityEngine.Object.Destroy(exemplar);
+            return;
+        }
+    }
+
+    public static void NextFrame()
+    {
+        SandglassWindow window = exemplar.GetComponent<SandglassWindow>();
+        if (window != null)
+        {
+            window.ChangeToNextImage();
+            return;
+        }
+    }
+    public static void Hide()
+    {
+        SandglassWindow window = exemplar.GetComponent<SandglassWindow>();
+        if (window != null)
+        {
+            window.ThisDestroy();
+            exemplar = null;
+            return;
+        }
     }
 }
 

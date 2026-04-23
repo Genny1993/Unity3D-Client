@@ -5,7 +5,7 @@ using TMPro;
 public class ChatSwitcher : MonoBehaviour
 {
     private bool switched = false;
-    [SerializeField] private Button switcher;
+    [SerializeField] private FastButton switcher;
     [SerializeField] private TMP_Text buttonText;
 
     [Header("Аудио SFX")]

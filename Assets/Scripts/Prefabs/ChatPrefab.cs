@@ -15,8 +15,8 @@ public class ChatPrefab : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text chatName;
-    [SerializeField] private Button historyButton;
-    [SerializeField] private Button chatButton;
+    [SerializeField] private FastButton historyButton;
+    [SerializeField] private FastButton chatButton;
 
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBar;
@@ -88,7 +88,7 @@ public class ChatPrefab : MonoBehaviour
         try
         {
             chatButton.interactable = false;
-            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData);
+            Newtonsoft.Json.Linq.JObject result = await Sender.SendAndGet(formData, true);
             Settings.CurretChat = chatId;
 
             JArray UserArray = result["info"] as JArray;

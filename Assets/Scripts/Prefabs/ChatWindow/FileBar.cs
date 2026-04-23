@@ -9,7 +9,7 @@ public class FilePanel : MonoBehaviour
     [SerializeField] private GameObject fileBar;
     [SerializeField] private GameObject statusBar;
     [SerializeField] private ScrollRect messagesList;
-    [SerializeField] private Button deleteFile;
+    [SerializeField] private FastButton deleteFile;
     [SerializeField] private TMP_Text fileLabel;
     [SerializeField] private TMP_InputField messageInput;
 
