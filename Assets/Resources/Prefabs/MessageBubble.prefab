@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 3577758091311853995}
   - component: {fileID: 2959372562660544020}
   - component: {fileID: 1498012603991333085}
-  - component: {fileID: 7571060702308709285}
+  - component: {fileID: 3181432540786859256}
   m_Layer: 5
   m_Name: MessageSelectButton
   m_TagString: Untagged
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7571060702308709285
+--- !u!114 &3181432540786859256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -483,9 +483,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1310805944148592202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FastButton
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -2146,7 +2146,7 @@ GameObject:
   - component: {fileID: 5151076168496930190}
   - component: {fileID: 491258961027165852}
   - component: {fileID: 4466135327812296055}
-  - component: {fileID: 337957202980122922}
+  - component: {fileID: 308859493808376252}
   m_Layer: 5
   m_Name: ShowImageButton
   m_TagString: Untagged
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &337957202980122922
+--- !u!114 &308859493808376252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2221,9 +2221,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3489316194176932870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FastButton
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -3191,13 +3191,13 @@ MonoBehaviour:
   restoreButton: {fileID: 7462642870378875581}
   deleteButton: {fileID: 4454136498450067220}
   quoteButton: {fileID: 7599545805075908002}
-  inQuoteButton: {fileID: 3549950859566469497}
-  inQuoteButton2: {fileID: 1735127255279260550}
-  fileButton: {fileID: 5625849041183150602}
+  inQuoteButton: {fileID: 129603273968869547}
+  inQuoteButton2: {fileID: 8858366039073487295}
+  fileButton: {fileID: 8331264258661147670}
   editOkButton: {fileID: 2476667582592353992}
-  messageSelectButton: {fileID: 7571060702308709285}
+  messageSelectButton: {fileID: 3181432540786859256}
   copyButton: {fileID: 1013881634150793534}
-  showImageButton: {fileID: 337957202980122922}
+  showImageButton: {fileID: 308859493808376252}
   statusBar: {fileID: 0}
   quoteBarMain: {fileID: 0}
   quoteLabel: {fileID: 0}
@@ -3958,7 +3958,7 @@ GameObject:
   - component: {fileID: 3088964020611068179}
   - component: {fileID: 2203648211373021482}
   - component: {fileID: 3167814108821524193}
-  - component: {fileID: 1735127255279260550}
+  - component: {fileID: 8858366039073487295}
   m_Layer: 5
   m_Name: QuoteButton
   m_TagString: Untagged
@@ -4024,7 +4024,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1735127255279260550
+--- !u!114 &8858366039073487295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4033,9 +4033,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6349048301833901625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FastButton
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -4342,7 +4342,7 @@ GameObject:
   - component: {fileID: 4961146124683953813}
   - component: {fileID: 1044460884390033073}
   - component: {fileID: 8343570009614684981}
-  - component: {fileID: 5625849041183150602}
+  - component: {fileID: 8331264258661147670}
   m_Layer: 5
   m_Name: FileButton
   m_TagString: Untagged
@@ -4408,7 +4408,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5625849041183150602
+--- !u!114 &8331264258661147670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4417,9 +4417,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6608387426177045505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FastButton
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -5345,7 +5345,7 @@ GameObject:
   - component: {fileID: 1947914750152197227}
   - component: {fileID: 2860089527513633730}
   - component: {fileID: 4720497562245182530}
-  - component: {fileID: 3549950859566469497}
+  - component: {fileID: 129603273968869547}
   m_Layer: 5
   m_Name: QuoteButton
   m_TagString: Untagged
@@ -5411,7 +5411,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3549950859566469497
+--- !u!114 &129603273968869547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5420,9 +5420,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7478781352921497598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31cef17b466a0f4592642199afdcbc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FastButton
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0

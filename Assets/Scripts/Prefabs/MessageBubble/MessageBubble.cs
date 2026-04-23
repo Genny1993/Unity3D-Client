@@ -68,13 +68,13 @@ public class MessageBubble : MonoBehaviour
     [SerializeField] private FastButton restoreButton;
     [SerializeField] private FastButton deleteButton;
     [SerializeField] private FastButton quoteButton;
-    [SerializeField] private FastButton inQuoteButton;
-    [SerializeField] private FastButton inQuoteButton2;
-    [SerializeField] private FastButton fileButton;
+    [SerializeField] private Button inQuoteButton;
+    [SerializeField] private Button inQuoteButton2;
+    [SerializeField] private Button fileButton;
     [SerializeField] private FastButton editOkButton;
-    [SerializeField] private FastButton messageSelectButton;
+    [SerializeField] private Button messageSelectButton;
     [SerializeField] private FastButton copyButton;
-    [SerializeField] private FastButton showImageButton;
+    [SerializeField] private Button showImageButton;
 
     [SerializeField] private GameObject statusBar;
     [SerializeField] private GameObject quoteBarMain;

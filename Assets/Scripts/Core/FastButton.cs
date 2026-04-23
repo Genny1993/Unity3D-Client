@@ -4,11 +4,15 @@ using UnityEngine.EventSystems;
 
 public class FastButton : Button
 {
+    public bool Enabled = true;
     public override void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            onClick.Invoke();
+            if (Enabled)
+            {
+                onClick.Invoke();
+            }
         }
 
         base.OnPointerDown(eventData);

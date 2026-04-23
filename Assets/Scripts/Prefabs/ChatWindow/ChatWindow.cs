@@ -311,6 +311,7 @@ public class ChatWindow : MonoBehaviour
     {
         messageInput.interactable = false;
         sendButton.interactable = false;
+        sendButton.Enabled = false;
 
         AudioManager.PlayOneShot(buttonClick, clickVolume);
         // Очищаем текст от символов перевода строки перед отправкой
@@ -326,6 +327,9 @@ public class ChatWindow : MonoBehaviour
             {
                 messageInput.ActivateInputField();
             }
+            messageInput.interactable = true;
+            sendButton.interactable = true;
+            sendButton.Enabled = true;
             return;
         }
 
@@ -380,6 +384,7 @@ public class ChatWindow : MonoBehaviour
         {
             messageInput.interactable = true;
             sendButton.interactable = true;
+            sendButton.Enabled = true;
             if (Settings.isPCProgram)
             {
                 messageInput.ActivateInputField();
